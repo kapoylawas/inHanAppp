@@ -10,6 +10,7 @@ import Home from "../pages/web/Home";
 import Ppid from "../pages/web/Ppid";
 import FormPermohonan from "../pages/web/Ppid/formPermohonan";
 import TandaTrima from "../pages/web/Ppid/tandaTrima";
+import WebVIew from "../pages/web/WebView";
 
 function Routes() {
   return (
@@ -45,6 +46,9 @@ function Routes() {
       </Route>
       <Route exact path="/web/tandaTrima">
         <TandaTrima />
+      </Route>
+      <Route exact path="/web/webview">
+        <WebVIew />
       </Route>
     </Switch>
   );
