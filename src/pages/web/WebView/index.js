@@ -4,10 +4,10 @@ import React from "react";
 function WebVIew() {
   return (
     <React.Fragment>
-        <div className="pt-20 pb-20">
+        <div className="pt-2 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div>
-              <div className="grid grid-cols-4 gap-4 mt-5">
+              <div className="grid grid-cols-4">
                 <div className="col-span-4">
                   <div className="p-1 rounded-md shadow-md bg-red-50">
                     <div className="text-center underline decoration-1">

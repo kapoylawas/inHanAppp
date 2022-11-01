@@ -33,7 +33,7 @@ function CategoryMenu(params) {
               </Link>
             </div>
             <div className="col-span-2 p-4 text-xs text-center rounded-md shadow-md bg-red-50 md:col-span-1 lg:col-span-1">
-              <Link>
+              <Link to="/web/ulpim">
                 <div>
                   <img
                     src={require("../../assets/images/review.png")}
