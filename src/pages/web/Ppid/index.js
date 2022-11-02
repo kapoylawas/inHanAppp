@@ -38,7 +38,9 @@ function Ppid() {
 
     await Api.get(
       `/ppid/daftar-informasi-publik?search=${searchQuery}&page=${page}`,
-      {}
+      {
+        
+      }
     ).then((response) => {
       setIsLoading(false);
 
@@ -90,7 +92,7 @@ function Ppid() {
                     <form onSubmit={searchHandlder}>
                       <label
                         for="default-search"
-                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
+                        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
                       >
                         Search
                       </label>
@@ -137,57 +139,57 @@ function Ppid() {
                         >
                             {++index + (currentPage - 1) * perPage}
                           <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                            <table class="w-full text-sm text-left text-blue-100 dark:text-blue-100">
+                            <table className="w-full text-sm text-left text-blue-100 dark:text-blue-100">
                               <tbody>
-                                <tr class="bg-emerald-600 border-b border-emerald-400 hover:bg-emerald-500">
+                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
                                   <th
                                     scope="row"
-                                    class="py-4 px-6 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
                                   >
                                    Creatad
                                   </th>
-                                  <td class="py-4 px-6">{ppid.waktu}</td>
+                                  <td className="px-6 py-4">{ppid.waktu}</td>
                                 </tr>
-                                <tr class="bg-emerald-600 border-b border-emerald-400 hover:bg-emerald-500">
+                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
                                   <th
                                     scope="row"
-                                    class="py-4 px-6 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
                                   >
                                    Judul
                                   </th>
-                                  <td class="py-4 px-6">{ppid.judul}</td>
+                                  <td className="px-6 py-4">{ppid.judul}</td>
                                 </tr>
-                                <tr class="bg-emerald-600 border-b border-emerald-400 hover:bg-emerald-500">
+                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
                                   <th
                                     scope="row"
-                                    class="py-4 px-6 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
                                   >
                                    Jenis Informasi
                                   </th>
-                                  <td class="py-4 px-6">{ppid.jenis_info}</td>
+                                  <td className="px-6 py-4">{ppid.jenis_info}</td>
                                 </tr>
-                                <tr class="bg-emerald-600 border-b border-emerald-400 hover:bg-emerald-500">
+                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
                                   <th
                                     scope="row"
-                                    class="py-4 px-6 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
                                   >
                                    Penanggung Jawab
                                   </th>
-                                  <td class="py-4 px-6">{ppid.penanggung_jawab}</td>
+                                  <td className="px-6 py-4">{ppid.penanggung_jawab}</td>
                                 </tr>
-                                <tr class="bg-emerald-600 border-b border-emerald-400 hover:bg-emerald-500">
+                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
                                   <th
                                     scope="row"
-                                    class="py-4 px-6 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
                                   >
                                    Download
                                   </th>
-                                  <td class="py-4 px-6">
+                                  <td className="px-6 py-4">
                                     <Link
                                         to={`/web/formPermohonan/${ppid.id}`}
                                     >
                                         <img
-                                            class="mx-auto"
+                                            className="mx-auto"
                                             width="30"
                                             height="30"
                                             src={require("../../../assets/images/direct-download.png")}

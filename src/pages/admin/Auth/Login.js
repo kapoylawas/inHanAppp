@@ -24,6 +24,10 @@ function Login() {
 
   const [isLoading, setLoading] = useState(false);
 
+  // const url = window.location.pathname
+
+  // console.log(url);
+
   const fetchData = async () => {
     await Api.get(
       `/profile?nip_nik=${dataNip.replaceAll('"', "")}&status=${status}`,
@@ -31,11 +35,13 @@ function Login() {
         headers: {
           //header Bearer + Token
           Authorization: `Bearer ${token}`,
+          objects: '/profile',
+          statusUsers: status
         },
       }
     ).then((response) => {
       setLoading(false);
-      // console.log(response);
+      console.log("data",response);
       //set data response to state "categories"
       setUser(response.data.data);
     }).catch((error) => {
@@ -109,7 +115,7 @@ function Login() {
                     <div>
                       <p class="font-bold">Selamat Datang</p>
                       <p class="text-sm">
-                      {isLoading ? "LOADING..." : "SUBMIT"}{" "}
+                      {isLoading ? "LOADING..." : ""}{" "}
                       {user.nama}
                       </p>
                     </div>

@@ -11,6 +11,10 @@ import Ppid from "../pages/web/Ppid";
 import FormPermohonan from "../pages/web/Ppid/formPermohonan";
 import TandaTrima from "../pages/web/Ppid/tandaTrima";
 import Ulpim from "../pages/web/Ulpim";
+import DataUlpim from "../pages/web/Ulpim/dataUlpim";
+import DetailPengaduan from "../pages/web/Ulpim/detailPengaduan";
+import KirimPengaduan from "../pages/web/Ulpim/kirimPengaduan";
+import PengaduanOpd from "../pages/web/Ulpim/pengaduanOpd";
 import WebVIew from "../pages/web/WebView";
 
 function Routes() {
@@ -53,6 +57,18 @@ function Routes() {
       </Route>
       <Route exact path="/web/ulpim">
         <Ulpim />
+      </Route>
+      <Route exact path="/web/dataUlpim">
+        <DataUlpim />
+      </Route>
+      <Route exact path="/web/pengaduanOpd">
+        <PengaduanOpd />
+      </Route>
+      <Route exact path="/web/kirimPengaduan">
+        <KirimPengaduan />
+      </Route>
+      <Route exact path="/web/dataUlpim/:id">
+        <DetailPengaduan />
       </Route>
     </Switch>
   );

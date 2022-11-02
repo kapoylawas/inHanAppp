@@ -30,6 +30,7 @@ function FormPermohonan() {
   const [work, setWork] = useState("");
   const [alamat, setAlamat] = useState("");
 
+
   //state categories
   const [categories] = useState(data);
 
