@@ -9,7 +9,7 @@ import PaginationDetailOpd from "../../../components/utilities/PaginationDetailO
 function LihatPengaduanOpd() {
   document.title = "UlPIM - Detail Pengaduan per opd";
 
-  const [ulpims, setUlpim] = useState(['']);
+  const [ulpims, setUlpim] = useState([""]);
   const dataUlpim = ulpims.sort();
 
   const { id } = useParams();

@@ -129,8 +129,9 @@ function Login() {
                           width="30"
                           className="inline-block mb-2 mr-1"
                         />{" "}
-                        {isLoading ? "LOADING..." : ""} {user.email_gov}{" "}
+                        {user.email_gov}
                       </div>
+                      
                     </div>
                     <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
                       <div class="col-span-5">
