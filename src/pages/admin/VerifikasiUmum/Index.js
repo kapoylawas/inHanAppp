@@ -108,13 +108,14 @@ function VerifikasiUmum() {
   return (
     <React.Fragment>
       <LayoutWeb>
+        <>
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
-            <div class="p-5 bg-red-100 rounded-md shadow-md">
+            <div className="p-5 bg-red-100 rounded-md shadow-md">
               <div className="object-center">
                 <section className="container max-w-screen-lg pb-10 mx-auto hero">
                   <img
-                    class="mx-auto"
+                    className="mx-auto"
                     width="100"
                     height="100"
                     src={require("../../../assets/blitarcirclecop.png")}
@@ -123,7 +124,7 @@ function VerifikasiUmum() {
               </div>
               {validation.msg && (
                   <div
-                  class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                  className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
                   role="alert"
                 >
                   {validation.msg}
@@ -179,6 +180,7 @@ function VerifikasiUmum() {
             </div>
           </div>
         </div>
+        </>
       </LayoutWeb>
     </React.Fragment>
   );

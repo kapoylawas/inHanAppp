@@ -50,23 +50,23 @@ function PengaduanOpd() {
                       ULPIM
                     </div>
                     <br></br>
-                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         {isLoading ? (
                           <LoadingSpinner />
                         ) : (
                           <>
-                            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                            <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
                               <tr>
                                 <th
                                   scope="col"
-                                  class="py-3 px-6 bg-gray-50 dark:bg-gray-800"
+                                  className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
                                 >
                                   Nama OPD
                                 </th>
                                 <th
                                   scope="col"
-                                  class="py-3 px-6 bg-gray-50 dark:bg-gray-800"
+                                  className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
                                 >
                                   Lihat Data
                                 </th>
@@ -76,17 +76,17 @@ function PengaduanOpd() {
                               {dataUlpim.map((opd, index) => (
                                 <tr
                                   key={index}
-                                  class="border-b border-gray-200 dark:border-gray-700"
+                                  className="border-b border-gray-200 dark:border-gray-700"
                                 >
                                   <th
                                     scope="row"
-                                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
                                   >
                                     {opd.nama_instansi}
                                   </th>
                                   <th
                                     scope="row"
-                                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
                                   >
                                     <Link
                                       to={`/web/lihatPengaduanOpd/${opd.id_instansi}`}

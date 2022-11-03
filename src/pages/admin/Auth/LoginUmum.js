@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Api from "../../../api";
-import LayoutWeb from "../../../layouts/web"
+import LayoutWeb from "../../../layouts/web";
 
 function LoginUmum() {
-    document.title = "Login Pegawai";
+  document.title = "Login Pegawai";
 
   // STATE LOGIN
   const [nik, setNik] = useState([]);
-  const [no_kk, setNokk] = useState("")
+  const [no_kk, setNokk] = useState("");
 
   useEffect(() => {
     localStorage.setItem("nip", JSON.stringify(nik));
@@ -63,16 +63,17 @@ function LoginUmum() {
         setValidation(error.response.data);
       });
   };
-    return(
-        <React.Fragment>
-        <LayoutWeb>
+  return (
+    <React.Fragment>
+      <LayoutWeb>
+        <>
           <div className="pt-20 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
-              <div class="p-5 bg-red-50 rounded-md shadow-md">
+              <div className="p-5 rounded-md shadow-md bg-red-50">
                 <div className="object-center">
                   <section className="container max-w-screen-lg pb-10 mx-auto hero">
                     <img
-                      class="mx-auto"
+                      className="mx-auto"
                       width="100"
                       height="100"
                       src={require("../../../assets/blitarcirclecop.png")}
@@ -86,11 +87,11 @@ function LoginUmum() {
                 <form onSubmit={loginHandler}>
                   {validation.msg && (
                     <div
-                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                    role="alert"
-                  >
-                    {validation.msg}
-                  </div>
+                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
+                      role="alert"
+                    >
+                      {validation.msg}
+                    </div>
                   )}
                   <div className="mb-5">
                     <label className="mt-2">NIK</label>
@@ -104,7 +105,7 @@ function LoginUmum() {
                   </div>
                   {validation.nik && (
                     <div
-                      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
                       role="alert"
                     >
                       {validation.nik[0]}
@@ -122,7 +123,7 @@ function LoginUmum() {
                   </div>
                   {validation.no_kk && (
                     <div
-                      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
                       role="alert"
                     >
                       {validation.no_kk[0]}
@@ -141,9 +142,10 @@ function LoginUmum() {
               </div>
             </div>
           </div>
-        </LayoutWeb>
-      </React.Fragment>
-    )
+        </>
+      </LayoutWeb>
+    </React.Fragment>
+  );
 }
 
-export default LoginUmum
+export default LoginUmum;
