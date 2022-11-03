@@ -1,37 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Api from "../../../api";
-import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
 import LayoutWeb from "../../../layouts/web";
 import Cookies from "js-cookie";
+import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
+import PaginationDetailOpd from "../../../components/utilities/PaginationDetailOpd";
 
+function LihatPengaduanOpd() {
+  document.title = "UlPIM - Detail Pengaduan per opd";
 
-function DetailPengaduan() {
-  document.title = "UlPIM - Detail Pengaduan";
-
-  const [ppids, setPpids] = useState([]);
-
-  const ppid = ppids.sort();
+  const [ulpims, setUlpim] = useState([]);
+  const dataUlpim = ulpims.sort();
 
   const { id } = useParams();
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const token = Cookies.get("token");
 
   const status = localStorage.getItem("status");
 
-  const fetchData = async () => {
-    await Api.get(`/ulpim/detail-pengaduan?id_pesan=${id}`, {
+  const [isLoading, setIsLoading] = useState(false);
+
+  // PAGINATION
+  const [currentPage, setCurrentPage] = useState(1);
+  //state perPage
+  const [perPage, setPerPage] = useState(0);
+
+  //state total
+  const [total, setTotal] = useState(0);
+
+  const fetchData = async (pageNumber) => {
+    const page = pageNumber ? pageNumber : currentPage;
+
+    await Api.get(`/ulpim/pengaduan-opd?page=${page}&opd=${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        objects: '/ulpim/detail-pengaduan',
-        statusUsers: status
+        objects: "/ulpim/pengaduan-opd",
+        statusUsers: status,
       },
     })
       .then((response) => {
         setIsLoading(false);
-        setPpids(response.data);
+
+        setUlpim(response.data.data.data);
+        // console.log(response);
+
+        //set perPage
+        setCurrentPage(response.data.data.current_page);
+
+        //set perPage
+        setPerPage(response.data.data.current_page);
+
+        //total
+        setTotal(response.data.data.current_page);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -56,16 +76,15 @@ function DetailPengaduan() {
                 <div className="col-span-4">
                   <div className="p-2 rounded-md shadow-md bg-red-50">
                     <div className="text-center underline decoration-1">
-                      ULPIM
+                      ULPIM PENGADUAN PER OPD
                     </div>
                     <div className="mt-3 mb-2 border-2 border-stone-400"></div>
-                    INFORMASI MASYARAKAT
-                    <div className="mt-3 mb-2 border-2 border-stone-400"></div>
+
                     {isLoading ? (
                       <LoadingSpinner />
                     ) : (
                       <>
-                        {ppid.map((ulpim, index) => (
+                        {dataUlpim.map((ulpim, index) => (
                           <>
                             <div
                               key={index}
@@ -93,6 +112,14 @@ function DetailPengaduan() {
                         ))}
                       </>
                     )}
+                    <br />
+                    <PaginationDetailOpd
+                      currentPage={currentPage}
+                      perPage={perPage}
+                      total={total}
+                      onChange={(pageNumber) => fetchData(pageNumber)}
+                      position="end"
+                    />
                   </div>
                 </div>
               </div>
@@ -104,4 +131,4 @@ function DetailPengaduan() {
   );
 }
 
-export default DetailPengaduan;
+export default LihatPengaduanOpd;

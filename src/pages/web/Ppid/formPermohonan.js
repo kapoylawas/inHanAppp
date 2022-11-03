@@ -4,6 +4,8 @@ import { toast } from "react-hot-toast";
 import { useHistory, useParams } from "react-router-dom";
 import LayoutWeb from "../../../layouts/web";
 import Api from "../../../api";
+import Cookies from "js-cookie";
+
 
 function FormPermohonan() {
   document.title = "In Hand App - Permohonan";
@@ -90,6 +92,11 @@ function FormPermohonan() {
 
   const { id } = useParams();
 
+  //token
+  const token = Cookies.get("token");
+
+  const status = localStorage.getItem("status");
+
   const storePermohonan = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -109,6 +116,14 @@ function FormPermohonan() {
 
     await Api.post("/ppid/permohonan-informasi-publik", formData, {
       // header
+      
+        headers: {
+          //header Bearer + Token
+          Authorization: `Bearer ${token}`,
+          objects: '/ppid/permohonan-informasi-publik',
+          statusUsers: status
+        },
+      
     })
       .then((response) => {
         setLoading(false);

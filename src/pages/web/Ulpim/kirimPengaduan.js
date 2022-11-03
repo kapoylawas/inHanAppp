@@ -4,6 +4,8 @@ import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Api from "../../../api";
 import LayoutWeb from "../../../layouts/web";
+import Cookies from "js-cookie";
+
 
 function KirimPengaduan() {
   document.title = "In Hand App - Pengaduan";
@@ -25,6 +27,10 @@ function KirimPengaduan() {
   //history
   const history = useHistory();
 
+  const token = Cookies.get("token");
+
+  const status = localStorage.getItem("status");
+
   const storePermohonan = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -38,8 +44,14 @@ function KirimPengaduan() {
     formData.append("tgl_lapor", tgl_lapor);
     formData.append("nik", nik);
 
-    await Api.post("ulpim/insert-pengaduan", formData, {
+    await Api.post("/ulpim/insert-pengaduan", formData, {
       // header
+      headers: {
+        //header Bearer + Token
+        Authorization: `Bearer ${token}`,
+        objects: '/ulpim/insert-pengaduan',
+        statusUsers: status
+      },
     })
       .then((response) => {
         setLoading(false);

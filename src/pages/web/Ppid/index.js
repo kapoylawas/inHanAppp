@@ -39,7 +39,11 @@ function Ppid() {
     await Api.get(
       `/ppid/daftar-informasi-publik?search=${searchQuery}&page=${page}`,
       {
-        
+        headers: {
+          //header Bearer + Token
+          objects: '/ppid/daftar-informasi-publik',
+          statusUsers: 1
+        },
       }
     ).then((response) => {
       setIsLoading(false);

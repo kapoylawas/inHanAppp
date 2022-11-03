@@ -14,8 +14,10 @@ import Ulpim from "../pages/web/Ulpim";
 import DataUlpim from "../pages/web/Ulpim/dataUlpim";
 import DetailPengaduan from "../pages/web/Ulpim/detailPengaduan";
 import KirimPengaduan from "../pages/web/Ulpim/kirimPengaduan";
+import LihatPengaduanOpd from "../pages/web/Ulpim/lihatPengaduanOpd";
 import PengaduanOpd from "../pages/web/Ulpim/pengaduanOpd";
 import WebVIew from "../pages/web/WebView";
+import PrivateRoute from "./PrivateRoutes";
 
 function Routes() {
   return (
@@ -46,9 +48,9 @@ function Routes() {
       <Route exact path="/web/ppid">
         <Ppid />
       </Route>
-      <Route exact path="/web/formPermohonan/:id">
+      <PrivateRoute exact path="/web/formPermohonan/:id">
         <FormPermohonan />
-      </Route>
+      </PrivateRoute>
       <Route exact path="/web/tandaTrima">
         <TandaTrima />
       </Route>
@@ -64,12 +66,15 @@ function Routes() {
       <Route exact path="/web/pengaduanOpd">
         <PengaduanOpd />
       </Route>
-      <Route exact path="/web/kirimPengaduan">
+      <PrivateRoute exact path="/web/kirimPengaduan">
         <KirimPengaduan />
-      </Route>
-      <Route exact path="/web/dataUlpim/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/dataUlpim/:id">
         <DetailPengaduan />
-      </Route>
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/lihatPengaduanOpd/:id">
+        <LihatPengaduanOpd />
+      </PrivateRoute>
     </Switch>
   );
 }

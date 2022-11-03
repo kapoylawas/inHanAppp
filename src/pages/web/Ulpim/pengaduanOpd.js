@@ -1,24 +1,31 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import LayoutWeb from "../../../layouts/web";
-// import Select from 'react-select'
 import Api from "../../../api";
-
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
 
 function PengaduanOpd() {
-
   const [ulpims, setUlpim] = useState([]);
   const dataUlpim = ulpims.sort();
 
-  console.log(dataUlpim);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-
-    await Api.get('/ulpim/get-opd', {})
+    await Api.get("/ulpim/get-opd", {
+      headers: {
+        //header Bearer + Token
+        objects: "/ulpim/get-opd",
+        statusUsers: 1,
+      },
+    })
       .then((response) => {
-        // console.log(response);
-        setUlpim(response.data.data);        
+        setIsLoading(false);
+
+        setUlpim(response.data.data);
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log("err", error);
       });
   };
@@ -26,6 +33,7 @@ function PengaduanOpd() {
   useEffect(() => {
     //call function "fetchDataPlaces"
     fetchData();
+    setIsLoading(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -41,24 +49,63 @@ function PengaduanOpd() {
                     <div className="text-center underline decoration-1">
                       ULPIM
                     </div>
-
-                    {/* <Select>
-                     <option value="">-- Tipe Pengaduan --</option>
-                      
-                    </Select> */}
-
-                    <select
-                      className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
-                    >
-                      <option value="">-- Pilih Opd --</option>
-                      {dataUlpim.map((ulpims) => (
-                        <option value={ulpims.nama_instansi} key={ulpims.id_instansi}>
-                          {ulpims.nama_instansi}
-                        </option>
-                      ))}
-                    </select>
-
-                    
+                    <br></br>
+                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        {isLoading ? (
+                          <LoadingSpinner />
+                        ) : (
+                          <>
+                            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                              <tr>
+                                <th
+                                  scope="col"
+                                  class="py-3 px-6 bg-gray-50 dark:bg-gray-800"
+                                >
+                                  Nama OPD
+                                </th>
+                                <th
+                                  scope="col"
+                                  class="py-3 px-6 bg-gray-50 dark:bg-gray-800"
+                                >
+                                  Lihat Data
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody className="p-2 rounded-md shadow-md bg-red-50">
+                              {dataUlpim.map((opd, index) => (
+                                <tr
+                                  key={index}
+                                  class="border-b border-gray-200 dark:border-gray-700"
+                                >
+                                  <th
+                                    scope="row"
+                                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                                  >
+                                    {opd.nama_instansi}
+                                  </th>
+                                  <th
+                                    scope="row"
+                                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                                  >
+                                    <Link
+                                      to={`/web/lihatPengaduanOpd/${opd.id_instansi}`}
+                                    >
+                                      <img
+                                        className="mx-auto"
+                                        width="30"
+                                        height="30"
+                                        src={require("../../../assets/images/search.png")}
+                                      />
+                                    </Link>
+                                  </th>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </>
+                        )}
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>

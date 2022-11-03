@@ -27,12 +27,20 @@ function DataUlpim() {
   const fetchData = async (pageNumber) => {
     const page = pageNumber ? pageNumber : currentPage;
 
-    await Api.get(`/ulpim/all-pengaduan?page=${page}`, {})
+    await Api.get(`/ulpim/all-pengaduan?page=${page}`, {
+
+      headers: {
+        //header Bearer + Token
+        objects: '/ulpim/all-pengaduan',
+        statusUsers: 1
+      },
+    })
       .then((response) => {
         setIsLoading(false);
         // console.log(response);
         setUlpim(response.data.data.data);
 
+        // console.log(response);
         //set perPage
         setCurrentPage(response.data.data.current_page);
 
