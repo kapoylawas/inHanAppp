@@ -41,27 +41,29 @@ function Ppid() {
       {
         headers: {
           //header Bearer + Token
-          objects: '/ppid/daftar-informasi-publik',
-          statusUsers: 1
+          objects: "/ppid/daftar-informasi-publik",
+          statusUsers: 1,
         },
       }
-    ).then((response) => {
-      setIsLoading(false);
+    )
+      .then((response) => {
+        setIsLoading(false);
 
-      console.log(response);
-      setPpid(response.data.data.data);
+        console.log(response);
+        setPpid(response.data.data.data);
 
-      setCurrentPage(response.data.data.page);
+        setCurrentPage(response.data.data.page);
 
-      //set perPage
-      setPerPage(response.data.data.per_page);
+        //set perPage
+        setPerPage(response.data.data.per_page);
 
-      //total
-      setTotal(response.data.data.total);
-    }).catch((error) => {
-      setIsLoading(false);
-      setErrorMessage(error);
-    });
+        //total
+        setTotal(response.data.data.total);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setErrorMessage(error);
+      });
   };
 
   useEffect(() => {
@@ -85,7 +87,31 @@ function Ppid() {
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div>
-              <div className="grid grid-cols-4 gap-4 mt-5">
+              <div className="grid grid-cols-4 gap-4">
+                <div className="col-span-4">
+                  <div className="p-2 rounded-md shadow-md bg-red-50">
+                    <div className="object-center">
+                      <section className="container max-w-screen-lg pb-10 mx-auto hero">
+                        <img
+                          className="mx-auto"
+                          width="100"
+                          height="90"
+                          src={require("../../../assets/blitarcirclecop.png")}
+                        />
+                      </section>
+                      <p class="text-center ...">
+                        Sekretariat PPID Kota Blitar 
+                        <br />
+                        Jl. Moh. Hatta No. 05 KotaBlitar , 66113
+                      </p>
+                      <p class="text-center ...">
+                        Phone: 0342-807-805
+                        <br />
+                        Email: ppid@blitarkota.go.id
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <div className="col-span-4">
                   <div className="p-2 rounded-md shadow-md bg-red-50">
                     <div className="text-center underline decoration-1">
@@ -135,79 +161,91 @@ function Ppid() {
                     </form>
 
                     <div className="mt-4 overflow-x-auto sm:w-full">
-
-                      {isLoading ? <LoadingSpinner /> : <> {sort.map((ppid, index) => (
-                        <div
-                          key={index}
-                          className="w-full p-4 mb-4 text-center bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700"
-                        >
-                            {++index + (currentPage - 1) * perPage}
-                          <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                            <table className="w-full text-sm text-left text-blue-100 dark:text-blue-100">
-                              <tbody>
-                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
-                                  <th
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
-                                  >
-                                   Creatad
-                                  </th>
-                                  <td className="px-6 py-4">{ppid.waktu}</td>
-                                </tr>
-                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
-                                  <th
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
-                                  >
-                                   Judul
-                                  </th>
-                                  <td className="px-6 py-4">{ppid.judul}</td>
-                                </tr>
-                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
-                                  <th
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
-                                  >
-                                   Jenis Informasi
-                                  </th>
-                                  <td className="px-6 py-4">{ppid.jenis_info}</td>
-                                </tr>
-                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
-                                  <th
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
-                                  >
-                                   Penanggung Jawab
-                                  </th>
-                                  <td className="px-6 py-4">{ppid.penanggung_jawab}</td>
-                                </tr>
-                                <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
-                                  <th
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
-                                  >
-                                   Download
-                                  </th>
-                                  <td className="px-6 py-4">
-                                    <Link
-                                        to={`/web/formPermohonan/${ppid.id}`}
-                                    >
-                                        <img
+                      {isLoading ? (
+                        <LoadingSpinner />
+                      ) : (
+                        <>
+                          {" "}
+                          {sort.map((ppid, index) => (
+                            <div
+                              key={index}
+                              className="w-full p-4 mb-4 text-center bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+                            >
+                              {++index + (currentPage - 1) * perPage}
+                              <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+                                <table className="w-full text-sm text-left text-blue-100 dark:text-blue-100">
+                                  <tbody>
+                                    <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
+                                      <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                      >
+                                        Creatad
+                                      </th>
+                                      <td className="px-6 py-4">
+                                        {ppid.waktu}
+                                      </td>
+                                    </tr>
+                                    <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
+                                      <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                      >
+                                        Judul
+                                      </th>
+                                      <td className="px-6 py-4">
+                                        {ppid.judul}
+                                      </td>
+                                    </tr>
+                                    <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
+                                      <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                      >
+                                        Jenis Informasi
+                                      </th>
+                                      <td className="px-6 py-4">
+                                        {ppid.jenis_info}
+                                      </td>
+                                    </tr>
+                                    <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
+                                      <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                      >
+                                        Penanggung Jawab
+                                      </th>
+                                      <td className="px-6 py-4">
+                                        {ppid.penanggung_jawab}
+                                      </td>
+                                    </tr>
+                                    <tr className="bg-gray-400 border-b border-gray-500 hover:bg-gray-600">
+                                      <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-emerald-50 whitespace-nowrap dark:text-emerald-100"
+                                      >
+                                        Download
+                                      </th>
+                                      <td className="px-6 py-4">
+                                        <Link
+                                          to={`/web/formPermohonan/${ppid.id}`}
+                                        >
+                                          <img
                                             className="mx-auto"
                                             width="30"
                                             height="30"
                                             src={require("../../../assets/images/direct-download.png")}
-                                        />
-                                    </Link>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      ))} </>}
-                      
-                      
+                                          />
+                                        </Link>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          ))}{" "}
+                        </>
+                      )}
                     </div>
                     <PaginationComponent
                       currentPage={currentPage}
