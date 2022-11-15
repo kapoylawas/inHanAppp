@@ -35,7 +35,7 @@ function Home() {
                       <div className="text-center underline decoration-1">
                         Instagram
                       </div>
-                      <div
+                      {/* <div
                         className="embedsocial-hashtag"
                         data-ref="e4cf037dbf36bb6e18c632f1d29ae4add495200a"
                       >
@@ -44,6 +44,18 @@ function Home() {
                           className="feed-powered-by-es feed-powered-by-es-feed-new"
                           href="https://embedsocial.com/social-media-aggregator/"
                         ></a>
+                      </div> */}
+                      <div
+                        class="embedsocial-hashtag"
+                        data-ref="e4cf037dbf36bb6e18c632f1d29ae4add495200a"
+                      >
+                        <a
+                          class="feed-powered-by-es feed-powered-by-es-feed-new"
+                          href="https://embedsocial.com/social-media-aggregator/"
+                          target="_blank"
+                          title="Widget by EmbedSocial"
+                        >
+                        </a>
                       </div>
                     </div>
                   </div>
