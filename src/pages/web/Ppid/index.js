@@ -64,7 +64,7 @@ function Ppid() {
       .then((response) => {
         setIsLoading(false);
 
-        // console.log(response);
+        console.log(response);
         setPpid(response.data.data.data);
 
         setCurrentPage(response.data.data.page);

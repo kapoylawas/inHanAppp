@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@arismun/format-rupiah": "^3.0.0",
     "axios": "^0.21.4",
     "bootstrap": "^5.2.2",
     "js-cookie": "^3.0.1",
