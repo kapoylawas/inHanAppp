@@ -30,6 +30,19 @@ function Ppid() {
 
   const [setErrorMessage] = useState("");
 
+  const [latitude, setLatitude] = React.useState('');
+  const [longitude, setLongitude] = React.useState('');
+
+  console.log(latitude);
+  console.log(longitude);
+
+    React.useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setLatitude(position.coords.latitude)
+            setLongitude(position.coords.longitude)
+        })
+    })
+
   const fetchData = async (pageNumber, searchData) => {
     const page = pageNumber ? pageNumber : currentPage;
 
@@ -43,13 +56,15 @@ function Ppid() {
           //header Bearer + Token
           objects: "/ppid/daftar-informasi-publik",
           statusUsers: 1,
+          lng: latitude,
+          lat: longitude
         },
       }
     )
       .then((response) => {
         setIsLoading(false);
 
-        console.log(response);
+        // console.log(response);
         setPpid(response.data.data.data);
 
         setCurrentPage(response.data.data.page);

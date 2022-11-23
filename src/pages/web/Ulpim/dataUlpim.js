@@ -24,6 +24,18 @@ function DataUlpim() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+  console.log(latitude);
+  console.log(longitude);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
+  }, []);
+
   const fetchData = async (pageNumber) => {
     const page = pageNumber ? pageNumber : currentPage;
 
@@ -32,6 +44,8 @@ function DataUlpim() {
         //header Bearer + Token
         objects: "/ulpim/all-pengaduan",
         statusUsers: 1,
+        lng: latitude,
+        lat: longitude,
       },
     })
       .then((response) => {

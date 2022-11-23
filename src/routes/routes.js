@@ -6,10 +6,13 @@ import LoginUmum from "../pages/admin/Auth/LoginUmum";
 import Register from "../pages/admin/Register/Index";
 import Verifikasi from "../pages/admin/Verifikasi/Index";
 import VerifikasiUmum from "../pages/admin/VerifikasiUmum/Index";
+import AllMenu from "../pages/web/AllMenu";
+import Blikosda from "../pages/web/Blikosda";
 import Home from "../pages/web/Home";
 import Ppid from "../pages/web/Ppid";
 import FormPermohonan from "../pages/web/Ppid/formPermohonan";
 import TandaTrima from "../pages/web/Ppid/tandaTrima";
+import Radio from "../pages/web/Radio";
 import Ulpim from "../pages/web/Ulpim";
 import DataUlpim from "../pages/web/Ulpim/dataUlpim";
 import DetailPengaduan from "../pages/web/Ulpim/detailPengaduan";
@@ -65,6 +68,15 @@ function Routes() {
       </Route>
       <Route exact path="/web/pengaduanOpd">
         <PengaduanOpd />
+      </Route>
+      <Route exact path="/web/blikosda">
+        <Blikosda />
+      </Route>
+      <Route exact path="/web/lainya">
+        <AllMenu />
+      </Route>
+      <Route exact path="/web/radio">
+        <Radio />
       </Route>
       <PrivateRoute exact path="/web/kirimPengaduan">
         <KirimPengaduan />

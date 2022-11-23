@@ -8,7 +8,7 @@ function WebHeader() {
         <React.Fragment>
            <div>
             <header>
-            <div className="fixed inset-x-0 top-0 z-10 text-center text-white bg-red-600">
+            <div className="fixed inset-x-0 top-0 z-10 text-center text-white bg-red-700">
                 <div className="container grid grid-cols-10 p-3 mx-auto sm:w-full md:w-6/12">
                 <div className="col-span-2 p-1 mr-2 bg-white rounded-full shadow-sm w-11 h-11">
                         <img src={require("../../assets/blitarcirclecop.png")} className="inline-block" />

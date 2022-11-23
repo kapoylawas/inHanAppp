@@ -8,7 +8,7 @@ function CategoryMenu(params) {
       <div>
         <div>
           <div className="grid items-center grid-cols-4 gap-5 mt-5 text-center md:gap-5">
-            <div className="col-span-2 p-4 text-xs text-center rounded-md shadow-md bg-red-50 md:col-span-1 lg:col-span-1">
+            <div className="col-span-2 p-4 text-xs text-center bg-red-200 rounded-md shadow-md md:col-span-1 lg:col-span-1">
               <Link to="/web/ppid">
                 <div>
                   <img
@@ -20,8 +20,8 @@ function CategoryMenu(params) {
                 PPID
               </Link>
             </div>
-            <div className="col-span-2 p-4 text-xs text-center rounded-md shadow-md bg-red-50 md:col-span-1 lg:col-span-1">
-              <Link>
+            <div className="col-span-2 p-4 text-xs text-center bg-red-200 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+              <Link to="/web/blikosda">
                 <div>
                   <img
                     src={require("../../assets/images/fruit-shop.png")}
@@ -32,7 +32,7 @@ function CategoryMenu(params) {
                 Blikosda
               </Link>
             </div>
-            <div className="col-span-2 p-4 text-xs text-center rounded-md shadow-md bg-red-50 md:col-span-1 lg:col-span-1">
+            <div className="col-span-2 p-4 text-xs text-center bg-red-200 rounded-md shadow-md md:col-span-1 lg:col-span-1">
               <Link to="/web/ulpim">
                 <div>
                   <img
@@ -44,16 +44,16 @@ function CategoryMenu(params) {
                 Ulpim
               </Link>
             </div>
-            <div className="col-span-2 p-4 text-xs text-center rounded-md shadow-md bg-red-50 md:col-span-1 lg:col-span-1">
-              <Link>
+            <div className="col-span-2 p-4 text-xs text-center bg-red-200 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+              <Link to="/web/lainya">
                 <div>
                   <img
-                    src={require("../../assets/images/letter.png")}
+                    src={require("../../assets/images/menu.png")}
                     width="30"
                     className="inline-block mb-2"
                   />
                 </div>
-                Silpulsitron
+                Lainnya
               </Link>
             </div>
           </div>
