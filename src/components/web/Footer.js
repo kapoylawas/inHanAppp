@@ -40,18 +40,18 @@ function WebFooter() {
                   className="inline-block mb-1"
                   width="25"
                   height="25"
-                  src={require("../../assets/images/folder.png")}
+                  src={require("../../assets/img/ic_ppid.png")}
                 />
                 <span className="block text-xs">PPID</span>
               </Link>
             </div>
             <div>
-              <Link className="justify-center inline-block w-full text-center focus:text-red-100 hover:text-red-100">
+              <Link to="/web/blikosda" className="justify-center inline-block w-full text-center focus:text-red-100 hover:text-red-100">
                 <img
                   className="inline-block mb-1"
                   width="25"
                   height="25"
-                  src={require("../../assets/images/fruit-shop.png")}
+                  src={require("../../assets/img/ic_blikosda – 1.png")}
                 />
                 <span className="block text-xs">Blikosda</span>
               </Link>
@@ -65,7 +65,7 @@ function WebFooter() {
                   className="inline-block mb-1"
                   width="25"
                   height="25"
-                  src={require("../../assets/images/review.png")}
+                  src={require("../../assets/img/ic_ulpim.png")}
                 />
                 <span className="block text-xs">Ulpim</span>
               </Link>

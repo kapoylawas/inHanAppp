@@ -12,7 +12,7 @@ function CategoryMenu(params) {
               <Link to="/web/ppid">
                 <div>
                   <img
-                    src={require("../../assets/images/folder.png")}
+                    src={require("../../assets/img/ic_ppid.png")}
                     width="30"
                     className="inline-block mb-2"
                   />
@@ -24,7 +24,7 @@ function CategoryMenu(params) {
               <Link to="/web/blikosda">
                 <div>
                   <img
-                    src={require("../../assets/images/fruit-shop.png")}
+                    src={require("../../assets/img/ic_blikosda – 1.png")}
                     width="30"
                     className="inline-block mb-2"
                   />
@@ -36,7 +36,7 @@ function CategoryMenu(params) {
               <Link to="/web/ulpim">
                 <div>
                   <img
-                    src={require("../../assets/images/review.png")}
+                    src={require("../../assets/img/ic_ulpim.png")}
                     width="30"
                     className="inline-block mb-2"
                   />
