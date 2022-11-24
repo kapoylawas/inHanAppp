@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import Api from "../../../api";
 import LayoutWeb from "../../../layouts/web";
 import { FormatRupiah } from "@arismun/format-rupiah";
-import PaginationComponent from "../../../components/utilities/Pagination";
 import PaginationUlpimComponent from "../../../components/utilities/PaginationUlpim";
 
 function Blikosda() {
@@ -77,7 +76,7 @@ function Blikosda() {
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
               <div className="grid grid-cols-4 gap-4 mt-5">
                 <div className="col-span-4">
-                  <div className="p-2 bg-red-100 rounded-md shadow-md">
+                  
                     <div className="text-center underline decoration-1">
                       Produk Unggulan
                     </div>
@@ -86,7 +85,7 @@ function Blikosda() {
                     {sort.map((bliko, index) => (
                       <>
                         <div key={index} className="col-span-4">
-                          <div className="p-1 bg-white rounded-md shadow-md">
+                          <div className="p-1 bg-gray-200 rounded-md shadow-md">
                             <div className="object-center">
                               <section className="container max-w-screen-lg pb-10 mx-auto hero">
                                 <a href="#">
@@ -120,7 +119,6 @@ function Blikosda() {
                       onChange={(pageNumber) => fetchData(pageNumber)}
                       position="end"
                     />
-                  </div>
                 </div>
               </div>
             </div>
