@@ -45,7 +45,6 @@ function Blikosda() {
       },
     })
       .then((response) => {
-        // console.log(response);
         setBliko(response.data.data.data);
 
         setCurrentPage(response.data.data.page);
