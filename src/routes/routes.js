@@ -8,6 +8,7 @@ import Verifikasi from "../pages/admin/Verifikasi/Index";
 import VerifikasiUmum from "../pages/admin/VerifikasiUmum/Index";
 import AllMenu from "../pages/web/AllMenu";
 import Blikosda from "../pages/web/Blikosda";
+import CallCenter from "../pages/web/CallCenter";
 import Home from "../pages/web/Home";
 import Ppid from "../pages/web/Ppid";
 import FormPermohonan from "../pages/web/Ppid/formPermohonan";
@@ -77,6 +78,9 @@ function Routes() {
       </Route>
       <Route exact path="/web/radio">
         <Radio />
+      </Route>
+      <Route exact path="/web/callCenter">
+        <CallCenter />
       </Route>
       <PrivateRoute exact path="/web/kirimPengaduan">
         <KirimPengaduan />
