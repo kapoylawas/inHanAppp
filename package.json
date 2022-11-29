@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "@arismun/format-rupiah": "^3.0.0",
+    "@mapbox/mapbox-gl-directions": "^4.1.0",
     "axios": "^0.21.4",
     "bootstrap": "^5.2.2",
     "js-cookie": "^3.0.1",
+    "mapbox-gl": "^2.4.1",
+    "mapbox-gl-geocoder": "^2.0.1",
     "otp-input-react": "^0.3.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.5.0",
