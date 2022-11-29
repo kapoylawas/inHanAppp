@@ -6,6 +6,7 @@ import Api from "../../../api";
 import LayoutWeb from "../../../layouts/web";
 import { FormatRupiah } from "@arismun/format-rupiah";
 import PaginationUlpimComponent from "../../../components/utilities/PaginationUlpim";
+import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
 
 function Blikosda() {
   document.title = "In Hand App - Blikosda";
@@ -24,6 +25,8 @@ function Blikosda() {
 
   //state total
   const [total, setTotal] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -45,6 +48,7 @@ function Blikosda() {
       },
     })
       .then((response) => {
+        setIsLoading(false);
         setBliko(response.data.data.data);
 
         setCurrentPage(response.data.data.page);
@@ -57,6 +61,7 @@ function Blikosda() {
         console.log("data", response);
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log(error);
       });
   };
@@ -64,7 +69,7 @@ function Blikosda() {
   useEffect(() => {
     //call function "fetchDataPlaces"
     fetchData();
-
+    setIsLoading(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -75,49 +80,58 @@ function Blikosda() {
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
               <div className="grid grid-cols-4 gap-4 mt-5">
                 <div className="col-span-4">
-                  
-                    <div className="text-center underline decoration-1">
-                      Produk Unggulan
-                    </div>
-                    <div className="mt-3 mb-2 border-2 border-stone-400"></div>
-                    <br />
-                    {sort.map((bliko, index) => (
-                      <>
-                        <div key={index} className="col-span-4">
-                          <div className="p-1 bg-gray-200 rounded-md shadow-md">
-                            <div className="object-center">
-                              <section className="container max-w-screen-lg pb-10 mx-auto hero">
-                                <a href="#">
-                                  <img
-                                    className="rounded-t-lg"
-                                    src={bliko.images}
-                                  />
-                                </a>
-                              </section>
-                              <div className="flex items-center justify-between">
-                                <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                                  <FormatRupiah value={bliko.harga} />
-                                </span>
-                                <a
-                                  href={bliko.link}
-                                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                >
-                                  Add to cart
-                                </a>
+                  <div className="text-center underline decoration-1">
+                    Produk Unggulan
+                  </div>
+                  <div className="mt-3 mb-2 border-2 border-stone-400"></div>
+                  <br />
+                  {isLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <>
+                      {sort.map((bliko, index) => (
+                        <>
+                          <div key={index} className="col-span-4">
+                            <div className="p-1 bg-gray-200 rounded-md shadow-md">
+                              <div className="object-center">
+                                <section className="container max-w-screen-lg pb-10 mx-auto hero">
+                                  <a href="#">
+                                    <img
+                                      className="rounded-t-lg"
+                                      src={bliko.images}
+                                    />
+                                  </a>
+                                </section>
+                                <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                                  {bliko.nama}
+                                </h5>
+                                <div className="flex items-center justify-between">
+                                  <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                                    <FormatRupiah value={bliko.harga} />
+                                  </span>
+                                  <a
+                                    href={bliko.link}
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                  >
+                                    Add to cart
+                                  </a>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <br />
-                      </>
-                    ))}
-                    <PaginationUlpimComponent
-                      currentPage={currentPage}
-                      perPage={perPage}
-                      total={total}
-                      onChange={(pageNumber) => fetchData(pageNumber)}
-                      position="end"
-                    />
+                          <br />
+                        </>
+                      ))}
+                    </>
+                  )}
+
+                  <PaginationUlpimComponent
+                    currentPage={currentPage}
+                    perPage={perPage}
+                    total={total}
+                    onChange={(pageNumber) => fetchData(pageNumber)}
+                    position="end"
+                  />
                 </div>
               </div>
             </div>
