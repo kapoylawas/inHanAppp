@@ -109,6 +109,9 @@ function CallCenter() {
   //state loading
   const [isLoading, setLoading] = useState(false);
 
+  //state validation
+  const [validation, setValidation] = useState({});
+
   //history
   const history = useHistory();
 
@@ -155,6 +158,7 @@ function CallCenter() {
       })
       .catch((error) => {
         setLoading(false);
+        setValidation(error.response.data);
         console.log(error);
       });
    }
@@ -253,6 +257,14 @@ function CallCenter() {
                       placeholder="No Identitas Kependudukan"
                     />
                   </div>
+                  {validation.nik && (
+                    <div
+                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
+                      role="alert"
+                    >
+                      {validation.nik[0]}
+                    </div>
+                  )}
                   <div className="mb-5">
                     <label className="mt-2">Nama Lengkap</label>
                     <input
@@ -263,6 +275,14 @@ function CallCenter() {
                       placeholder="Nama Lengkap"
                     />
                   </div>
+                  {validation.nama && (
+                    <div
+                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
+                      role="alert"
+                    >
+                      {validation.nama[0]}
+                    </div>
+                  )}
                   <div className="mb-5">
                     <label className="mt-2">No Handphone</label>
                     <input
@@ -273,6 +293,14 @@ function CallCenter() {
                       placeholder="No Handphone / Whatsapp"
                     />
                   </div>
+                  {validation.nomor_hp && (
+                    <div
+                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
+                      role="alert"
+                    >
+                      {validation.nomor_hp[0]}
+                    </div>
+                  )}
                   <div className="mb-5">
                     <label className="mt-2">Deskripsi Kejadian</label>
                     <textarea
