@@ -8,6 +8,7 @@ import CategoryMenu from "../../../components/utilities/CategoryMenu";
 import Slider from "../../../components/utilities/Slider";
 import LayoutWeb from "../../../layouts/web";
 import Iframe from "react-iframe";
+import CardRadio from "../../../components/utilities/CardRadio";
 
 function Home() {
   document.title = "In Hand App - Home";
@@ -28,6 +29,7 @@ function Home() {
                 <Slider />
               </div>
               <CategoryMenu />
+              <CardRadio />
               <div>
                 <div className="grid grid-cols-4 gap-4 mt-5">
                   <div className="col-span-4">
