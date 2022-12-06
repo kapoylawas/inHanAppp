@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/style-prop-object */
 import React, { useEffect, useState } from "react";
-import Iframe from "react-iframe";
+// import Iframe from "react-iframe";
 import Api from "../../api";
 import LoadingSpinner from "./LoadingSpinner";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 
 function CardRadio() {
   const [radio, setRadio] = useState([]);
@@ -60,16 +62,18 @@ function CardRadio() {
                   {isLoading ? (
                     <LoadingSpinner />
                   ) : (
-                    <Iframe
-                      allowtransparency="true"
-                      style="padding:10px;background:#000;webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;width:560px;margin:0 auto;overflow:hidden;"
-                      url={radio.radio}
-                      display="block"
-                      frameborder="0"
-                      height="184"
-                      width="100%"
-                      position="relative"
-                    />
+                    <div className="grid grid-cols-4 gap-4 mt-5">
+                      <div className="col-span-4">
+                        <div className="p-2 text-xs text-center rounded-md shadow-md bg-red-50">
+                          <AudioPlayer
+                            autoPlay
+                            src={radio.radio}
+                            onPlay={(e) => console.log("onPlay")}
+                            // other props here
+                          />
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
