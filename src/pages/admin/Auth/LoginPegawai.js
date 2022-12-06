@@ -33,8 +33,6 @@ function LoginPegawai() {
     setVerifed(true);
   }
   
-  
-
   const loginHandler = async (e) => {
     
     e.preventDefault();

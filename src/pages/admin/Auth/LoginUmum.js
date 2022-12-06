@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Api from "../../../api";
@@ -24,6 +25,13 @@ function LoginUmum() {
 
   //history
   const history = useHistory();
+
+  const [verifed, setVerifed] = useState(false);
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setVerifed(true);
+  }
+  
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -129,10 +137,15 @@ function LoginUmum() {
                       {validation.no_kk[0]}
                     </div>
                   )}
+                  <ReCAPTCHA
+                    sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
+                    onChange={onChange}
+                  />
                   <div>
                     <button
                       type="submit"
                       className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                      disabled={!verifed}
                     >
                       {" "}
                       {isLoading ? "LOADING..." : "SUBMIT"}{" "}
