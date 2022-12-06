@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Api from "../../../api";
 import LayoutWeb from "../../../layouts/web";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function LoginPegawai() {
   document.title = "Login Pegawai";
@@ -25,9 +26,18 @@ function LoginPegawai() {
   //history
   const history = useHistory();
 
-  const loginHandler = async (e) => {
-    e.preventDefault();
 
+  const [verifed, setVerifed] = useState(false)
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setVerifed(true);
+  }
+  
+  
+
+  const loginHandler = async (e) => {
+    
+    e.preventDefault();
     //set state isLoading to "true"
     setLoading(true);
 
@@ -39,7 +49,7 @@ function LoginPegawai() {
       .then((response) => {
         //set state isLoading to "false"
         setLoading(false);
-
+       
         //show toast
         toast.success("Verif Nip Successfully.", {
           duration: 4000,
@@ -130,10 +140,15 @@ function LoginPegawai() {
                       {validation.finger_id[0]}
                     </div>
                   )}
+                  <ReCAPTCHA
+                    sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
+                    onChange={onChange}
+                  />
                   <div>
                     <button
                       type="submit"
                       className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                      disabled={!verifed}
                     >
                       {" "}
                       {isLoading ? "LOADING..." : "SUBMIT"}{" "}
