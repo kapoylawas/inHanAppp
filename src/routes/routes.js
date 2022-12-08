@@ -14,6 +14,9 @@ import Ppid from "../pages/web/Ppid";
 import FormPermohonan from "../pages/web/Ppid/formPermohonan";
 import TandaTrima from "../pages/web/Ppid/tandaTrima";
 import Radio from "../pages/web/Radio";
+import Sipul from "../pages/web/Sipul/Index";
+import IsiForm from "../pages/web/Sipul/isiForm";
+import ListFrorm from "../pages/web/Sipul/listForm";
 import Ulpim from "../pages/web/Ulpim";
 import DataUlpim from "../pages/web/Ulpim/dataUlpim";
 import DetailPengaduan from "../pages/web/Ulpim/detailPengaduan";
@@ -91,6 +94,15 @@ function Routes() {
       <PrivateRoute exact path="/web/lihatPengaduanOpd/:id">
         <LihatPengaduanOpd />
       </PrivateRoute>
+      <Route exact path="/web/sipul">
+        <Sipul />
+      </Route>
+      <Route exact path="/web/listForm">
+        <ListFrorm />
+      </Route>
+      <Route exact path="/web/isiForm/:id">
+        <IsiForm />
+      </Route>
     </Switch>
   );
 }
