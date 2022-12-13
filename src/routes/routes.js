@@ -14,6 +14,7 @@ import Ppid from "../pages/web/Ppid";
 import FormPermohonan from "../pages/web/Ppid/formPermohonan";
 import TandaTrima from "../pages/web/Ppid/tandaTrima";
 import Radio from "../pages/web/Radio";
+import Confirm from "../pages/web/Sipul/confirm";
 import Sipul from "../pages/web/Sipul/Index";
 import IsiForm from "../pages/web/Sipul/isiForm";
 import ListFrorm from "../pages/web/Sipul/listForm";
@@ -102,6 +103,9 @@ function Routes() {
       </Route>
       <Route exact path="/web/isiForm/:id">
         <IsiForm />
+      </Route>
+      <Route exact path="/web/confirm">
+        <Confirm />
       </Route>
     </Switch>
   );

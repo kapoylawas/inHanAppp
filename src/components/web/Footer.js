@@ -2,6 +2,11 @@
 //import react
 import React from "react";
 import { Link } from "react-router-dom";
+import { ReactComponent as Ppid } from "../../assets/image/ic_ppid_by_design.svg";
+import { ReactComponent as Bliko } from "../../assets/image/ic_blikosda_by_design.svg";
+import { ReactComponent as Ulpim } from "../../assets/image/ic_ulpim_by_design.svg";
+import { ReactComponent as Home } from "../../assets/image/ic_home_by_design.svg";
+import { ReactComponent as Akun } from "../../assets/image/ic_person_by_design.svg";
 
 function WebFooter() {
   function refreshPage() {
@@ -14,73 +19,48 @@ function WebFooter() {
   return (
     <React.Fragment>
       <>
-        <div className="fixed inset-x-0 bottom-0 z-10 text-center bg-red-600">
+        <div className="fixed inset-x-0 bottom-0 z-10 text-center bg-gray-50">
           <div className="container grid grid-cols-5 gap-5 p-2 mx-auto sm:w-full md:w-6/12">
             <div>
               <Link
                 to="/"
                 onClick={refreshPage}
-                className="justify-center inline-block w-full text-center focus:text-red-100 hover:text-red-100"
+                className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500"
               >
-                <img
-                  className="inline-block mb-1"
-                  width="25"
-                  height="25"
-                  src={require("../../assets/images/home.png")}
-                />
+                <Home width="30" className="inline-block" />
                 <span className="block text-xs">Beranda</span>
               </Link>
             </div>
             <div>
               <Link
                 to="/web/ppid"
-                className="justify-center inline-block w-full text-center focus:text-red-100 hover:text-red-100"
+                className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500"
               >
-                <img
-                  className="inline-block mb-1"
-                  width="25"
-                  height="25"
-                  src={require("../../assets/img/ic_ppid.png")}
-                />
+                <Ppid width="30" className="inline-block" />
                 <span className="block text-xs">PPID</span>
               </Link>
             </div>
             <div>
-              <Link to="/web/blikosda" className="justify-center inline-block w-full text-center focus:text-red-100 hover:text-red-100">
-                <img
-                  className="inline-block mb-1"
-                  width="25"
-                  height="25"
-                  src={require("../../assets/img/ic_blikosda – 1.png")}
-                />
+              <Link to="/web/blikosda" className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500">
+              <Bliko width="30" className="inline-block" />
                 <span className="block text-xs">Blikosda</span>
               </Link>
             </div>
             <div>
               <Link
                 to="/web/ulpim"
-                className="justify-center inline-block w-full text-center focus:text-red-100 hover:text-red-100"
+                className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500"
               >
-                <img
-                  className="inline-block mb-1"
-                  width="25"
-                  height="25"
-                  src={require("../../assets/img/ic_ulpim.png")}
-                />
+                 <Ulpim width="30" className="inline-block" />
                 <span className="block text-xs">Ulpim</span>
               </Link>
             </div>
             <div>
               <Link
                 to="/admin/login"
-                className="justify-center inline-block w-full text-center focus:text-red-100 hover:text-red-100"
+                className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500"
               >
-                <img
-                  className="inline-block mb-1"
-                  width="25"
-                  height="25"
-                  src={require("../../assets/images/login.png")}
-                />
+               <Akun width="30" className="inline-block" />
                 <span className="block text-xs">Akun</span>
               </Link>
             </div>

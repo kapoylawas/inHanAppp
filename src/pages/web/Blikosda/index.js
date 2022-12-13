@@ -91,47 +91,56 @@ function Blikosda() {
                     <>
                       {sort.map((bliko, index) => (
                         <>
-                          <div key={index} className="col-span-4">
-                            <div className="p-1 bg-gray-200 rounded-md shadow-md">
-                              <div className="object-center">
-                                <section className="container max-w-screen-lg pb-10 mx-auto hero">
-                                  <a href="#">
+                          <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-8/12">
+                            <div key={index} className="col-span-4">
+                              <div className="p-1 bg-gray-200 rounded-md shadow-md">
+                                <div className="object-center">
+                                  <div className="flex flex-col items-center pb-10">
                                     <img
-                                      className="rounded-t-lg"
+                                      className="w-24 h-24 mt-5 mb-3 rounded-full shadow-lg"
                                       src={bliko.images}
+                                      alt="Bonnie image"
                                     />
-                                  </a>
-                                </section>
-                                <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                  {bliko.nama}
-                                </h5>
-                                <div className="flex items-center justify-between">
-                                  <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                                    <FormatRupiah value={bliko.harga} />
-                                  </span>
-                                  <a
-                                    href={bliko.link}
-                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                  >
-                                    Add to cart
-                                  </a>
+                                    <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                      {bliko.nama}
+                                    </h5>
+                                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                                      {/* {bliko.deskripsi} */}
+                                      <FormatRupiah value={bliko.harga} />
+                                    </span>
+                                    <div className="flex mt-4 space-x-3 md:mt-6">
+                                      <a
+                                        href={bliko.link}
+                                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                      >
+                                        Add to cart
+                                      </a>
+                                      <a
+                                        href="#"
+                                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+                                      >
+                                        Detail
+                                      </a>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+                            <br />
                           </div>
-                          <br />
                         </>
                       ))}
                     </>
                   )}
-
-                  <PaginationUlpimComponent
-                    currentPage={currentPage}
-                    perPage={perPage}
-                    total={total}
-                    onChange={(pageNumber) => fetchData(pageNumber)}
-                    position="end"
-                  />
+                  <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-8/12">
+                    <PaginationUlpimComponent
+                      currentPage={currentPage}
+                      perPage={perPage}
+                      total={total}
+                      onChange={(pageNumber) => fetchData(pageNumber)}
+                      position="end"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

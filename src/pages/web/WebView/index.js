@@ -11,7 +11,7 @@ function WebVIew() {
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="grid grid-cols-4 mt-5">
               <div className="col-span-4">
-                <div className="p-1 rounded-md shadow-md bg-red-50">
+                <div className="p-1 rounded-md shadow-md bg-gray-50">
                   <div className="text-center underline decoration-1">
                     Instagram
                   </div>
@@ -31,7 +31,7 @@ function WebVIew() {
             <div>
               <div className="grid grid-cols-4 gap-4 mt-5">
                 <div className="col-span-4">
-                  <div className="p-2 rounded-md shadow-md bg-red-50">
+                  <div className="p-2 rounded-md shadow-md bg-gray-50">
                     <div className="text-center underline decoration-1">
                       Youtube
                     </div>

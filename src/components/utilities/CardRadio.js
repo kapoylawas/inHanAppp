@@ -34,7 +34,7 @@ function CardRadio() {
       .then((response) => {
         setIsLoading(false);
         setRadio(response.data.data);
-        console.log("data", response);
+        // console.log("data", response);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -55,7 +55,7 @@ function CardRadio() {
         <div>
           <div className="grid items-center grid-cols-4 gap-5 mt-5 text-center md:gap-5">
             <div className="col-span-4">
-              <div className="p-2 text-xs text-center bg-red-200 rounded-md shadow-md">
+              <div className="p-2 text-xs text-center bg-gray-100 rounded-md shadow-md">
                 <div className="text-center underline decoration-1">Radio</div>
                 <br></br>
                 <div>
@@ -64,12 +64,10 @@ function CardRadio() {
                   ) : (
                     <div className="grid grid-cols-4 gap-4 mt-5">
                       <div className="col-span-4">
-                        <div className="p-2 text-xs text-center rounded-md shadow-md bg-red-50">
+                        <div className="p-2 text-xs text-center bg-gray-500 rounded-md shadow-md">
                           <AudioPlayer
-                            autoPlay
                             src={radio.radio}
-                            onPlay={(e) => console.log("onPlay")}
-                            // other props here
+                            autoPlayAfterSrcChange={false}
                           />
                         </div>
                       </div>

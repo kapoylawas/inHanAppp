@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" viewBox="0 0 35 35">
+  <defs>
+    <clipPath id="clip-ic_person_by_design_">
+      <rect width="35" height="35"/>
+    </clipPath>
+  </defs>
+  <g id="ic_person_by_design_" data-name="ic_person_by_design " clip-path="url(#clip-ic_person_by_design_)">
+    <path id="Path_29" data-name="Path 29" d="M11.5,4.167A3.667,3.667,0,1,1,8.907,5.241,3.666,3.666,0,0,1,11.5,4.167Zm0,9.167c4.052,0,7.333,1.641,7.333,3.667v1.833H4.167V17C4.167,14.974,7.448,13.333,11.5,13.333Z" transform="translate(6.833 6.833)" fill="#b21e20"/>
+  </g>
+</svg>

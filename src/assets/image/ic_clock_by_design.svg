@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" viewBox="0 0 35 35">
+  <defs>
+    <clipPath id="clip-ic_clock_by_design">
+      <rect width="35" height="35"/>
+    </clipPath>
+  </defs>
+  <g id="ic_clock_by_design" clip-path="url(#clip-ic_clock_by_design)">
+    <path id="Path_35" data-name="Path 35" d="M7.993,1.333A6.667,6.667,0,1,0,14.667,8,6.663,6.663,0,0,0,7.993,1.333Zm.007,12A5.333,5.333,0,1,1,13.333,8,5.332,5.332,0,0,1,8,13.333Zm.333-8.667h-1v4l3.5,2.1.5-.82-3-1.78Z" transform="translate(9.667 9.667)" fill="#fff"/>
+  </g>
+</svg>

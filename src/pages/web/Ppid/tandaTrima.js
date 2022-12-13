@@ -6,6 +6,10 @@ function TandaTrima() {
   document.title = "In Hand App - Tanda Trima";
 
   const tandaBukti = JSON.parse(localStorage.getItem("data"));
+  const kode = JSON.parse(localStorage.getItem("kode"));
+
+  console.log("kode", kode);
+
   return (
     <React.Fragment>
       <LayoutWeb>

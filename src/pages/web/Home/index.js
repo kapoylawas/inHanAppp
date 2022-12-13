@@ -5,7 +5,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import CategoryMenu from "../../../components/utilities/CategoryMenu";
-import Slider from "../../../components/utilities/Slider";
 import LayoutWeb from "../../../layouts/web";
 import Iframe from "react-iframe";
 import CardRadio from "../../../components/utilities/CardRadio";
@@ -19,21 +18,21 @@ function Home() {
         <>
           <div className="pt-20 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
-              <div className="grid grid-cols-1 p-1 text-sm bg-gray-200 rounded shadow-md">
+                
+              <div className="rounded-lg shadow-md ">
                 <img
-                  className="inline-block mb-1"
-                  width="100%"
-                  height="100%"
-                  src={require("../../../assets/images/bgHome.png")}
-                />
-                <Slider />
+                    className="inline-block"
+                    width="100%"
+                    height="100%"
+                    src={require("../../../assets/bg.png")}
+                  />
               </div>
               <CategoryMenu />
               <CardRadio />
               <div>
                 <div className="grid grid-cols-4 gap-4 mt-5">
                   <div className="col-span-4">
-                    <div className="p-1 bg-red-200 rounded-md shadow-md">
+                    <div className="p-1 bg-gray-100 rounded-md shadow-md">
                       <div className="text-center underline decoration-1">
                         Instagram
                       </div>
@@ -56,7 +55,7 @@ function Home() {
               <div>
                 <div className="grid grid-cols-4 gap-4 mt-5">
                   <div className="col-span-4">
-                    <div className="p-2 bg-red-200 rounded-md shadow-md">
+                    <div className="p-2 bg-gray-100 rounded-md shadow-md">
                       <div className="text-center underline decoration-1">
                         Youtube
                       </div>

@@ -9,10 +9,19 @@ function Sipul() {
   const [nik, setNik] = useState([]);
   const [nama, setNama] = useState([]);
   const [alamat, setAlamat] = useState([]);
+  const [rt, setRt] = useState([]);
+  const [rw, setRw] = useState([]);
+  const [kelurahan, setKelurahan] = useState([]);
+  const [kecamatan, setKecamatan] = useState([]);
+  const [nowa, setNowa] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("data", JSON.stringify({ nik, nama, alamat }));
-  }, [nik, nama, alamat]);
+    localStorage.setItem(
+      "data",
+      JSON.stringify({ nik, nama, alamat, rt, rw, kelurahan, kecamatan, nowa })
+    );
+  }, [nik, nama, alamat, rt, rw, kelurahan, kecamatan, nowa]);
+
   return (
     <React.Fragment>
       <LayoutWeb>
@@ -34,9 +43,9 @@ function Sipul() {
                       value={nik}
                       onChange={(e) => setNik(e.target.value)}
                       className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                      placeholder="No Induk Kependudukan"
                     />
                   </div>
+
                   <div className="mb-5">
                     <label className="mt-2">NAMA</label>
                     <input
@@ -44,7 +53,6 @@ function Sipul() {
                       value={nama}
                       onChange={(e) => setNama(e.target.value)}
                       className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                      placeholder="Nama"
                     />
                   </div>
                   <div className="mb-5">
@@ -54,7 +62,51 @@ function Sipul() {
                       value={alamat}
                       onChange={(e) => setAlamat(e.target.value)}
                       className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                      placeholder="Nama"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <label className="mt-2">RT</label>
+                    <input
+                      type="text"
+                      value={rt}
+                      onChange={(e) => setRt(e.target.value)}
+                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <label className="mt-2">RW</label>
+                    <input
+                      type="text"
+                      value={rw}
+                      onChange={(e) => setRw(e.target.value)}
+                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <label className="mt-2">KELURAHAN</label>
+                    <input
+                      type="text"
+                      value={kelurahan}
+                      onChange={(e) => setKelurahan(e.target.value)}
+                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <label className="mt-2">KECAMATAN</label>
+                    <input
+                      type="text"
+                      value={kecamatan}
+                      onChange={(e) => setKecamatan(e.target.value)}
+                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <label className="mt-2">NO WHATSAPP</label>
+                    <input
+                      type="text"
+                      value={nowa}
+                      onChange={(e) => setNowa(e.target.value)}
+                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
                     />
                   </div>
                   <div>
