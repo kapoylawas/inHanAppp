@@ -77,7 +77,7 @@ function LoginUmum() {
         <>
           <div className="pt-20 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
-              <div className="p-5 rounded-md shadow-md bg-red-50">
+              <div className="p-5 bg-gray-100 rounded-md shadow-md">
                 <div className="object-center">
                   <section className="container max-w-screen-lg pb-10 mx-auto hero">
                     <img
@@ -95,7 +95,7 @@ function LoginUmum() {
                 <form onSubmit={loginHandler}>
                   {validation.msg && (
                     <div
-                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
+                      className="relative px-4 py-3 text-red-700 bg-gray-100 border border-red-400 rounded"
                       role="alert"
                     >
                       {validation.msg}

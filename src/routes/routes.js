@@ -24,6 +24,7 @@ import DetailPengaduan from "../pages/web/Ulpim/detailPengaduan";
 import KirimPengaduan from "../pages/web/Ulpim/kirimPengaduan";
 import LihatPengaduanOpd from "../pages/web/Ulpim/lihatPengaduanOpd";
 import PengaduanOpd from "../pages/web/Ulpim/pengaduanOpd";
+import PengaduanUser from "../pages/web/Ulpim/pengaduanUser";
 import WebVIew from "../pages/web/WebView";
 import PrivateRoute from "./PrivateRoutes";
 
@@ -94,6 +95,9 @@ function Routes() {
       </PrivateRoute>
       <PrivateRoute exact path="/web/lihatPengaduanOpd/:id">
         <LihatPengaduanOpd />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/pengaduanUser/">
+        <PengaduanUser />
       </PrivateRoute>
       <Route exact path="/web/sipul">
         <Sipul />
