@@ -55,12 +55,11 @@ function ConfirmWeb() {
 
     await Api.post("/silpusitron/insert", formData, {
       // header
-      //   headers: {
-      //     //header Bearer + Token
-      //     // Authorization: `Bearer ${token}`,
-      //     objects: "/ppid/permohonan-informasi-publik",
-      //     statusUsers: 2,
-      //   },
+        headers: {
+          //header Bearer + Token
+          // Authorization: `Bearer ${token}`,
+          objects: "/silpusitron/insert",
+        },
     })
       .then((response) => {
         setLoading(false);

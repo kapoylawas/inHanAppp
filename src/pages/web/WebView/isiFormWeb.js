@@ -23,11 +23,9 @@ function IsiFormWeb() {
 
   const fetchData = async () => {
     await Api.get(`/silpusitron/get-form?tid=${id}`, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //     objects: "/ulpim/pengaduan-opd",
-      //     statusUsers: status,
-      //   },
+        headers: {
+          objects: "/silpusitron/get-form",
+        },
     })
       .then((response) => {
         setIsLoading(false);
