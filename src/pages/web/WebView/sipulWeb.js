@@ -34,12 +34,6 @@ function SipulWeb() {
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="card-body">
               <div className="p-5 bg-gray-100 rounded-md shadow-md">
-                <img
-                  className="mx-auto"
-                  width="100"
-                  height="100"
-                  src={require("../../../assets/blitarcirclecop.png")}
-                />
                 <form>
                   <div className="mb-5">
                     <label className="mt-2">NIK</label>

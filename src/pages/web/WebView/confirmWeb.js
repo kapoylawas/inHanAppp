@@ -84,14 +84,6 @@ function ConfirmWeb() {
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="object-center">
-              <section className="container max-w-screen-lg pb-10 mx-auto hero">
-                <img
-                  className="mx-auto"
-                  width="100"
-                  height="100"
-                  src={require("../../../assets/blitarcirclecop.png")}
-                />
-              </section>
             </div>
             <div className="card-body">
               <div className="col-span-4">
