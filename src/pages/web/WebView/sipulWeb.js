@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
 
 function SipulWeb() {
@@ -14,12 +13,6 @@ function SipulWeb() {
   const [kelurahan, setKelurahan] = useState([]);
   const [kecamatan, setKecamatan] = useState([]);
   const [nowa, setNowa] = useState([]);
-
-  const [verifed, setVerifed] = useState(false);
-  function onChange(value) {
-    // console.log("Captcha value:", value);
-    setVerifed(true);
-  }
 
   useEffect(() => {
     localStorage.setItem(
@@ -110,16 +103,12 @@ function SipulWeb() {
                       className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
                     />
                   </div>
-                  <ReCAPTCHA
-                    sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
-                    onChange={onChange}
-                  />
+                 
                   <div>
                     <Link to="/web/listFormWeb">
                       <button
                         type="submit"
                         className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
-                        disabled={!verifed}
                       >
                         Next Pilih Form
                       </button>

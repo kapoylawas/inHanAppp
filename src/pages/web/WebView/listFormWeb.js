@@ -65,7 +65,7 @@ function ListFrormWeb() {
               </Link>
             </nav>
           </div>
-          <div className="grid grid-cols-4 gap-4 mt-5">
+          <div className="grid grid-cols-4 gap-4">
             <div className="col-span-4">
               <div>
                 <div className="text-center">Pilih Salah Satu List Form</div>
@@ -80,15 +80,15 @@ function ListFrormWeb() {
                           <tr>
                             <th
                               scope="col"
-                              className="px-6 py-3 bg-gray-100 dark:bg-gray-800"
+                              className="bg-gray-100 dark:bg-gray-800"
                             >
-                              Nama Form Surat
+                              Pilih Form
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 bg-gray-100 dark:bg-gray-800"
+                              className="bg-gray-100 dark:bg-gray-800"
                             >
-                              Pilih Form
+                            
                             </th>
                           </tr>
                         </thead>
@@ -100,13 +100,7 @@ function ListFrormWeb() {
                             >
                               <th
                                 scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 bg-gray-100 whitespace-nowrap dark:text-white dark:bg-gray-800"
-                              >
-                                {form.name}
-                              </th>
-                              <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 bg-gray-100 whitespace-nowrap dark:text-white dark:bg-gray-800"
+                                className="py-4 font-medium text-gray-900 bg-gray-100 whitespace-nowrap dark:text-white dark:bg-gray-800"
                               >
                                 <Link to={`/web/isiFormWeb/${form.tid}`}>
                                   <img
@@ -116,6 +110,12 @@ function ListFrormWeb() {
                                     src={require("../../../assets/images/search.png")}
                                   />
                                 </Link>
+                              </th>
+                              <th
+                                scope="row"
+                                className="px-6 py-4 font-medium text-gray-900 bg-gray-100 whitespace-nowrap dark:text-white dark:bg-gray-800"
+                              >
+                                {form.name}
                               </th>
                             </tr>
                           ))}
