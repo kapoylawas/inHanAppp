@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
-import LayoutWeb from "../../../layouts/web";
 
-function Sipul() {
+function SipulWeb() {
   document.title = "InHandApp - Sipulsitron";
 
   const [nik, setNik] = useState([]);
@@ -31,7 +30,6 @@ function Sipul() {
 
   return (
     <React.Fragment>
-      <LayoutWeb>
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="card-body">
@@ -123,7 +121,7 @@ function Sipul() {
                     onChange={onChange}
                   />
                   <div>
-                    <Link to="/web/listForm">
+                    <Link to="/web/listFormWeb">
                       <button
                         type="submit"
                         className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
@@ -138,9 +136,8 @@ function Sipul() {
             </div>
           </div>
         </div>
-      </LayoutWeb>
     </React.Fragment>
   );
 }
 
-export default Sipul;
+export default SipulWeb;

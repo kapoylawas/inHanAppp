@@ -1,25 +1,25 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Api from "../../../api";
 import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
-import LayoutWeb from "../../../layouts/web";
 
-function IsiForm() {
+function IsiFormWeb() {
   const { id } = useParams();
 
   const [silpusitrons, setSilpusitron] = useState([]);
   const data = silpusitrons.sort();
 
-  // const kodes = Object.fromEntries(data.map(kode => [kode.kode]))
-
-  // console.log(kodes);
-  // const [kode, setKode] = useState("");
-
   localStorage.setItem("kode", JSON.stringify(data));
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [verifed, setVerifed] = useState(false);
+  function onChange(value) {
+    setVerifed(true);
+  }
 
   const fetchData = async () => {
     await Api.get(`/silpusitron/get-form?tid=${id}`, {
@@ -30,7 +30,6 @@ function IsiForm() {
       //   },
     })
       .then((response) => {
-        console.log(response);
         setIsLoading(false);
         setSilpusitron(response.data.data);
       })
@@ -66,7 +65,6 @@ function IsiForm() {
 
   return (
     <React.Fragment>
-      <LayoutWeb>
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="card-body">
@@ -113,11 +111,16 @@ function IsiForm() {
                               </div>
                             );
                           })}
+                          <ReCAPTCHA
+                                sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
+                                onChange={onChange}
+                            />
                         </form>
-                        <Link to="/web/confirm">
+                        <Link to="/web/confirmWeb">
                           <button
                             type="submit"
                             className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                            disabled={!verifed}
                           >
                             CONFIRM DATA
                           </button>
@@ -125,7 +128,7 @@ function IsiForm() {
                       </>
                     )}
 
-                    <Link to="/web/listForm">
+                    <Link to="/web/listFormWeb">
                       <button className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900">
                         KEMBALI
                       </button>
@@ -136,9 +139,8 @@ function IsiForm() {
             </div>
           </div>
         </div>
-      </LayoutWeb>
     </React.Fragment>
   );
 }
 
-export default IsiForm;
+export default IsiFormWeb;

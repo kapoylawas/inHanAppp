@@ -28,6 +28,10 @@ import LihatPengaduanOpd from "../pages/web/Ulpim/lihatPengaduanOpd";
 import PengaduanOpd from "../pages/web/Ulpim/pengaduanOpd";
 import PengaduanUser from "../pages/web/Ulpim/pengaduanUser";
 import WebVIew from "../pages/web/WebView";
+import ConfirmWeb from "../pages/web/WebView/confirmWeb";
+import IsiFormWeb from "../pages/web/WebView/isiFormWeb";
+import ListFrormWeb from "../pages/web/WebView/listFormWeb";
+import SipulWeb from "../pages/web/WebView/sipulWeb";
 import Wisata from "../pages/web/Wisata";
 import Detail from "../pages/web/Wisata/detail";
 import PrivateRoute from "./PrivateRoutes";
@@ -126,6 +130,18 @@ function Routes() {
       </Route>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />
+      </Route>
+      <Route exact path="/web/sipulWeb">
+        <SipulWeb />
+      </Route>
+      <Route exact path="/web/listFormWeb">
+        <ListFrormWeb />
+      </Route>
+      <Route exact path="/web/isiFormWeb/:id">
+        <IsiFormWeb />
+      </Route>
+      <Route exact path="/web/confirmWeb">
+        <ConfirmWeb />
       </Route>
     </Switch>
   );

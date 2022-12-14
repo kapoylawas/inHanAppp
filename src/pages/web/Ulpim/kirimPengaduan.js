@@ -56,7 +56,7 @@ function KirimPengaduan() {
         setLoading(false);
         //show toast
         toast.success(
-          "Data Anda Success Disimpan Tunggu Respon Selanjutnya Akan ada Notif WA!",
+          "Data Anda Success Disimpan Tunggu Respon Selanjutnya",
           {
             duration: 10000,
             position: "top-center",

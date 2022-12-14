@@ -26,8 +26,8 @@ function DataUlpim() {
 
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  console.log(latitude);
-  console.log(longitude);
+  // console.log(latitude);
+  // console.log(longitude);  
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {

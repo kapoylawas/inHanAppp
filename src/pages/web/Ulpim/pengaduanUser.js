@@ -30,8 +30,10 @@ function PengaduanUser() {
 
   //token
   const token = Cookies.get("token");
+  console.log(token);
 
   const status = localStorage.getItem("status");
+  console.log(status);
 
   const fetchData = async (pageNumber) => {
     const page = pageNumber ? pageNumber : currentPage;
