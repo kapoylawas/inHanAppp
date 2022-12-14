@@ -7,6 +7,8 @@ import Register from "../pages/admin/Register/Index";
 import Verifikasi from "../pages/admin/Verifikasi/Index";
 import VerifikasiUmum from "../pages/admin/VerifikasiUmum/Index";
 import AllMenu from "../pages/web/AllMenu";
+import Berita from "../pages/web/Berita";
+import DetailBerita from "../pages/web/Berita/detailBerita";
 import Blikosda from "../pages/web/Blikosda";
 import CallCenter from "../pages/web/CallCenter";
 import Home from "../pages/web/Home";
@@ -26,6 +28,8 @@ import LihatPengaduanOpd from "../pages/web/Ulpim/lihatPengaduanOpd";
 import PengaduanOpd from "../pages/web/Ulpim/pengaduanOpd";
 import PengaduanUser from "../pages/web/Ulpim/pengaduanUser";
 import WebVIew from "../pages/web/WebView";
+import Wisata from "../pages/web/Wisata";
+import Detail from "../pages/web/Wisata/detail";
 import PrivateRoute from "./PrivateRoutes";
 
 function Routes() {
@@ -110,6 +114,18 @@ function Routes() {
       </Route>
       <Route exact path="/web/confirm">
         <Confirm />
+      </Route>
+      <Route exact path="/web/wisata">
+        <Wisata />
+      </Route>
+      <Route exact path="/web/detail/:id">
+        <Detail />
+      </Route>
+      <Route exact path="/web/berita">
+        <Berita />
+      </Route>
+      <Route exact path="/web/detailBerita/:id">
+        <DetailBerita />
       </Route>
     </Switch>
   );

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Ulpim() {
   document.title = "UlPIM - Pengaduan";
 
-  const status = localStorage.getItem("status");
+  // const status = localStorage.getItem("status");
   // const status = 1;
   // console.log(status);
 
@@ -46,7 +46,7 @@ function Ulpim() {
                     </Link>
                   </div>
                 </div>
-                {status === 1 &&
+                {/* {status === 1 && */}
                     <>
                     <div className="col-span-4">
                       <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-2 lg:col-span-2">
@@ -63,7 +63,7 @@ function Ulpim() {
                       </div>
                     </div>
                     </>
-                }
+                {/* }  */}
                 
 
                 <div className="col-span-4">
@@ -71,7 +71,7 @@ function Ulpim() {
                     <Link to="/web/pengaduanUser">
                       <div>
                         <img
-                          src={require("../../../assets/images/all.png")}
+                          src={require("../../../assets/images/contact-data.png")}
                           width="30"
                           className="inline-block mb-2"
                         />

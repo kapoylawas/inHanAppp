@@ -75,6 +75,7 @@ function VerifikasiUmum() {
         //set state isLoading to "false"
         setLoading(false);
 
+        console.log(response);
         //show toast
         toast.success("Login Successfully.", {
           duration: 4000,
@@ -86,7 +87,7 @@ function VerifikasiUmum() {
           },
         });
 
-        Cookies.set("token", response.data.token);
+        Cookies.set("token", response.data.token.token);
         localStorage.setItem("status", JSON.stringify(2));
 
         //redirect dashboard page

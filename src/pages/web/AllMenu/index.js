@@ -6,6 +6,8 @@ import { ReactComponent as Ppid } from "../../../assets/image/ic_ppid_by_design.
 import { ReactComponent as Bliko } from "../../../assets/image/ic_blikosda_by_design.svg";
 import { ReactComponent as Ulpim } from "../../../assets/image/ic_ulpim_by_design.svg";
 import { ReactComponent as Silpu } from "../../../assets/image/ic_silpusitron_by_design.svg";
+import { ReactComponent as Wisata } from "../../../assets/image/ic_wisata_by_design.svg";
+import { ReactComponent as Berita } from "../../../assets/image/ic_news_by_design.svg";
 
 function AllMenu() {
   return (
@@ -83,6 +85,22 @@ function AllMenu() {
                           />
                         </div>
                         Call Center
+                      </Link>
+                    </div>
+                    <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+                      <Link to="/web/wisata">
+                        <div>
+                        <Wisata width="30" className="inline-block mb-2" />
+                        </div>
+                        Wisata
+                      </Link>
+                    </div>
+                    <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+                      <Link to="/web/berita">
+                        <div>
+                        <Berita className="inline-block mb-2" />
+                        </div>
+                        Berita
                       </Link>
                     </div>
                   </div>

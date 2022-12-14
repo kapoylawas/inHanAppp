@@ -9,9 +9,9 @@ import Cookies from "js-cookie";
 function DetailPengaduan() {
   document.title = "UlPIM - Detail Pengaduan";
 
-  const [ppids, setPpids] = useState([]);
+  const [ulpim, setUlpim] = useState([]);
 
-  const ppid = ppids.sort();
+  const data = ulpim.sort();
 
   const { id } = useParams();
 
@@ -31,7 +31,7 @@ function DetailPengaduan() {
     })
       .then((response) => {
         setIsLoading(false);
-        setPpids(response.data);
+        setUlpim(response.data);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -65,7 +65,9 @@ function DetailPengaduan() {
                       <LoadingSpinner />
                     ) : (
                       <>
-                        {ppid.map((ulpim, index) => (
+                      {/* {ulpim.isi_pesan} */}
+                      {/* {ulpim.isi_pesan} */}
+                        {data.map((ulpim, index) => (
                           <>
                             <div
                               key={index}

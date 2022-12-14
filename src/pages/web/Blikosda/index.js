@@ -58,7 +58,7 @@ function Blikosda() {
 
         //total
         setTotal(response.data.data.page);
-        console.log("data", response);
+        // console.log("data", response);
       })
       .catch((error) => {
         setIsLoading(false);

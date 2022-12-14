@@ -43,12 +43,14 @@ function Sipul() {
                       value={nik}
                       onChange={(e) => setNik(e.target.value)}
                       className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
+                      required
                     />
                   </div>
 
                   <div className="mb-5">
                     <label className="mt-2">NAMA</label>
                     <input
+                      required
                       type="text"
                       value={nama}
                       onChange={(e) => setNama(e.target.value)}
