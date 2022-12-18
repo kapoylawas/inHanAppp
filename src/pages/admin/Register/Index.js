@@ -204,7 +204,6 @@ function Register() {
                   <div className="mt-3 mb-2 border-2 border-stone-400"></div>
               
                   <div className="mb-5">
-                      <label className="mt-5">Tipe Verifikasi</label>
                       <select
                         value={tipe}
                         className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
