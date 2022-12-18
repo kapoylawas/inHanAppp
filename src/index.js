@@ -9,6 +9,7 @@ import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 //mapbox gl geocoder CSS
 import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './index.css';
+import 'react-slideshow-image/dist/styles.css'
 
 
 ReactDOM.render(

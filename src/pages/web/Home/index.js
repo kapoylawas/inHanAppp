@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/style-prop-object */
@@ -12,6 +13,9 @@ import Api from "../../../api";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import 'react-slideshow-image/dist/styles.css'
+import Slider from "../../../components/utilities/Slider";
+
 
 function Home() {
   document.title = "In Hand App - Home";
@@ -117,14 +121,19 @@ function Home() {
                 <></>
               )}
 
+
               <div className="rounded-lg shadow-md ">
-                <img
+                {/* <img
                   className="inline-block"
                   width="100%"
                   height="100%"
                   src={require("../../../assets/bg.png")}
-                />
+                /> */}
+                <Slider />
               </div>
+
+            
+
               <CategoryMenu />
               <CardRadio />
               <div>
