@@ -62,13 +62,17 @@ function Register() {
         setLoading(false);
 
         //show toast
-        toast.success("Register Data Successfully.", {
-          duration: 4000,
-          position: "top-right",
+        toast.success("Register Data Anda Successfully.", {
+          duration: 9000,
+          position: "top-center",
           style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
+            border: '1px solid #713200',
+            padding: '16px',
+            color: '#713200',
+          },
+          iconTheme: {
+            primary: '#713200',
+            secondary: '#FFFAEE',
           },
         });
 
