@@ -6,7 +6,7 @@ import { ReactComponent as Ppid } from "../../../assets/image/ic_ppid_by_design.
 import { ReactComponent as Bliko } from "../../../assets/image/ic_blikosda_by_design.svg";
 import { ReactComponent as Ulpim } from "../../../assets/image/ic_ulpim_by_design.svg";
 import { ReactComponent as Silpu } from "../../../assets/image/ic_silpusitron_by_design.svg";
-import { ReactComponent as Wisata } from "../../../assets/image/ic_wisata_by_design.svg";
+import { ReactComponent as Wisata } from "../../../assets/image/ic_new_wisata_by_design (1).svg";
 import { ReactComponent as Berita } from "../../../assets/image/ic_news_by_design.svg";
 import { ReactComponent as Phone } from "../../../assets/image/phone-svgrepo-com.svg";
 
