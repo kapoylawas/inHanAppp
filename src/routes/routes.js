@@ -92,9 +92,9 @@ function Routes() {
       <Route exact path="/web/radio">
         <Radio />
       </Route>
-      <Route exact path="/web/callCenter">
+      <PrivateRoute exact path="/web/callCenter">
         <CallCenter />
-      </Route>
+      </PrivateRoute>
       <PrivateRoute exact path="/web/kirimPengaduan">
         <KirimPengaduan />
       </PrivateRoute>

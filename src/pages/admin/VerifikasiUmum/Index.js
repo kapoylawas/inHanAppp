@@ -112,7 +112,7 @@ function VerifikasiUmum() {
         <>
           <div className="pt-20 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
-              <div className="p-5 bg-red-100 rounded-md shadow-md">
+              <div className="p-5 bg-gray-200 rounded-md shadow-md">
                 <div className="object-center">
                   <section className="container max-w-screen-lg pb-10 mx-auto hero">
                     <img
@@ -135,6 +135,7 @@ function VerifikasiUmum() {
                   MASUKKAN KODE OTP DARI WHATSAPP
                 </div>
                 <div className="mt-3 mb-2 border-2 border-stone-400"></div>
+                <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-10/12">
                 <div className="text-center underline decoration-1">
                   <OTPInput
                     value={otp}
@@ -146,6 +147,7 @@ function VerifikasiUmum() {
                     secure
                     style={{ position: "relative", left: "30%" }}
                   />
+                </div>
                 </div>
                 <form onSubmit={loginHandler}>
                   <div className="mb-5">
@@ -168,6 +170,7 @@ function VerifikasiUmum() {
                   </div>
                 </form>
                 <hr></hr>
+
                 <button
                   className="px-4 py-2 mt-3 font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
                   disabled={resendTime !== 60}
@@ -178,6 +181,7 @@ function VerifikasiUmum() {
                   {resendTime !== 60 && <span> {resendTime} </span>}
                   Resend OTP
                 </button>
+
               </div>
             </div>
           </div>

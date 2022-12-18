@@ -40,7 +40,7 @@ function Login() {
     )
       .then((response) => {
         setLoading(false);
-        // console.log("data", response);
+        console.log("data", response);
         //set data response to state "categories"
         setUser(response.data.data.data_user);
       })

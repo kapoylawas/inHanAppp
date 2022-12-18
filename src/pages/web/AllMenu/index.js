@@ -8,6 +8,7 @@ import { ReactComponent as Ulpim } from "../../../assets/image/ic_ulpim_by_desig
 import { ReactComponent as Silpu } from "../../../assets/image/ic_silpusitron_by_design.svg";
 import { ReactComponent as Wisata } from "../../../assets/image/ic_wisata_by_design.svg";
 import { ReactComponent as Berita } from "../../../assets/image/ic_news_by_design.svg";
+import { ReactComponent as Phone } from "../../../assets/image/phone-svgrepo-com.svg";
 
 function AllMenu() {
   return (
@@ -24,7 +25,7 @@ function AllMenu() {
                         <div>
                         <Ppid width="30" className="inline-block mb-2" />
                         </div>
-                        PPID
+                        Informasi Publik
                       </Link>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
@@ -32,7 +33,7 @@ function AllMenu() {
                         <div>
                         <Bliko width="30" className="inline-block mb-2" />
                         </div>
-                        Blikosda
+                        Produk Unggulan
                       </Link>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
@@ -40,11 +41,11 @@ function AllMenu() {
                         <div>
                         <Ulpim width="30" className="inline-block mb-2" />
                         </div>
-                        Ulpim
+                        Pengaduan
                       </Link>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
-                      <Link to="/web/sipul">
+                      <Link to="/web/listForm">
                         <div>
                         <Silpu width="30" className="inline-block mb-2" />
                         </div>
@@ -52,16 +53,12 @@ function AllMenu() {
                       </Link>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
-                      <Link to="/web/radio">
+                    <a href="tel:112">
                         <div>
-                          <img
-                            src={require("../../../assets/images/radio.png")}
-                            width="30"
-                            className="inline-block mb-2"
-                          />
+                        <Phone width="30" className="inline-block mb-2" />
                         </div>
-                        Radio
-                      </Link>
+                        Darurat 112 
+                      </a>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/webview">

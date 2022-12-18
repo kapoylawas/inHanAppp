@@ -23,7 +23,6 @@ function SipulWeb() {
 
   return (
     <React.Fragment>
-        <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="card-body">
               <div className="p-5 bg-gray-100 rounded-md shadow-md">
@@ -117,7 +116,6 @@ function SipulWeb() {
                 </form>
               </div>
             </div>
-          </div>
         </div>
     </React.Fragment>
   );

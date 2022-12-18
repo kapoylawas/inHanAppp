@@ -42,7 +42,7 @@ function LoginUmum() {
     await Api.post("/login/umum", {
       nik: nik,
       no_kk: no_kk,
-      platform: 1,
+      platform: 2,
     })
       .then((response) => {
         //set state isLoading to "false"
@@ -138,7 +138,8 @@ function LoginUmum() {
                     </div>
                   )}
                   <ReCAPTCHA
-                    sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
+                    // sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
+                    sitekey="6Le10GMjAAAAAAt4jp3xLa-KkS3oMnwVlwd2KDeT"
                     onChange={onChange}
                   />
                   <div>

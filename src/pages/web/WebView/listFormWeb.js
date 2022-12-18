@@ -38,7 +38,6 @@ function ListFrormWeb() {
 
   return (
     <React.Fragment>
-      <div className="pt-20 pb-20">
         <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
           <div>
             <nav arial-aria-label="Black">
@@ -128,7 +127,6 @@ function ListFrormWeb() {
             </div>
           </div>
         </div>
-      </div>
     </React.Fragment>
   );
 }

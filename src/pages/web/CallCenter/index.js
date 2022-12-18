@@ -10,6 +10,7 @@ import MapboxGeocoder from "mapbox-gl-geocoder";
 import { useHistory } from "react-router-dom";
 import Api from "../../../api";
 import { toast } from "react-hot-toast";
+import Cookies from "js-cookie";
 //api key mapbox
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
@@ -96,9 +97,6 @@ function CallCenter() {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
-  const [nik, setNik] = useState("");
-  const [nama, setNama] = useState("");
-  const [nohp, setNohp] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [tanggal, setTanggal] = useState("");
   const [waktu, setWaktu] = useState("");
@@ -110,10 +108,53 @@ function CallCenter() {
   const [isLoading, setLoading] = useState(false);
 
   //state validation
-  const [validation, setValidation] = useState({});
+  // const [validation, setValidation] = useState({});
 
   //history
   const history = useHistory();
+
+  const dataNip = localStorage.getItem("nip");
+  const status = localStorage.getItem("status");
+  const token = Cookies.get("token");
+
+  const [nik, setNik] = useState("");
+  const [nama, setNama] = useState("");
+  const [nohp, setNohp] = useState("");
+
+
+  const fetchData = async () => {
+    await Api.get(
+      `/profile2?nip_nik=${dataNip.replaceAll('"', "")}&status=${status}`,
+      {
+        headers: {
+          //header Bearer + Token
+          Authorization: `Bearer ${token}`,
+          objects: "/profile",
+          statusUsers: status,
+        },
+      }
+    )
+      .then((response) => {
+        setLoading(false);
+        setNik(response.data.data.data_user.nik)
+        setNama(response.data.data.data_user.nama)
+        setNohp(response.data.data.data_user.nomor_hp)
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
+  };
+
+  //hook
+  useEffect(() => {
+    //call function "fetchDataUser"
+    if (token) {
+      fetchData();
+      setLoading(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
 
   const storePengaduan = async (e) => {
     e.preventDefault();
@@ -158,7 +199,7 @@ function CallCenter() {
       })
       .catch((error) => {
         setLoading(false);
-        setValidation(error.response.data);
+        // setValidation(error.response.data);
         console.log(error);
       });
    }
@@ -247,60 +288,7 @@ function CallCenter() {
                   src={require("../../../assets/blitarcirclecop.png")}
                 />
                 <form onSubmit={storePengaduan}>
-                  <div className="mb-5">
-                    <label className="mt-2">NIK</label>
-                    <input
-                      type="number"
-                      value={nik}
-                      onChange={(e) => setNik(e.target.value)}
-                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                      placeholder="No Identitas Kependudukan"
-                    />
-                  </div>
-                  {validation.nik && (
-                    <div
-                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
-                      role="alert"
-                    >
-                      {validation.nik[0]}
-                    </div>
-                  )}
-                  <div className="mb-5">
-                    <label className="mt-2">Nama Lengkap</label>
-                    <input
-                      type="text"
-                      value={nama}
-                      onChange={(e) => setNama(e.target.value)}
-                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                      placeholder="Nama Lengkap"
-                    />
-                  </div>
-                  {validation.nama && (
-                    <div
-                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
-                      role="alert"
-                    >
-                      {validation.nama[0]}
-                    </div>
-                  )}
-                  <div className="mb-5">
-                    <label className="mt-2">No Handphone</label>
-                    <input
-                      type="number"
-                      value={nohp}
-                      onChange={(e) => setNohp(e.target.value)}
-                      className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                      placeholder="No Handphone / Whatsapp"
-                    />
-                  </div>
-                  {validation.nomor_hp && (
-                    <div
-                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
-                      role="alert"
-                    >
-                      {validation.nomor_hp[0]}
-                    </div>
-                  )}
+
                   <div className="mb-5">
                     <label className="mt-2">Deskripsi Kejadian</label>
                     <textarea

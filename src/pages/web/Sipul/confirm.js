@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -9,7 +10,7 @@ import LayoutWeb from "../../../layouts/web";
 function Confirm() {
   document.title = "In Hand App - Tanda Trima";
 
-  const dataPribadi = JSON.parse(localStorage.getItem("data"));
+  // const dataPribadi = JSON.parse(localStorage.getItem("data"));
   const fmkode = JSON.parse(localStorage.getItem("kode"));
   const isi_tb = JSON.stringify(localStorage.getItem("testingDatas"));
 
@@ -17,39 +18,77 @@ function Confirm() {
   const tbs = JSON.stringify(fmkode.map((kd) => kd.tb));
   const title = JSON.stringify(fmkode.map((kd) => kd.title));
 
-  const nik = dataPribadi.nik;
-  const nama = dataPribadi.nama;
-  const alamat = dataPribadi.alamat;
-  const field_rt = dataPribadi.rt;
-  const field_rw = dataPribadi.rw;
-  const field_kelurahan = dataPribadi.kelurahan;
-  const kecamatan = dataPribadi.kecamatan;
-  const field_no_whatsapp_penduduk = dataPribadi.nowa;
-
-  //   console.log("nik", nik);
-  //   console.log("nama", nama);
-  //   console.log("alamat", alamat);
-  //   console.log("field_rt", field_rt);
-  //   console.log("field_rw", field_rw);
-  //   console.log("field_kelurahan", field_kelurahan);
-  //   console.log("field_kecamatan", kecamatan);
-  //   console.log("field_no_whatsapp_penduduk", field_no_whatsapp_penduduk);
-
-  //   console.log(
-  //     "tb",
-  //     tbs.replace("[", "").replace("]", "").replace('"', "").replace('"', "")
-  //   );
-  //   console.log("isi_tb", isi_tb);
-  //   console.log(
-  //     "idtb",
-  //     kodes.replace("[", "").replace("]", "").replace('"', "").replace('"', "")
-  //   );
+  // const nik = dataPribadi.nik;
+  // const nama = dataPribadi.nama;
+  // const alamat = dataPribadi.alamat;
+  // const field_rt = dataPribadi.rt;
+  // const field_rw = dataPribadi.rw;
+  // const field_kelurahan = dataPribadi.kelurahan;
+  // const kecamatan = dataPribadi.kecamatan;
+  // const field_no_whatsapp_penduduk = dataPribadi.nowa;
 
   //state loading
   const [isLoading, setLoading] = useState(false);
 
   //history
   const history = useHistory();
+
+  //token
+  const token = Cookies.get("token");
+
+  const status = localStorage.getItem("status");
+
+  const dataNip = localStorage.getItem("nip");
+
+  const [nik, setNik] = useState("")
+  const [nama, setNama] = useState("")
+  const [alamat, setAlamat] = useState("")
+  const [rt, setRt] = useState("")
+  const [rw, setRw] = useState("")
+  const [kelurahan, setKelurahan] = useState("")
+  const [kecamatan, setKecamatan] = useState("")
+  const [nomorhp, setNomorhp] = useState("")
+
+  const fetchData = async () => {
+    await Api.get(
+      `/profile2?nip_nik=${dataNip.replaceAll('"', "")}&status=${status}`,
+      {
+        headers: {
+          //header Bearer + Token
+          Authorization: `Bearer ${token}`,
+          objects: "/profile",
+          statusUsers: status,
+        },
+      }
+    )
+      .then((response) => {
+        setLoading(false);
+        //set data response to state "categories"
+        // console.log(response);
+        setNik(response.data.data.data_user.nik)
+        setNama(response.data.data.data_user.nama)
+        setAlamat(response.data.data.data_user.alamat)
+        setRt(response.data.data.data_user.rt)
+        setRw(response.data.data.data_user.rw)
+        setKelurahan(response.data.data.data_user.kelurahan)
+        setKecamatan(response.data.data.data_user.kecamatan)
+        setNomorhp(response.data.data.data_user.nomor_hp)
+
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
+  };
+
+  //hook
+  useEffect(() => {
+    //call function "fetchDataUser"
+    if (token) {
+      fetchData();
+      setLoading(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const storePermohonan = async (e) => {
     e.preventDefault();
@@ -59,11 +98,11 @@ function Confirm() {
     formData.append("field_nik", nik);
     formData.append("field_nama", nama);
     formData.append("field_alamat", alamat);
-    formData.append("field_rt", field_rt);
-    formData.append("field_rw", field_rw);
-    formData.append("field_kelurahan", field_kelurahan);
+    formData.append("field_rt", rt);
+    formData.append("field_rw", rw);
+    formData.append("field_kelurahan", kelurahan);
     formData.append("field_kecamatan", kecamatan);
-    formData.append("field_no_whatsapp_penduduk", field_no_whatsapp_penduduk);
+    formData.append("field_no_whatsapp_penduduk", nomorhp);
     formData.append(
       "tb",
       tbs.replace("[", "").replace("]", "").replace('"', "").replace('"', "")
@@ -154,10 +193,10 @@ function Confirm() {
                       <br />
                       <div className="p-3 mb-3 bg-gray-200 rounded shadow-md">
                         <div className="mb-5 text-base font-bold">
-                          Atas Nama : {dataPribadi.nama}
+                          Atas Nama : {nama}
                         </div>
                         <div className="mb-5 text-base font-bold">
-                          No Whatsapp : {dataPribadi.nowa}
+                          No Whatsapp : {nomorhp}
                         </div>
                         <div className="mb-5 text-base font-bold">
                           Jenis Surat : {title.replace("[", "").replace("]", "").replace('"', "").replace('"', "")}

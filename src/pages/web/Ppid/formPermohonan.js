@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useHistory, useParams } from "react-router-dom";
 import LayoutWeb from "../../../layouts/web";
@@ -21,15 +21,12 @@ function FormPermohonan() {
   ];
 
   const [permohonan, setPermohonan] = useState("");
-  const [nik, setNik] = useState("");
   const [tujuan, setTujuan] = useState("");
-  const [nama, setNama] = useState("");
-  const [email, setEmail] = useState("");
   const [imagekitas, setImagekitas] = useState("");
+  console.log(imagekitas);
   const [akta, setAkta] = useState("");
-  const [notlpn, setNotlpn] = useState("");
+  console.log(akta);
   const [work, setWork] = useState("");
-  const [alamat, setAlamat] = useState("");
 
   //state categories
   const [categories] = useState(data);
@@ -95,15 +92,57 @@ function FormPermohonan() {
 
   const status = localStorage.getItem("status");
 
+  const dataNip = localStorage.getItem("nip");
+
+  const [namaUser, setNamaUser] = useState({});
+  const [alamat, setAlamat] = useState("");
+  const [email, setEmail] = useState("");
+  const [notlpn, setNotlpn] = useState("");
+
+  const fetchData = async () => {
+    await Api.get(
+      `/profile2?nip_nik=${dataNip.replaceAll('"', "")}&status=${status}`,
+      {
+        headers: {
+          //header Bearer + Token
+          Authorization: `Bearer ${token}`,
+          objects: "/profile",
+          statusUsers: status,
+        },
+      }
+    )
+      .then((response) => {
+        setLoading(false);
+        //set data response to state "categories"
+        setNamaUser(response.data.data.data_user.nama);
+        setAlamat(response.data.data.data_user.alamat);
+        setEmail(response.data.data.data_user.email);
+        setNotlpn(response.data.data.data_user.nomor_hp);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
+  };
+
+  //hook
+  useEffect(() => {
+    //call function "fetchDataUser"
+    if (token) {
+      fetchData();
+      setLoading(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const storePermohonan = async (e) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData();
 
     formData.append("kategori", permohonan);
-    formData.append("nik", nik);
+    formData.append("nik", dataNip);
     formData.append("tujuan", tujuan);
-    formData.append("nama", nama);
+    formData.append("nama", namaUser);
     formData.append("email", email);
     formData.append("kitas", imagekitas);
     formData.append("akta", akta);
@@ -124,6 +163,7 @@ function FormPermohonan() {
     })
       .then((response) => {
         setLoading(false);
+        console.log(response);
         //show toast
         toast.success("Data Saved Successfully!", {
           duration: 4000,
@@ -174,16 +214,7 @@ function FormPermohonan() {
                         ))}
                       </select>
                     </div>
-                    <div className="mb-5">
-                      <label className="mt-2">NIK</label>
-                      <input
-                        type="number"
-                        value={nik}
-                        onChange={(e) => setNik(e.target.value)}
-                        className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                        placeholder="No Identitas Kependudukan"
-                      />
-                    </div>
+                  
                     <div className="mb-5">
                       <label className="mt-2">
                         Tujuan Penggunaan Informasi
@@ -197,16 +228,7 @@ function FormPermohonan() {
                         rows="5"
                       />
                     </div>
-                    <div className="mb-5">
-                      <label className="mt-2">Nama Lengkap</label>
-                      <input
-                        type="text"
-                        value={nama}
-                        onChange={(e) => setNama(e.target.value)}
-                        className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
-                        placeholder="Nama Lengkap"
-                      />
-                    </div>
+                    
                     <div className="mb-5">
                       <label
                         className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-900"
@@ -253,7 +275,7 @@ function FormPermohonan() {
                       </div>
                     )}
 
-                    <div className="mb-5">
+                    {/* <div className="mb-5">
                       <label className="mt-2">Alamat</label>
                       <textarea
                         type="text"
@@ -263,9 +285,9 @@ function FormPermohonan() {
                         placeholder="Alamat Lengkap"
                         rows="5"
                       />
-                    </div>
+                    </div> */}
 
-                    <div className="mb-5">
+                    {/* <div className="mb-5">
                       <label className="mt-2">Email</label>
                       <input
                         type="email"
@@ -274,8 +296,8 @@ function FormPermohonan() {
                         className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
                         placeholder="Alamat Email"
                       />
-                    </div>
-                    <div className="mb-5">
+                    </div> */}
+                    {/* <div className="mb-5">
                       <label className="mt-2">No Telepon</label>
                       <input
                         type="number"
@@ -284,7 +306,7 @@ function FormPermohonan() {
                         className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
                         placeholder="No Telepon"
                       />
-                    </div>
+                    </div> */}
                     <div className="mb-5">
                       <label className="mt-2">Pekerjaan</label>
                       <input
