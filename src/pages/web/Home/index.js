@@ -135,7 +135,7 @@ function Home() {
             
 
               <CategoryMenu />
-              <CardRadio />
+              
               <div>
                 <div className="grid grid-cols-4 gap-4 mt-5">
                   <div className="col-span-4">
@@ -179,6 +179,7 @@ function Home() {
                   </div>
                 </div>
               </div>
+              <CardRadio />
             </div>
           </div>
         </>
