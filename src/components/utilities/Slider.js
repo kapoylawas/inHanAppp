@@ -15,11 +15,11 @@ function Slider() {
     },
   ];
 
-  const [banner, setBanner] = useState([])
-  const sort = banner.sort();
-  console.log(sort);
+  // const [banner, setBanner] = useState([])
+  // const sort = banner.sort();
+  // console.log(sort);
 
-  const [setIsLoading] = useState(false);
+  // const [setIsLoading] = useState(false);
 
   const [setErrorMessage] = useState("");
 
@@ -38,12 +38,12 @@ function Slider() {
       }
     )
       .then((response) => {
-        setIsLoading(false);
-        setBanner(response.data.data)
+        // setIsLoading(false);
+        // setBanner(response.data.data)
         console.log(response);
       })
       .catch((error) => {
-        setIsLoading(false);
+        // setIsLoading(false);
         setErrorMessage(error);
       });
   };
@@ -51,7 +51,7 @@ function Slider() {
   useEffect(() => {
     //call function "fetchDataPlaces"
     fetchData();
-    setIsLoading(true);
+    // setIsLoading(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
