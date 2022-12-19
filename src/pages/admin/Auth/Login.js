@@ -76,7 +76,7 @@ function Login() {
     });
 
     //redirect login page
-    history.push("admin/login");
+    history.push("/web/lainya");
   };
 
   return (
