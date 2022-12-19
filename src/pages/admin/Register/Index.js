@@ -98,7 +98,7 @@ function Register() {
   const [title, setTitle] = useState([]);
   const sort = title.sort();
 
-  const [setIsLoading] = useState(false);
+  // const [setIsLoading] = useState(false);
 
   const fetchData = async () => {
     await Api.get(`/term-of-condition`, {
@@ -111,12 +111,12 @@ function Register() {
       // },
     })
       .then((response) => {
-        setIsLoading(false);
+        // setIsLoading(false);
         setTitle(response.data.data);
         // console.log("data", response);
       })
       .catch((error) => {
-        setIsLoading(false);
+        // setIsLoading(false);
         setErrorMessage(error);
       });
   };
@@ -124,7 +124,7 @@ function Register() {
   useEffect(() => {
     //call function "fetchDataPlaces"
     fetchData();
-    setIsLoading(true);
+    // setIsLoading(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
