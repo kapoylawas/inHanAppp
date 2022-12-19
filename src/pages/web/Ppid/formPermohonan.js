@@ -23,16 +23,16 @@ function FormPermohonan() {
   const [permohonan, setPermohonan] = useState("");
   const [tujuan, setTujuan] = useState("");
   const [imagekitas, setImagekitas] = useState("");
-  console.log(imagekitas);
+  // console.log(imagekitas);
   const [akta, setAkta] = useState("");
-  console.log(akta);
+  // console.log(akta);
   const [work, setWork] = useState("");
 
   //state categories
   const [categories] = useState(data);
 
   //state validation
-  const [validation, setValidation] = useState({});
+  const [validation] = useState({});
 
   //state loading
   const [isLoading, setLoading] = useState(false);
@@ -159,11 +159,13 @@ function FormPermohonan() {
         Authorization: `Bearer ${token}`,
         objects: "/ppid/permohonan-informasi-publik",
         statusUsers: status,
+        lat: 1,
+        lng: 2,
       },
     })
       .then((response) => {
         setLoading(false);
-        console.log(response);
+        // console.log(response);
         //show toast
         toast.success("Data Saved Successfully!", {
           duration: 4000,
@@ -180,7 +182,8 @@ function FormPermohonan() {
       })
       .catch((error) => {
         setLoading(false);
-        setValidation(error.response.data);
+        console.log("err", error);
+        // setValidation(error.response.data);
       });
   };
   return (
@@ -199,6 +202,14 @@ function FormPermohonan() {
                   />
                   <br></br>
                   <form onSubmit={storePermohonan}>
+                  {validation.msg && (
+                    <div
+                      className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
+                      role="alert"
+                    >
+                      {validation.msg}
+                    </div>
+                  )}
                     <div className="mb-5">
                       <label className="mt-5">Kategori Permohonan</label>
                       <select

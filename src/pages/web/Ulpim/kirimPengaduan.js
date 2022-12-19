@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Api from "../../../api";
@@ -9,16 +9,16 @@ import Cookies from "js-cookie";
 function KirimPengaduan() {
   document.title = "In Hand App - Pengaduan";
 
-  const [pengirim, setPengirim] = useState("");
-  const [no_telp, setNotelp] = useState("");
-  const [email, setEmail] = useState("");
-  const [alamat, setAlamat] = useState("");
+  // const [pengirim, setPengirim] = useState("");
+  // const [no_telp, setNotelp] = useState("");
+  // const [nik, setNik] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [alamat, setAlamat] = useState("");
   const [isi_pesan, setIsipesan] = useState("");
   const [tgl_lapor, setTgllapor] = useState("");
-  const [nik, setNik] = useState("");
 
   //state validation
-  const [setValidation] = useState({});
+  const [validation, setValidation] = useState({});
 
   //state loading
   const [isLoading, setLoading] = useState(false);
@@ -35,13 +35,13 @@ function KirimPengaduan() {
     setLoading(true);
     const formData = new FormData();
 
-    formData.append("pengirim", pengirim);
-    formData.append("no_telp", no_telp);
+    formData.append("pengirim", namaUser);
+    formData.append("no_telp", notlpn);
     formData.append("email", email);
     formData.append("alamat", alamat);
     formData.append("isi_pesan", isi_pesan);
     formData.append("tgl_lapor", tgl_lapor);
-    formData.append("nik", nik);
+    formData.append("nik", dataNip);
 
     await Api.post("/ulpim/insert-pengaduan", formData, {
       // header
@@ -54,19 +54,17 @@ function KirimPengaduan() {
     })
       .then((response) => {
         setLoading(false);
+        // console.log(response);
         //show toast
-        toast.success(
-          "Data Anda Success Disimpan Tunggu Respon Selanjutnya",
-          {
-            duration: 10000,
-            position: "top-center",
-            style: {
-              borderRadius: "20px",
-              background: "#333",
-              color: "#fff",
-            },
-          }
-        );
+        toast.success("Data Anda Success Disimpan Tunggu Respon Selanjutnya", {
+          duration: 10000,
+          position: "top-center",
+          style: {
+            borderRadius: "20px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
 
         history.push("/web/ulpim");
       })
@@ -75,6 +73,48 @@ function KirimPengaduan() {
         setValidation(error.response.data);
       });
   };
+
+  const dataNip = localStorage.getItem("nip");
+  const [namaUser, setNamaUser] = useState("");
+  const [notlpn, setNotlpn] = useState("");
+  const [alamat, setAlamat] = useState("");
+  const [email, setEmail] = useState("");
+
+  const fetchData = async () => {
+    await Api.get(
+      `/profile2?nip_nik=${dataNip.replaceAll('"', "")}&status=${status}`,
+      {
+        headers: {
+          //header Bearer + Token
+          Authorization: `Bearer ${token}`,
+          objects: "/profile",
+          statusUsers: status,
+        },
+      }
+    )
+      .then((response) => {
+        setLoading(false);
+        //set data response to state "categories"
+        console.log(response);
+        setNamaUser(response.data.data.data_user.nama);
+        setAlamat(response.data.data.data_user.alamat);
+        setEmail(response.data.data.data_user.email);
+        setNotlpn(response.data.data.data_user.nomor_hp);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
+  };
+
+  //hook
+  useEffect(() => {
+    //call function "fetchDataUser"
+
+    fetchData();
+    setLoading(true);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <React.Fragment>
       <LayoutWeb>
@@ -92,7 +132,15 @@ function KirimPengaduan() {
                     />
                     <br></br>
                     <form onSubmit={storePermohonan}>
-                      <div className="mb-5">
+                      {validation.msg && (
+                        <div
+                          className="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
+                          role="alert"
+                        >
+                          {validation.msg}
+                        </div>
+                      )}
+                      {/* <div className="mb-5">
                         <label className="mt-2">Pengirim</label>
                         <input
                           value={pengirim}
@@ -102,8 +150,8 @@ function KirimPengaduan() {
                           placeholder="Nama Sesuai Identitas Asli"
                           required
                         />
-                      </div>
-                      <div className="mb-5">
+                      </div> */}
+                      {/* <div className="mb-5">
                         <label className="mt-2">No tpln</label>
                         <input
                           value={no_telp}
@@ -113,8 +161,8 @@ function KirimPengaduan() {
                           placeholder="No Handphone"
                           required
                         />
-                      </div>
-                      <div className="mb-5">
+                      </div> */}
+                      {/* <div className="mb-5">
                         <label className="mt-2">Email</label>
                         <input
                           value={email}
@@ -136,7 +184,7 @@ function KirimPengaduan() {
                           rows="5"
                           required
                         />
-                      </div>
+                      </div> */}
                       <div className="mb-5">
                         <label className="mt-2">Laporan</label>
                         <textarea
@@ -159,7 +207,7 @@ function KirimPengaduan() {
                           required
                         ></input>
                       </div>
-                      <div className="mb-5">
+                      {/* <div className="mb-5">
                         <label className="mt-2">NIK</label>
                         <input
                           value={nik}
@@ -168,7 +216,7 @@ function KirimPengaduan() {
                           className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
                           required
                         ></input>
-                      </div>
+                      </div> */}
                       <button
                         type="submit"
                         className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"

@@ -131,11 +131,7 @@ function Home() {
                 /> */}
                 <Slider />
               </div>
-
-            
-
               <CategoryMenu />
-              
               <div>
                 <div className="grid grid-cols-4 gap-4 mt-5">
                   <div className="col-span-4">

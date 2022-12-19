@@ -6,20 +6,20 @@ function SipulWeb() {
   document.title = "InHandApp - Sipulsitron";
 
   const [nik, setNik] = useState([]);
-  const [nama, setNama] = useState([]);
-  const [alamat, setAlamat] = useState([]);
-  const [rt, setRt] = useState([]);
-  const [rw, setRw] = useState([]);
-  const [kelurahan, setKelurahan] = useState([]);
-  const [kecamatan, setKecamatan] = useState([]);
-  const [nowa, setNowa] = useState([]);
-
+  // const [nama, setNama] = useState([]);
+  // const [alamat, setAlamat] = useState([]);
+  // const [rt, setRt] = useState([]);
+  // const [rw, setRw] = useState([]);
+  // const [kelurahan, setKelurahan] = useState([]);
+  // const [kecamatan, setKecamatan] = useState([]);
+  // const [nowa, setNowa] = useState([]);
+  
   useEffect(() => {
     localStorage.setItem(
       "data",
-      JSON.stringify({ nik, nama, alamat, rt, rw, kelurahan, kecamatan, nowa })
+      JSON.stringify(nik)
     );
-  }, [nik, nama, alamat, rt, rw, kelurahan, kecamatan, nowa]);
+  }, [nik]);
 
   return (
     <React.Fragment>
@@ -38,7 +38,7 @@ function SipulWeb() {
                     />
                   </div>
 
-                  <div className="mb-5">
+                  {/* <div className="mb-5">
                     <label className="mt-2">NAMA</label>
                     <input
                       required
@@ -101,7 +101,7 @@ function SipulWeb() {
                       onChange={(e) => setNowa(e.target.value)}
                       className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
                     />
-                  </div>
+                  </div> */}
                  
                   <div>
                     <Link to="/web/listFormWeb">

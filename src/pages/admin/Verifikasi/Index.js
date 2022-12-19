@@ -86,7 +86,7 @@ function Verifikasi() {
           },
         });
 
-        Cookies.set("token", response.data.token);
+        Cookies.set("token", response.data.token.token);
         localStorage.setItem("status", JSON.stringify(1));
 
         //redirect dashboard page

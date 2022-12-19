@@ -76,7 +76,7 @@ function Login() {
     });
 
     //redirect login page
-    history.push("/");
+    history.push("admin/login");
   };
 
   return (
@@ -121,7 +121,8 @@ function Login() {
                         {isLoading ? "LOADING..." : ""} {user.nik}{" "}
                       </div>
                     </div>
-                    {status === 1 && (
+
+                    
                       <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
                         <div class="col-span-5">
                           <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
@@ -133,8 +134,7 @@ function Login() {
                           {user.email_gov}
                         </div>
                       </div>
-                    )}
-                    {
+                      
                       <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
                         <div class="col-span-5">
                           <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
@@ -146,7 +146,7 @@ function Login() {
                           {user.email}
                         </div>
                       </div>
-                    }
+                    
                     <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
                       <div class="col-span-5">
                         <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}

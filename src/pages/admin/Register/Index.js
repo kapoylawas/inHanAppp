@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Api from "../../../api";
@@ -66,13 +66,13 @@ function Register() {
           duration: 9000,
           position: "top-center",
           style: {
-            border: '1px solid #713200',
-            padding: '16px',
-            color: '#713200',
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
           },
           iconTheme: {
-            primary: '#713200',
-            secondary: '#FFFAEE',
+            primary: "#713200",
+            secondary: "#FFFAEE",
           },
         });
 
@@ -93,6 +93,40 @@ function Register() {
     console.log("Captcha value:", value);
     setVerifed(true);
   }
+
+  const [setErrorMessage] = useState("");
+  const [title, setTitle] = useState([]);
+  const sort = title.sort();
+
+  const [setIsLoading] = useState(false);
+
+  const fetchData = async () => {
+    await Api.get(`/term-of-condition`, {
+      // headers: {
+      //   //header Bearer + Token
+      //   objects: "/ppid/daftar-informasi-publik",
+      //   statusUsers: 1,
+      //   lng: latitude,
+      //   lat: longitude
+      // },
+    })
+      .then((response) => {
+        setIsLoading(false);
+        setTitle(response.data.data);
+        // console.log("data", response);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setErrorMessage(error);
+      });
+  };
+
+  useEffect(() => {
+    //call function "fetchDataPlaces"
+    fetchData();
+    setIsLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <React.Fragment>
@@ -202,18 +236,18 @@ function Register() {
                     </div>
                   )}
                   <div className="mt-3 mb-2 border-2 border-stone-400"></div>
-              
+
                   <div className="mb-5">
-                      <select
-                        value={tipe}
-                        className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
-                        onChange={(e) => handleshowhide(e)}
-                      >
-                        <option value="">-- Tipe Verifikasi --</option>
-                        <option value="1">Whatsapp</option>
-                        <option value="2">Email</option>
-                      </select>
-                    </div>
+                    <select
+                      value={tipe}
+                      className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
+                      onChange={(e) => handleshowhide(e)}
+                    >
+                      <option value="">-- Pilih Tipe Verifikasi --</option>
+                      <option value="1">Whatsapp</option>
+                      <option value="2">Email</option>
+                    </select>
+                  </div>
 
                   <div class="flex items-center mb-4">
                     <input
@@ -227,7 +261,11 @@ function Register() {
                       for="default-checkbox"
                       class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      Data Yang Saya Kirim Adalah Benar dan Dapat di Pertanggung Jawabkan
+                      {sort.map((isi, index) => ( 
+                        <>
+                        {isi.isi}
+                        </>
+                      ))}
                     </label>
                   </div>
                   <button

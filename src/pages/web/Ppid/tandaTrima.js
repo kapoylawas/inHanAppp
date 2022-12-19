@@ -13,7 +13,7 @@ function TandaTrima() {
         <>
           <div className="pt-20 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
-              <div className="p-5 rounded-md shadow-md bg-red-50">
+              <div className="p-5 rounded-md shadow-md bg-gray-50">
                 <div className="object-center">
                   <section className="container max-w-screen-lg pb-10 mx-auto hero">
                     <img
