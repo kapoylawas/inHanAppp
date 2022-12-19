@@ -14,8 +14,8 @@ function KirimPengaduan() {
   // const [nik, setNik] = useState("");
   // const [email, setEmail] = useState("");
   // const [alamat, setAlamat] = useState("");
+  // const [tgl_lapor, setTgllapor] = useState("");
   const [isi_pesan, setIsipesan] = useState("");
-  const [tgl_lapor, setTgllapor] = useState("");
 
   //state validation
   const [validation, setValidation] = useState({});
@@ -40,8 +40,8 @@ function KirimPengaduan() {
     formData.append("email", email);
     formData.append("alamat", alamat);
     formData.append("isi_pesan", isi_pesan);
-    formData.append("tgl_lapor", tgl_lapor);
-    formData.append("nik", dataNip);
+    formData.append("nik", nik);
+    // formData.append("tgl_lapor", tgl_lapor);
 
     await Api.post("/ulpim/insert-pengaduan", formData, {
       // header
@@ -79,6 +79,8 @@ function KirimPengaduan() {
   const [notlpn, setNotlpn] = useState("");
   const [alamat, setAlamat] = useState("");
   const [email, setEmail] = useState("");
+  const [nik, setNik] = useState("");
+  console.log(nik);
 
   const fetchData = async () => {
     await Api.get(
@@ -96,6 +98,7 @@ function KirimPengaduan() {
         setLoading(false);
         //set data response to state "categories"
         console.log(response);
+        setNik(response.data.data.data_user.nik);
         setNamaUser(response.data.data.data_user.nama);
         setAlamat(response.data.data.data_user.alamat);
         setEmail(response.data.data.data_user.email);
@@ -197,7 +200,7 @@ function KirimPengaduan() {
                           required
                         />
                       </div>
-                      <div className="mb-5">
+                      {/* <div className="mb-5">
                         <label className="mt-2">Tanggal Laporan</label>
                         <input
                           value={tgl_lapor}
@@ -206,7 +209,7 @@ function KirimPengaduan() {
                           className="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-7 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
                           required
                         ></input>
-                      </div>
+                      </div> */}
                       {/* <div className="mb-5">
                         <label className="mt-2">NIK</label>
                         <input

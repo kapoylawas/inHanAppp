@@ -37,13 +37,13 @@ function WebFooter() {
                 className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500"
               >
                 <Ppid width="30" className="inline-block" />
-                <span className="block text-xs">PPID</span>
+                <span className="block text-xs">Informasi Publik</span>
               </Link>
             </div>
             <div>
               <Link to="/web/blikosda" className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500">
               <Bliko width="30" className="inline-block" />
-                <span className="block text-xs">Blikosda</span>
+                <span className="block text-xs">Produk Unggulan</span>
               </Link>
             </div>
             <div>
@@ -52,7 +52,7 @@ function WebFooter() {
                 className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500"
               >
                  <Ulpim width="30" className="inline-block" />
-                <span className="block text-xs">Ulpim</span>
+                <span className="block text-xs">Pengaduan</span>
               </Link>
             </div>
             <div>
