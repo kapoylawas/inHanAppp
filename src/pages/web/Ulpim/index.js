@@ -9,13 +9,9 @@ function Ulpim() {
   document.title = "UlPIM - Pengaduan";
 
   const status = localStorage.getItem("status");
-  // const cek = status;
-  // const status = 2
-  // console.log(status);
-
+ 
   const dataNip = localStorage.getItem("nip");
   const [opd, setOpd] = useState("");
-  // console.log("opd pegawai :", opd);
 
   //history
   const history = useHistory();
@@ -38,7 +34,6 @@ function Ulpim() {
       .then((response) => {
         //show toast
         setLoading(false);
-        console.log("data :", response);
         toast.success("Berhasil Menampilkan Data Opd Anda", {
           duration: 10000,
           position: "top-center",
@@ -59,7 +54,6 @@ function Ulpim() {
   };
 
   const [emailgov, setEmailgov] = useState("");
-  // console.log(emailgov);
 
   const fetchData = async () => {
     await Api.get(
@@ -72,7 +66,6 @@ function Ulpim() {
     )
       .then((response) => {
         //set data response to state "categories"
-        // console.log(response);
         setOpd(response.data.data.data_user.opd);
         setEmailgov(response.data.data.data_user.email_gov);
       })

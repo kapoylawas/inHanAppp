@@ -97,7 +97,7 @@ function KirimPengaduan() {
       .then((response) => {
         setLoading(false);
         //set data response to state "categories"
-        console.log(response);
+        // console.log(response);
         setNik(response.data.data.data_user.nik);
         setNamaUser(response.data.data.data_user.nama);
         setAlamat(response.data.data.data_user.alamat);

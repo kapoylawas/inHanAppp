@@ -37,7 +37,7 @@ function Wisata() {
 
         //total
         setTotal(response.data.data.current_page);
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         setIsLoading(false);

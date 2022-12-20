@@ -27,7 +27,7 @@ function ListFrorm() {
       },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setIsLoading(false);
         setListform(response.data.data);
       })

@@ -13,7 +13,7 @@ function WebFooter() {
     setTimeout(() => {
       window.location.reload(false);
     }, 500);
-    console.log("page to reload");
+    // console.log("page to reload");
   }
 
   return (

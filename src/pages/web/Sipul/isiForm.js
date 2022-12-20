@@ -28,7 +28,7 @@ function IsiForm() {
       },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setIsLoading(false);
         setSilpusitron(response.data.data);
       })

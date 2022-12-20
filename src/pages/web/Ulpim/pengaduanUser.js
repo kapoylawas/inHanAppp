@@ -46,7 +46,7 @@ function PengaduanUser() {
     })
       .then((response) => {
         setIsLoading(false);
-        console.log("data", response);
+        // console.log("data", response);
         setUser(response.data);
         setCurrentPage(response.data.data.page);
 

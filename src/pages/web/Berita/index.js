@@ -43,7 +43,7 @@ function Berita() {
 
         //total
         setTotal(response.data.data.page);
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         setIsLoading(false);

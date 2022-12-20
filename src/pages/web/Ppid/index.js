@@ -64,7 +64,6 @@ function Ppid() {
       .then((response) => {
         setIsLoading(false);
 
-        console.log(response);
         setPpid(response.data.data.data);
 
         setCurrentPage(response.data.data.page);
@@ -104,7 +103,7 @@ function Ppid() {
             <div>
               <div className="grid grid-cols-4 gap-4">
                 <div className="col-span-4">
-                  <div className="p-2 rounded-md shadow-md bg-red-50">
+                  <div className="p-2 bg-gray-100 rounded-md shadow-md">
                     <div className="object-center">
                       <section className="container max-w-screen-lg pb-10 mx-auto hero">
                         <img
@@ -128,7 +127,7 @@ function Ppid() {
                   </div>
                 </div>
                 <div className="col-span-4">
-                  <div className="p-2 rounded-md shadow-md bg-red-50">
+                  <div className="p-2 bg-gray-100 rounded-md shadow-md">
                     <div className="text-center underline decoration-1">
                       PPID
                     </div>

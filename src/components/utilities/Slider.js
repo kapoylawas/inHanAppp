@@ -15,12 +15,6 @@ function Slider() {
     },
   ];
 
-  // const [banner, setBanner] = useState([])
-  // const sort = banner.sort();
-  // console.log(sort);
-
-  // const [setIsLoading] = useState(false);
-
   const [setErrorMessage] = useState("");
 
   const fetchData = async () => {
@@ -38,12 +32,9 @@ function Slider() {
       }
     )
       .then((response) => {
-        // setIsLoading(false);
-        // setBanner(response.data.data)
         console.log(response);
       })
       .catch((error) => {
-        // setIsLoading(false);
         setErrorMessage(error);
       });
   };

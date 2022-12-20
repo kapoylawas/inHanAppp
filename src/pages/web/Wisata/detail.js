@@ -25,7 +25,7 @@ function Detail() {
       //   },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setDetail(response.data.data);
         setIsLoading(false);
       })

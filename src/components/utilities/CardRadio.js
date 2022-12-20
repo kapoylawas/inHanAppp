@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/style-prop-object */
 import React, { useEffect, useState } from "react";
-// import Iframe from "react-iframe";
 import Api from "../../api";
 import LoadingSpinner from "./LoadingSpinner";
 import AudioPlayer from "react-h5-audio-player";
@@ -34,7 +33,6 @@ function CardRadio() {
       .then((response) => {
         setIsLoading(false);
         setRadio(response.data.data);
-        // console.log("data", response);
       })
       .catch((error) => {
         setIsLoading(false);

@@ -21,7 +21,7 @@ function DetailBerita() {
           //   },
         })
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             setDetailBerita(response.data.data);
             setIsLoading(false);
           })

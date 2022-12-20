@@ -61,18 +61,6 @@ function AllMenu() {
                       </a>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
-                      <Link to="/web/webview">
-                        <div>
-                          <img
-                            src={require("../../../assets/img/browser.png")}
-                            width="30"
-                            className="inline-block mb-2"
-                          />
-                        </div>
-                        Web View
-                      </Link>
-                    </div>
-                    <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/callCenter">
                         <div>
                           <img

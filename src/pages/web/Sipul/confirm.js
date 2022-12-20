@@ -121,7 +121,7 @@ function Confirm() {
         },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setLoading(false);
         //show toast
         toast.success("Data Sipul Anda Sudah Terkirim", {

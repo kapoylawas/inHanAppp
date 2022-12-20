@@ -59,7 +59,7 @@ function OpdPegawai() {
                     className="inline-block mb-2"
                   />
                   <br></br>
-                  <strong>Opps...!</strong> Anda Belum ada Pengaduan!.
+                  <strong>Opps...!</strong> OPD Anda Belum ada Pengaduan!.
                 </div>
               </div>
             )}

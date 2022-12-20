@@ -63,7 +63,7 @@ function Jawaban() {
           .then((response) => {
             //show toast
             setLoading(false);
-            console.log("data :", response);
+            // console.log("data :", response);
             toast.success("Berhasil Menyimpan Data Jawaban", {
               duration: 10000,
               position: "top-center",

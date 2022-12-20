@@ -75,7 +75,7 @@ function VerifikasiUmum() {
         //set state isLoading to "false"
         setLoading(false);
 
-        console.log(response);
+        // console.log("data :",response);
         //show toast
         toast.success("Login Successfully.", {
           duration: 4000,

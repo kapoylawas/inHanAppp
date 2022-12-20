@@ -25,6 +25,8 @@ function Login() {
   const status = localStorage.getItem("status");
 
   const [isLoading, setLoading] = useState(false);
+  const [emailgov, setEmailgov] = useState("");
+  const [email, setEmail] = useState("");
 
   const fetchData = async () => {
     await Api.get(
@@ -40,9 +42,10 @@ function Login() {
     )
       .then((response) => {
         setLoading(false);
-        console.log("data", response);
         //set data response to state "categories"
         setUser(response.data.data.data_user);
+        setEmailgov(response.data.data.data_user.email_gov);
+        setEmail(response.data.data.data_user.email);
       })
       .catch((error) => {
         setLoading(false);
@@ -122,31 +125,38 @@ function Login() {
                       </div>
                     </div>
 
-                    
-                      <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
-                        <div class="col-span-5">
-                          <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
-                          <img
-                            src={require("../../../assets/images/gmail.png")}
-                            width="30"
-                            className="inline-block mb-2 mr-1"
-                          />{" "}
-                          {user.email_gov}
+                    {emailgov ? (
+                      <>
+                        <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
+                          <div class="col-span-5">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
+                            <img
+                              src={require("../../../assets/images/gmail.png")}
+                              width="30"
+                              className="inline-block mb-2 mr-1"
+                            />{" "}
+                            {user.email_gov}
+                          </div>
                         </div>
-                      </div>
-                      
-                      <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
-                        <div class="col-span-5">
-                          <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
-                          <img
-                            src={require("../../../assets/images/gmail.png")}
-                            width="30"
-                            className="inline-block mb-2 mr-1"
-                          />{" "}
-                          {user.email}
+                      </>
+                    ) : null}
+
+                    {email ? (
+                      <>
+                        <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
+                          <div class="col-span-5">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
+                            <img
+                              src={require("../../../assets/images/gmail.png")}
+                              width="30"
+                              className="inline-block mb-2 mr-1"
+                            />{" "}
+                            {user.email}
+                          </div>
                         </div>
-                      </div>
-                    
+                      </>
+                    ) : null}
+
                     <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
                       <div class="col-span-5">
                         <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
