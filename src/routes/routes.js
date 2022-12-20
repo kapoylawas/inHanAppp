@@ -35,6 +35,8 @@ import SipulWeb from "../pages/web/WebView/sipulWeb";
 import Wisata from "../pages/web/Wisata";
 import Detail from "../pages/web/Wisata/detail";
 import PrivateRoute from "./PrivateRoutes";
+import OpdPegawai from "../pages/web/Ulpim/opdPegawai";
+import Jawaban from "../pages/web/Ulpim/jawaban";
 
 function Routes() {
   return (
@@ -104,8 +106,14 @@ function Routes() {
       <PrivateRoute exact path="/web/lihatPengaduanOpd/:id">
         <LihatPengaduanOpd />
       </PrivateRoute>
-      <PrivateRoute exact path="/web/pengaduanUser/">
+      <PrivateRoute exact path="/web/pengaduanUser">
         <PengaduanUser />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/opdPegawai">
+        <OpdPegawai />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/jawaban/:id_pesan/:id_istansi">
+        <Jawaban />
       </PrivateRoute>
       <Route exact path="/web/sipul">
         <Sipul />

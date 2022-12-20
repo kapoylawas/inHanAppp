@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import LayoutWeb from "../../../layouts/web";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Api from "../../../api";
+import { toast } from "react-hot-toast";
 
 function Ulpim() {
   document.title = "UlPIM - Pengaduan";
@@ -13,8 +14,52 @@ function Ulpim() {
   // console.log(status);
 
   const dataNip = localStorage.getItem("nip");
+  const [opd, setOpd] = useState("");
+  // console.log("opd pegawai :", opd);
 
-  const [statusp, setStatusp] = useState("");
+  //history
+  const history = useHistory();
+
+  const [isLoading, setLoading] = useState(false);
+
+  const storeOpd = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+
+    formData.append("opd", opd);
+
+    await Api.post("/ulpim/pengaduan-belum-terjawab", formData, {
+      // header
+      headers: {
+        objects: "/ulpim/pengadua-belum-terjawab",
+      },
+    })
+      .then((response) => {
+        //show toast
+        setLoading(false);
+        console.log("data :", response);
+        toast.success("Berhasil Menampilkan Data Opd Anda", {
+          duration: 10000,
+          position: "top-center",
+          style: {
+            borderRadius: "20px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+
+        localStorage.setItem("data-opd", JSON.stringify(response.data));
+        history.push("/web/opdPegawai");
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("err :", error);
+      });
+  };
+
+  const [emailgov, setEmailgov] = useState("");
+  // console.log(emailgov);
 
   const fetchData = async () => {
     await Api.get(
@@ -27,8 +72,9 @@ function Ulpim() {
     )
       .then((response) => {
         //set data response to state "categories"
-        console.log(response);
-        setStatusp(response.data.data.data_user.status_profile);
+        // console.log(response);
+        setOpd(response.data.data.data_user.opd);
+        setEmailgov(response.data.data.data_user.email_gov);
       })
       .catch((error) => {
         console.log(error);
@@ -65,39 +111,45 @@ function Ulpim() {
                 </div>
 
                 <div className="col-span-4">
-                  {statusp === 1 && (
-                    <div className="col-span-4">
-                      <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-2 lg:col-span-2">
-                        <Link to="/web/kirimPengaduan">
-                          <div>
-                            <img
-                              src={require("../../../assets/images/message.png")}
-                              width="30"
-                              className="inline-block mb-2"
-                            />
-                          </div>
-                          KIRIM PENGADUAN
-                        </Link>
+                  <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-2 lg:col-span-2">
+                    <Link to="/web/kirimPengaduan">
+                      <div>
+                        <img
+                          src={require("../../../assets/images/message.png")}
+                          width="30"
+                          className="inline-block mb-2"
+                        />
                       </div>
-                    </div>
-                  )}
-                  {statusp !== 1 && (
-                    <div className="col-span-4">
-                      <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-2 lg:col-span-2">
-                        <Link to="/web/kirimPengaduan">
-                          <div>
-                            <img
-                              src={require("../../../assets/images/message.png")}
-                              width="30"
-                              className="inline-block mb-2"
-                            />
-                          </div>
-                          KIRIM PENGADUAN
-                        </Link>
-                      </div>
-                    </div>
-                  )}
+                      KIRIM PENGADUAN
+                    </Link>
+                  </div>
                 </div>
+
+                {emailgov ? (
+                  <>
+                    <div className="col-span-4">
+                      <form onSubmit={storeOpd}>
+                        <div className="col-span-4">
+                          <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-2 lg:col-span-2">
+                            <div>
+                              <img
+                                src={require("../../../assets/images/product.png")}
+                                width="30"
+                                className="inline-block mb-2"
+                              />
+                            </div>
+                            <button type="submit">
+                              {" "}
+                              {isLoading
+                                ? "LOADING..."
+                                : "LIHAT PENGADUAN BY OPD"}{" "}
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </>
+                ) : null}
 
                 <div className="col-span-4">
                   <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-2 lg:col-span-2">
@@ -109,7 +161,7 @@ function Ulpim() {
                           className="inline-block mb-2"
                         />
                       </div>
-                      LIHAT PENGADUAN BY OPD
+                      LIHAT PENGADUAN All OPD
                     </Link>
                   </div>
                 </div>

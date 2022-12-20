@@ -59,7 +59,6 @@ function LoginPegawai() {
           },
         });
 
-        console.log(response);
         //redirect dashboard page
         history.push("/admin/login/verifikasi");
       })
@@ -139,8 +138,8 @@ function LoginPegawai() {
                     </div>
                   )}
                   <ReCAPTCHA
-                    // sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
-                    sitekey="6Le10GMjAAAAAAt4jp3xLa-KkS3oMnwVlwd2KDeT"
+                    sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
+                    // sitekey="6Le10GMjAAAAAAt4jp3xLa-KkS3oMnwVlwd2KDeT"
                     onChange={onChange}
                   />
                   <div>
