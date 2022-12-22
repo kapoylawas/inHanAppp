@@ -115,18 +115,18 @@ function Routes() {
       <PrivateRoute exact path="/web/jawaban/:id_pesan/:id_istansi">
         <Jawaban />
       </PrivateRoute>
-      <Route exact path="/web/sipul">
+      <PrivateRoute exact path="/web/sipul">
         <Sipul />
-      </Route>
-      <Route exact path="/web/listForm">
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/listForm">
         <ListFrorm />
-      </Route>
-      <Route exact path="/web/isiForm/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/isiForm/:id">
         <IsiForm />
-      </Route>
-      <Route exact path="/web/confirm">
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/confirm">
         <Confirm />
-      </Route>
+      </PrivateRoute>
       <Route exact path="/web/wisata">
         <Wisata />
       </Route>
