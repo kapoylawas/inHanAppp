@@ -13,9 +13,8 @@ import Api from "../../../api";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import 'react-slideshow-image/dist/styles.css'
+import "react-slideshow-image/dist/styles.css";
 import Slider from "../../../components/utilities/Slider";
-
 
 function Home() {
   document.title = "In Hand App - Home";
@@ -121,7 +120,6 @@ function Home() {
                 <></>
               )}
 
-
               <div className="rounded-lg shadow-md ">
                 {/* <img
                   className="inline-block"
@@ -174,6 +172,7 @@ function Home() {
                     </div>
                   </div>
                 </div>
+                
               </div>
               <CardRadio />
             </div>
