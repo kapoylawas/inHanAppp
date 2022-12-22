@@ -6,11 +6,11 @@ import Api from "../../api";
 function Slider() {
   const slideImages = [
     {
-      url: "http://admin-inhand.blitarkota.go.id/banner-img/wqeweq-19122022095939.jpg",
+      url: "https://admin-inhand.blitarkota.go.id/banner-img/wqeweq-19122022095939.jpg",
       caption: "",
     },
     {
-      url: "http://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
+      url: "https://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
       caption: "",
     },
   ];
