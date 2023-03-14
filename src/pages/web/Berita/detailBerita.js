@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { Interweave } from "interweave";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -21,7 +22,7 @@ function DetailBerita() {
           //   },
         })
           .then((response) => {
-            // console.log(response);
+            console.log(response);
             setDetailBerita(response.data.data);
             setIsLoading(false);
           })
@@ -75,12 +76,12 @@ function DetailBerita() {
             ) : (
               <>
                 <div className="rounded-lg shadow-md ">
-                  {/* <img
+                  <img
                     className="inline-block"
                     width="100%"
                     height="100%"
                     src={detailBerita.image}
-                  /> */}
+                  />
                 </div>
                 <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-100 rounded-md shadow-sm">
                   <div class="col-span-5">

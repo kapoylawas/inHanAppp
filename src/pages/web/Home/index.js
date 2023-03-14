@@ -96,8 +96,8 @@ function Home() {
               {token ? (
                 <>
                   <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-white rounded-md shadow-sm">
-                    <div class="col-span-5">
-                      <i class="fa fa-user-circle" aria-hidden="true"></i>{" "}
+                    <div className="col-span-5">
+                      <i className="fa fa-user-circle" aria-hidden="true"></i>{" "}
                       <img
                         src={require("../../../assets/images/programmer.png")}
                         width="30"
@@ -120,7 +120,7 @@ function Home() {
                 <></>
               )}
 
-              <div className="rounded-lg shadow-md ">
+              {/* <div className="rounded-lg shadow-md "> */}
                 {/* <img
                   className="inline-block"
                   width="100%"
@@ -128,7 +128,7 @@ function Home() {
                   src={require("../../../assets/bg.png")}
                 /> */}
                 <Slider />
-              </div>
+              {/* </div> */}
               <CategoryMenu />
               <div>
                 <div className="grid grid-cols-4 gap-4 mt-5">

@@ -17,22 +17,23 @@ function Slider() {
 
   const [setErrorMessage] = useState("");
 
-  const fetchData = async () => {
+  const [banner, setBanner] = useState([]);
+  console.log(banner);
+  const sort = banner.sort();
 
-    await Api.get(
-      `/banner`,
-      {
-        // headers: {
-        //   //header Bearer + Token
-        //   objects: "/ppid/daftar-informasi-publik",
-        //   statusUsers: 1,
-        //   lng: latitude,
-        //   lat: longitude
-        // },
-      }
-    )
+  const fetchData = async () => {
+    await Api.get(`/banner`, {
+      // headers: {
+      //   //header Bearer + Token
+      //   objects: "/ppid/daftar-informasi-publik",
+      //   statusUsers: 1,
+      //   lng: latitude,
+      //   lat: longitude
+      // },
+    })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        setBanner(response.data.data);
       })
       .catch((error) => {
         setErrorMessage(error);
@@ -48,20 +49,61 @@ function Slider() {
 
   return (
     <React.Fragment>
-      <Slide>
-        {slideImages.map((slideImage, index) => (
-          <div className="each-slide" key={index}>
+      {/* <Slide>
+        {sort.map((slideImage) => (
+          <div className="each-slide">
             <div>
                 <img
                   className="inline-block"
                   width="100%"
                   height="100%"
-                  src={slideImage.url}
+                  src={slideImage.img}
                 />
             </div>
           </div>
         ))}
-      </Slide>
+      </Slide> */}
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide relative"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner relative w-full overflow-hidden">
+          {sort.map((slideImage) => (
+            <div class="carousel-item active float-left w-full">
+              <img
+                src={slideImage.img}
+                class="block w-full"
+                alt="Wild Landscape"
+              />
+            </div>
+          ))}
+        </div>
+        <button
+          class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span
+            class="carousel-control-prev-icon inline-block bg-no-repeat"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span
+            class="carousel-control-next-icon inline-block bg-no-repeat"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </React.Fragment>
   );
 }

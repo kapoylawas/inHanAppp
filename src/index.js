@@ -10,6 +10,7 @@ import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './index.css';
 import 'react-slideshow-image/dist/styles.css'
+import 'tw-elements';
 
 
 ReactDOM.render(
