@@ -1,19 +1,18 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
-import { Slide } from "react-slideshow-image";
 import Api from "../../api";
 
 function Slider() {
-  const slideImages = [
-    {
-      url: "https://admin-inhand.blitarkota.go.id/banner-img/wqeweq-19122022095939.jpg",
-      caption: "",
-    },
-    {
-      url: "https://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
-      caption: "",
-    },
-  ];
+  // const slideImages = [
+  //   {
+  //     url: "https://admin-inhand.blitarkota.go.id/banner-img/wqeweq-19122022095939.jpg",
+  //     caption: "",
+  //   },
+  //   {
+  //     url: "https://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
+  //     caption: "",
+  //   },
+  // ];
 
   const [setErrorMessage] = useState("");
 
@@ -49,20 +48,7 @@ function Slider() {
 
   return (
     <React.Fragment>
-      {/* <Slide>
-        {sort.map((slideImage) => (
-          <div className="each-slide">
-            <div>
-                <img
-                  className="inline-block"
-                  width="100%"
-                  height="100%"
-                  src={slideImage.img}
-                />
-            </div>
-          </div>
-        ))}
-      </Slide> */}
+      
       <div
         id="carouselExampleIndicators"
         class="carousel slide relative"

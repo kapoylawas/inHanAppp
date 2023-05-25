@@ -162,12 +162,13 @@ function Home() {
                       <div className="mt-4 md:flex rounded-xl md:p-1">
                         <Iframe
                           allowfullscreen
-                          src="https://my.walls.io/r3vqy?nobackground=1&amp;show_header=0"
+                          src="https://feed.mikle.com/widget/v2/161653/?preloader-text=Loading"
                           style="border:0;height:800px;width:100%"
                           loading="lazy"
                           width="100%"
                           height="520px"
                         />
+                      
                       </div>
                     </div>
                   </div>
