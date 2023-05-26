@@ -168,7 +168,6 @@ function Home() {
                           width="100%"
                           height="520px"
                         />
-                      
                       </div>
                     </div>
                   </div>
