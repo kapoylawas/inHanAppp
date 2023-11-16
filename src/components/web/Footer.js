@@ -19,8 +19,8 @@ function WebFooter() {
   return (
     <React.Fragment>
       <>
-        <div className="fixed inset-x-0 bottom-0 z-10 text-center bg-gray-50">
-          <div className="container grid grid-cols-5 gap-5 p-2 mx-auto sm:w-full md:w-6/12">
+        {/* <div className="fixed inset-x-0 bottom-0 z-10 text-center bg-gray-50"> */}
+          <div className="fixed inset-x-0 bottom-0 grid grid-cols-5 gap-5 p-2 mx-auto bg-gray-100 sm:w-full md:w-6/12">
             <div>
               <Link
                 to="/"
@@ -65,7 +65,7 @@ function WebFooter() {
               </Link>
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </>
     </React.Fragment>
   );

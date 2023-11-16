@@ -4,7 +4,7 @@ function PaginationComponent(props) {
     return (
         props.total > 0 && (
             <Pagination
-                innerClass={`pagination ${props.position} mb-0`}
+                innerClass={`pagination props.position} mb-0`}
                 activePage={props.currentPage}
                 activeClass="page-item active"
                 itemsCountPerPage={props.perPage}

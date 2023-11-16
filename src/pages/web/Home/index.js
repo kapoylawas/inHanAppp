@@ -91,7 +91,7 @@ function Home() {
     <React.Fragment>
       <LayoutWeb>
         <>
-          <div className="pt-20 pb-20">
+          <div className="pb-20 pt-18">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
               {token ? (
                 <>
