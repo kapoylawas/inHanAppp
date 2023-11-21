@@ -23,7 +23,7 @@ function AllMenu() {
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/ppid">
                         <div>
-                        <Ppid width="30" className="inline-block mb-2" />
+                          <Ppid width="30" className="inline-block mb-2" />
                         </div>
                         Informasi Publik
                       </Link>
@@ -31,7 +31,7 @@ function AllMenu() {
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/blikosda">
                         <div>
-                        <Bliko width="30" className="inline-block mb-2" />
+                          <Bliko width="30" className="inline-block mb-2" />
                         </div>
                         Produk Unggulan
                       </Link>
@@ -39,7 +39,7 @@ function AllMenu() {
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/ulpim">
                         <div>
-                        <Ulpim width="30" className="inline-block mb-2" />
+                          <Ulpim width="30" className="inline-block mb-2" />
                         </div>
                         Pengaduan
                       </Link>
@@ -47,17 +47,17 @@ function AllMenu() {
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/listForm">
                         <div>
-                        <Silpu width="30" className="inline-block mb-2" />
+                          <Silpu width="30" className="inline-block mb-2" />
                         </div>
                         Pelayanan
                       </Link>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
-                    <a href="tel:112">
+                      <a href="tel:112">
                         <div>
-                        <Phone width="30" className="inline-block mb-2" />
+                          <Phone width="30" className="inline-block mb-2" />
                         </div>
-                        Darurat 112 
+                        Darurat 112
                       </a>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
@@ -75,7 +75,7 @@ function AllMenu() {
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/wisata">
                         <div>
-                        <Wisata width="30" className="inline-block mb-2" />
+                          <Wisata width="30" className="inline-block mb-2" />
                         </div>
                         Wisata
                       </Link>
@@ -83,9 +83,33 @@ function AllMenu() {
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/berita">
                         <div>
-                        <Berita className="inline-block mb-2" />
+                          <Berita className="inline-block mb-2" />
                         </div>
                         Berita
+                      </Link>
+                    </div>
+                    <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+                      <Link to="/web/aptika">
+                        <div>
+                          <img
+                            src={require("../../../assets/img/call-center.png")}
+                            width="30"
+                            className="inline-block mb-2"
+                          />
+                        </div>
+                        Aduan Fasilitas Internet
+                      </Link>
+                    </div>
+                    <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+                      <Link to="/web/aduanWeb">
+                        <div>
+                          <img
+                            src={require("../../../assets/img/call-center.png")}
+                            width="30"
+                            className="inline-block mb-2"
+                          />
+                        </div>
+                        Aduan Website / Aplikasi
                       </Link>
                     </div>
                   </div>

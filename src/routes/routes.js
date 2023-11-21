@@ -37,6 +37,8 @@ import Detail from "../pages/web/Wisata/detail";
 import PrivateRoute from "./PrivateRoutes";
 import OpdPegawai from "../pages/web/Ulpim/opdPegawai";
 import Jawaban from "../pages/web/Ulpim/jawaban";
+import Aptika from "../pages/web/Aptika";
+import AduanWeb from "../pages/web/Aptika/aduanWeb";
 
 function Routes() {
   return (
@@ -136,6 +138,12 @@ function Routes() {
       <Route exact path="/web/berita">
         <Berita />
       </Route>
+      <PrivateRoute exact path="/web/aptika">
+        <Aptika />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/aduanWeb">
+        <AduanWeb />
+      </PrivateRoute>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />
       </Route>
