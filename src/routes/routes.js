@@ -39,6 +39,8 @@ import OpdPegawai from "../pages/web/Ulpim/opdPegawai";
 import Jawaban from "../pages/web/Ulpim/jawaban";
 import Aptika from "../pages/web/Aptika";
 import AduanWeb from "../pages/web/Aptika/aduanWeb";
+import Sapras from "../pages/web/Sapras";
+import Send from "../pages/web/Sapras/send";
 
 function Routes() {
   return (
@@ -144,6 +146,12 @@ function Routes() {
       <PrivateRoute exact path="/web/aduanWeb">
         <AduanWeb />
       </PrivateRoute>
+      <Route exact path="/web/sarpras">
+        <Sapras />
+      </Route>
+      <Route exact path="/web/send">
+        <Send />
+      </Route>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />
       </Route>
