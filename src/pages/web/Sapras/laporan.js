@@ -83,7 +83,7 @@ function Laporan() {
                   className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
                   onClick={handleCheckNik}
                 >
-                  Cek NIK
+                  Cek Pelaporan
                 </button>
               </div>
 
