@@ -10,7 +10,8 @@ function Send() {
 
   const [nik, setNik] = useState("");
   const [nameSarpras, setNameSarpras] = useState("");
-  const [kategori, setKategori] = useState("");
+  const [kategoris, setKategori] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [phone, setPhone] = useState("");
   const [keteranganRusak, setKeteranganRusak] = useState("");
   const [keteranganLokasi, setKeteranganLokasi] = useState("");
@@ -47,7 +48,7 @@ function Send() {
     const formData = new FormData();
     formData.append("nik", nik);
     formData.append("nama_sarpras", nameSarpras);
-    formData.append("kategori_sarpras", kategori);
+    formData.append("kategori_sarpras", selectedCategory);
     formData.append("phone", phone);
     formData.append("keterangan_kerusakan", keteranganRusak);
     formData.append("keterangan_lokasi", keteranganLokasi);
@@ -94,10 +95,36 @@ function Send() {
       });
   };
 
-  const handleshowhide = (event) => {
-    const getType = event.target.value;
-    setKategori(getType);
+  const handleCategoryChange = (event) => {
+    // Memperbarui state ketika kategori dipilih
+    setSelectedCategory(event.target.value);
   };
+
+  const fetchDataKategori = async () => {
+    await Api.get(`/isarpras/get-kategori`, {
+      headers: {
+        //header Bearer + Token
+        Authorization: `Bearer ${token}`,
+        objects: "/isarpras/get-kategori",
+        statusUsers: status,
+      },
+    })
+      .then((response) => {
+        setLoading(false);
+        setKategori(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    //call function "fetchDataPlaces"
+    fetchDataKategori();
+    setLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <React.Fragment>
@@ -120,19 +147,22 @@ function Send() {
                     type="text"
                     className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
                     onChange={(e) => setNameSarpras(e.target.value)}
-                    value={nik}
+                    value={nameSarpras}
                     placeholder="Nama Sarpras"
                   />
                 </div>
                 <div className="mb-5">
                   <select
-                    value={kategori}
+                    value={selectedCategory}
                     className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
-                    onChange={(e) => handleshowhide(e)}
+                    onChange={handleCategoryChange}
                   >
                     <option value="">-- Pilih Kategori --</option>
-                    <option value="1">Whatsapp</option>
-                    <option value="2">Email</option>
+                    {kategoris.map((kategori) => (
+                      <option value={kategori.id_kategori} key={kategori.id}>
+                        {kategori.nama_kategori}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex mb-4">

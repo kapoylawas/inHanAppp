@@ -41,6 +41,7 @@ import Aptika from "../pages/web/Aptika";
 import AduanWeb from "../pages/web/Aptika/aduanWeb";
 import Sapras from "../pages/web/Sapras";
 import Send from "../pages/web/Sapras/send";
+import Laporan from "../pages/web/Sapras/laporan";
 
 function Routes() {
   return (
@@ -149,9 +150,12 @@ function Routes() {
       <Route exact path="/web/sarpras">
         <Sapras />
       </Route>
-      <Route exact path="/web/send">
+      <PrivateRoute exact path="/web/send">
         <Send />
-      </Route>
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/laporan">
+        <Laporan />
+      </PrivateRoute>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />
       </Route>
