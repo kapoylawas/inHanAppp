@@ -42,6 +42,9 @@ import AduanWeb from "../pages/web/Aptika/aduanWeb";
 import Sapras from "../pages/web/Sapras";
 import Send from "../pages/web/Sapras/send";
 import Laporan from "../pages/web/Sapras/laporan";
+import Elanda from "../pages/web/Elanda";
+import Pelaporan from "../pages/web/Elanda/pelaporan";
+import Rekom from "../pages/web/Elanda/rekom";
 
 function Routes() {
   return (
@@ -155,6 +158,15 @@ function Routes() {
       </PrivateRoute>
       <PrivateRoute exact path="/web/laporan">
         <Laporan />
+      </PrivateRoute>
+      <Route exact path="/web/elanda">
+        <Elanda />
+      </Route>
+      <PrivateRoute exact path="/web/rekom">
+        <Rekom />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/pelaporan">
+        <Pelaporan />
       </PrivateRoute>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />

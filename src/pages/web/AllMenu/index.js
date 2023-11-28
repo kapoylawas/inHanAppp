@@ -124,6 +124,18 @@ function AllMenu() {
                         Aduan Sarana Prasarana
                       </Link>
                     </div>
+                    <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+                      <Link to="/web/elanda">
+                        <div>
+                          <img
+                            src={require("../../../assets/img/call-center.png")}
+                            width="30"
+                            className="inline-block mb-2"
+                          />
+                        </div>
+                        E-landa
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
