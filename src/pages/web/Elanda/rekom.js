@@ -178,13 +178,82 @@ function Rekom() {
     setKtm(imageData);
   };
 
+  const history = useHistory();
+
+  const storeElanda = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("warga", tipe);
+    formData.append("email", email);
+    formData.append("nama", dataUser.nama);
+    formData.append("alamat", dataUser.alamat);
+    formData.append("kelurahan", dataUser.kelurahan);
+    formData.append("kecamatan", dataUser.kecamatan);
+    formData.append("organisasi", organisasi);
+    formData.append("prodi", progamStudi);
+    formData.append("nik", nik);
+    formData.append("nim", nim);
+    formData.append("nomor", noHP);
+    formData.append("jenis", jenis);
+    formData.append("keterangan", deskripsi);
+    formData.append("judul", judul);
+    formData.append("start", dateAwal);
+    formData.append("end", endDate);
+    formData.append("instansi", selectedInstansis);
+    formData.append("tujuan", tujuan);
+    formData.append("file1", imagekitas);
+    formData.append("file2", doc);
+    formData.append("file3", ktm);
+    await Api.post("/elanda/store-ijin-penelitian", formData, {
+      headers: {
+        //header Bearer + Token
+        Authorization: `Bearer ${token}`,
+        objects: "/elanda/store-ijin-penelitian",
+        statusUsers: status,
+      },
+    })
+      .then((response) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        //show toast
+        // const status = response.data.success
+        if (response.status) {
+          // Lakukan sesuatu dengan data yang diterima
+          toast.success("Berhasil Menyimpan Data.", {
+            duration: 9000,
+            position: "top-center",
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
+            },
+            iconTheme: {
+              primary: "#713200",
+              secondary: "#FFFAEE",
+            },
+          });
+          history.push("/web/lainya");
+        } else {
+          // Tampilkan pesan toast jika status bukan 'success'
+          toast.error("Data salah. Coba lagi.");
+        }
+      })
+      .catch((error) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        console.error("Gagal mengambil data:", error);
+        toast.error("Terjadi kesalahan. Coba lagi.");
+      });
+  };
+
   return (
     <React.Fragment>
       <LayoutWeb>
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
-              <form>
+              <form onSubmit={storeElanda}>
                 <div className="mb-4 ">
                   <select
                     value={tipe}
@@ -406,6 +475,16 @@ function Rekom() {
                     type="file"
                     onChange={handleFileKTM}
                   />
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                    disabled={isLoading}
+                  >
+                    {" "}
+                    {isLoading ? "LOADING..." : "SUBMIT"}{" "}
+                  </button>
                 </div>
               </form>
             </div>
