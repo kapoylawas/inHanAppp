@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import React, { useEffect, useState } from "react";
 import LayoutWeb from "../../../layouts/web";
 import Api from "../../../api";
@@ -7,9 +8,18 @@ import toast from "react-hot-toast";
 
 function Rekom() {
   document.title = "E-landa - Rekomendasi Iji Penelitian";
+  const [dataUser, setDataUser] = useState("");
+  const namaData = dataUser.nama;
+  const alamatData = dataUser.alamat;
+  const kelurahanData = dataUser.kelurahan;
+  const kecamatanData = dataUser.kecamatan;
 
   const [nik, setNik] = useState("");
   const [tipe, setTipe] = useState("");
+  const [nama, setNama] = useState("");
+  const [alamat, setAlamat] = useState("");
+  const [kelurahan, setKelurahan] = useState("");
+  const [kecamatan, setKecamatan] = useState("");
   const [noHP, setNoHP] = useState("");
   const [email, setEmail] = useState("");
   const [organisasi, setOrganisasi] = useState("");
@@ -21,10 +31,11 @@ function Rekom() {
   const [dateAwal, setDateAwal] = useState("");
   const [endDate, setEndDate] = useState("");
   const [instansis, setInstansis] = useState([]);
-  const [selectedInstansis, setSelectedInstansis] = useState('');
-  const [tujuan, setTujuan] = useState('');
+  const [selectedInstansis, setSelectedInstansis] = useState("");
+  const [tujuan, setTujuan] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const [dataUser, setDataUser] = useState("");
+
+  console.log(dataUser);
 
   const handleshowhide = (event) => {
     const getType = event.target.value;
@@ -186,10 +197,10 @@ function Rekom() {
     const formData = new FormData();
     formData.append("warga", tipe);
     formData.append("email", email);
-    formData.append("nama", dataUser.nama);
-    formData.append("alamat", dataUser.alamat);
-    formData.append("kelurahan", dataUser.kelurahan);
-    formData.append("kecamatan", dataUser.kecamatan);
+    formData.append("nama", namaData || nama);
+    formData.append("alamat", alamatData || alamat);
+    formData.append("kelurahan", kelurahanData || kelurahan);
+    formData.append("kecamatan", kecamatanData || kecamatan);
     formData.append("organisasi", organisasi);
     formData.append("prodi", progamStudi);
     formData.append("nik", nik);
@@ -247,6 +258,22 @@ function Rekom() {
       });
   };
 
+  const handlePilihanChange = (event) => {
+    setTipe(event.target.value);
+    setNama("");
+    setAlamat("");
+    setKecamatan("");
+    setKelurahan("");
+
+    if (event.target.value === "awal") {
+      window.location.reload();
+    }
+  };
+
+  const handleNamaChange = (event) => {
+    setNama(event.target.value);
+  };
+
   return (
     <React.Fragment>
       <LayoutWeb>
@@ -258,11 +285,11 @@ function Rekom() {
                   <select
                     value={tipe}
                     className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
-                    onChange={(e) => handleshowhide(e)}
+                    onChange={handlePilihanChange}
                   >
-                    <option value="">-- Asal Pemohon --</option>
+                    <option value="awal">-- Asal Pemohon --</option>
+                    <option value="Luar">Luar Kota Blitar</option>
                     <option value="Blitar">Kota Blitar</option>
-                    <option value="Luar Kota">Luar Kota Blitar</option>
                   </select>
                 </div>
                 <div className="flex mb-4 space-x-2.5">
@@ -274,46 +301,56 @@ function Rekom() {
                     placeholder="NIK"
                   />
                   <button
-                    className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
                     onClick={handleCheckNik}
+                    className={
+                      tipe === "Luar"
+                        ? "hidden"
+                        : "px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+                    }
                   >
                     Cek NIK
                   </button>
                 </div>
+
                 <div className="flex mb-4">
                   <input
                     type="text"
                     className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
-                    value={dataUser.nama}
+                    value={namaData || nama}
                     placeholder="Nama Anda"
-                    disabled
+                    onChange={handleNamaChange}
+                    disabled={tipe == "Blitar"}
                   />
                 </div>
+
                 <div className="flex mb-4">
                   <input
                     type="text"
                     className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
-                    value={dataUser.alamat}
+                    value={alamatData || alamat}
                     placeholder="Alamat"
-                    disabled
+                    disabled={tipe == "Blitar"}
+                    onChange={(e) => setAlamat(e.target.value)}
                   />
                 </div>
                 <div className="flex mb-4">
                   <input
                     type="text"
                     className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
-                    value={dataUser.kelurahan}
+                    value={kelurahanData || kelurahan}
+                    disabled={tipe == "Blitar"}
                     placeholder="Kelurahan"
-                    disabled
+                    onChange={(e) => setKelurahan(e.target.value)}
                   />
                 </div>
                 <div className="flex mb-4">
                   <input
                     type="text"
                     className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
-                    value={dataUser.kecamatan}
+                    value={kecamatanData || kecamatan}
                     placeholder="Kecamatan"
-                    disabled
+                    disabled={tipe == "Blitar"}
+                    onChange={(e) => setKecamatan(e.target.value)}
                   />
                 </div>
                 <div className="flex mb-4">
@@ -422,7 +459,10 @@ function Rekom() {
                   >
                     <option value="">-- Pilih Instansi Penelitian--</option>
                     {instansis.map((instansi) => (
-                      <option value={instansi.id_instansi} key={instansi.id_instansi}>
+                      <option
+                        value={instansi.id_instansi}
+                        key={instansi.id_instansi}
+                      >
                         {instansi.nama_instansi}
                       </option>
                     ))}
