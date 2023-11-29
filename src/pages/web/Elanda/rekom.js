@@ -280,6 +280,9 @@ function Rekom() {
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
+              <div className="mb-3 text-center">
+                Rekomendasi Ijin Penelitian
+              </div>
               <form onSubmit={storeElanda}>
                 <div className="mb-4 ">
                   <select
