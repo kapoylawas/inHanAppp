@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LayoutWeb from "../../../layouts/web";
 import Api from "../../../api";
 import Cookies from "js-cookie";
@@ -129,17 +129,78 @@ function Pelaporan() {
     setDoc(imageData);
   };
 
+  const history = useHistory();
+  const status = localStorage.getItem("status");
+  const token = Cookies.get("token");
+
+  const storeElanda = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("warga", tipe);
+    formData.append("nik", nik);
+    formData.append("nama", namaData || nama);
+    formData.append("nomor", noHP);
+    formData.append("alamat", alamatData || alamat);
+    formData.append("kelurahan", kelurahanData || kelurahan);
+    formData.append("kecamatan", kecamatanData || kecamatan);
+    formData.append("email", email);
+    formData.append("jenis", jenisLaporan);
+    formData.append("keterangan", deskripsi); 
+    formData.append("file1", imagekitas);
+    formData.append("file2", doc);
+    await Api.post("/elanda/store-pelaporan-situasi", formData, {
+      headers: {
+        //header Bearer + Token
+        Authorization: `Bearer ${token}`,
+        objects: "/elanda/store-pelaporan-situasi",
+        statusUsers: status,
+      },
+    })
+      .then((response) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        //show toast
+        // const status = response.data.success
+        if (response.status) {
+          // Lakukan sesuatu dengan data yang diterima
+          toast.success("Berhasil Menyimpan Data.", {
+            duration: 9000,
+            position: "top-center",
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
+            },
+            iconTheme: {
+              primary: "#713200",
+              secondary: "#FFFAEE",
+            },
+          });
+          history.push("/web/lainya");
+        } else {
+          // Tampilkan pesan toast jika status bukan 'success'
+          toast.error("Data salah. Coba lagi.");
+        }
+      })
+      .catch((error) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        console.error("Gagal mengambil data:", error);
+        toast.error("Terjadi kesalahan. Coba lagi.");
+      });
+  };
+
   return (
     <React.Fragment>
       <LayoutWeb>
         <div className="pt-20 pb-20">
-          z
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
               <div className="mb-3 text-center">
                 Pelaporan Situasi dan Kondusifitas Wilayah
               </div>
-              <form>
+              <form onSubmit={storeElanda}>
                 <div className="mb-4 ">
                   <select
                     value={jenisLaporan}
@@ -293,6 +354,14 @@ function Pelaporan() {
                     onChange={handleFileDoc}
                   />
                 </div>
+                <button
+                    type="submit"
+                    className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                    disabled={isLoading}
+                  >
+                    {" "}
+                    {isLoading ? "LOADING..." : "SUBMIT"}{" "}
+                  </button>
               </form>
             </div>
           </div>

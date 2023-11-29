@@ -45,6 +45,8 @@ import Laporan from "../pages/web/Sapras/laporan";
 import Elanda from "../pages/web/Elanda";
 import Pelaporan from "../pages/web/Elanda/pelaporan";
 import Rekom from "../pages/web/Elanda/rekom";
+import Sipak from "../pages/web/Sipak/Index";
+import Pendaftaran from "../pages/web/Sipak/pendaftaran";
 
 function Routes() {
   return (
@@ -168,6 +170,12 @@ function Routes() {
       <PrivateRoute exact path="/web/pelaporan">
         <Pelaporan />
       </PrivateRoute>
+      <Route exact path="/web/sipak">
+        <Sipak />
+      </Route>
+      <Route exact path="/web/pendaftaran">
+        <Pendaftaran />
+      </Route>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />
       </Route>
