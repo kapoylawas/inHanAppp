@@ -2,7 +2,7 @@ import React from "react";
 
 export default function LoadingSpinner() {
   return (
-    <div className="text-center">
+    <div className="mt-2 text-center">
       <div role="status">
         <svg
           className="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

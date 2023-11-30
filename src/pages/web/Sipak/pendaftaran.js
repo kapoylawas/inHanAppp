@@ -15,6 +15,64 @@ function Pendaftaran() {
     setIsModalOpen(false);
   };
 
+  const [nik, setNik] = useState("");
+  const [email, setEmail] = useState("");
+  const [telpon, setTelpon] = useState("");
+
+  const history = useHistory();
+  const status = localStorage.getItem("status");
+  const token = Cookies.get("token");
+  const [isLoading, setLoading] = useState(false);
+
+  const storePendaftaran = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("nik", nik);
+    formData.append("email", email);
+    formData.append("telepon", telpon);
+    await Api.post("/sipak/pendaftaran", formData, {
+      headers: {
+        //header Bearer + Token
+        Authorization: `Bearer ${token}`,
+        objects: "/sipak/pendaftaran",
+        statusUsers: status,
+      },
+    })
+      .then((response) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        //show toast
+        // const status = response.data.success
+        if (response.status) {
+          // Lakukan sesuatu dengan data yang diterima
+          toast.success("Berhasil Menyimpan Data.", {
+            duration: 9000,
+            position: "top-center",
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
+            },
+            iconTheme: {
+              primary: "#713200",
+              secondary: "#FFFAEE",
+            },
+          });
+          history.push("/web/lainya");
+        } else {
+          // Tampilkan pesan toast jika status bukan 'success'
+          toast.error("Data salah. Coba lagi.");
+        }
+      })
+      .catch((error) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        console.error("Gagal mengambil data:", error);
+        toast.error("Terjadi kesalahan. Coba lagi.");
+      });
+  };
+
   return (
     <React.Fragment>
       <LayoutWeb>
@@ -74,7 +132,48 @@ function Pendaftaran() {
               </button>
             </div>
           </Modal>
-          
+          <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
+            <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
+              <div className="mb-3 text-center">FORM PENDAFTARAN PEMOHON</div>
+              <form onSubmit={storePendaftaran}>
+                <div className="flex mb-4 space-x-2.5">
+                  <input
+                    type="text"
+                    className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                    onChange={(e) => setNik(e.target.value)}
+                    value={nik}
+                    placeholder="Input NIK Anda"
+                  />
+                </div>
+                <div className="flex mb-4 space-x-2.5">
+                  <input
+                    type="text"
+                    className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    placeholder="Input Email Anda"
+                  />
+                </div>
+                <div className="flex mb-4 space-x-2.5">
+                  <input
+                    type="text"
+                    className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                    onChange={(e) => setTelpon(e.target.value)}
+                    value={telpon}
+                    placeholder="Input NOMOR WHATSAPP Anda"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                  disabled={isLoading}
+                >
+                  {" "}
+                  {isLoading ? "LOADING..." : "SUBMIT"}{" "}
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </LayoutWeb>
     </React.Fragment>

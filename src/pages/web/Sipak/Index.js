@@ -90,7 +90,7 @@ function Sipak() {
                   </div>
                   <div className="col-span-4">
                     <div className="p-2 text-xs text-center bg-gray-100 rounded-md shadow-md">
-                      <Link to="/web/pelaporan">
+                      <Link to="/web/lacak">
                         <div>
                           <img
                             src={require("../../../assets/images/product.png")}
