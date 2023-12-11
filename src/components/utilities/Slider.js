@@ -8,10 +8,10 @@ function Slider() {
       url: "https://admin-inhand.blitarkota.go.id/banner-img/wqeweq-19122022095939.jpg",
       caption: "",
     },
-    {
-      url: "https://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
-      caption: "",
-    },
+    // {
+    //   url: "https://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
+    //   caption: "",
+    // },
   ];
 
   const [setErrorMessage] = useState("");
