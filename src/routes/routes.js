@@ -48,6 +48,10 @@ import Rekom from "../pages/web/Elanda/rekom";
 import Sipak from "../pages/web/Sipak/Index";
 import Pendaftaran from "../pages/web/Sipak/pendaftaran";
 import Lacak from "../pages/web/Sipak/lacak";
+import Pelayanan from "../pages/web/Sipak/pelayanan";
+import KartuKeluarga from "../pages/web/Sipak/kartuKeluarga";
+import Kia from "../pages/web/Sipak/kia";
+import Kta from "../pages/web/Sipak/kta";
 
 function Routes() {
   return (
@@ -179,6 +183,18 @@ function Routes() {
       </PrivateRoute>
       <PrivateRoute exact path="/web/lacak">
         <Lacak />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/pelayanan">
+        <Pelayanan />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/kk">
+        <KartuKeluarga />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/kia">
+        <Kia />
+      </PrivateRoute>
+      <PrivateRoute exact path="/web/kta">
+        <Kta />
       </PrivateRoute>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />
