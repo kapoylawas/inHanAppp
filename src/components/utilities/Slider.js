@@ -3,16 +3,16 @@ import React, { useEffect, useState } from "react";
 import Api from "../../api";
 
 function Slider() {
-  // const slideImages = [
-  //   {
-  //     url: "https://admin-inhand.blitarkota.go.id/banner-img/wqeweq-19122022095939.jpg",
-  //     caption: "",
-  //   },
-  //   {
-  //     url: "https://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
-  //     caption: "",
-  //   },
-  // ];
+  const slideImages = [
+    {
+      url: "https://admin-inhand.blitarkota.go.id/banner-img/wqeweq-19122022095939.jpg",
+      caption: "",
+    },
+    {
+      url: "https://admin-inhand.blitarkota.go.id/banner-img/zxcvbn-19122022100007.jpg",
+      caption: "",
+    },
+  ];
 
   const [setErrorMessage] = useState("");
 
@@ -55,10 +55,10 @@ function Slider() {
         data-bs-ride="carousel"
       >
         <div class="carousel-inner relative w-full overflow-hidden">
-          {sort.map((slideImage) => (
+          {slideImages.map((slideImage) => (
             <div class="carousel-item active float-left w-full">
               <img
-                src={slideImage.img}
+                src={slideImage.url}
                 class="block w-full"
                 alt="Wild Landscape"
               />
