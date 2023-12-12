@@ -14,10 +14,7 @@ function Pelayanan() {
   const [isLoading, setLoading] = useState(false);
 
   const [dataForm, setDataForm] = useState("");
-  // console.log("get", dataForm);
-
-  const [raw, setRaw] = useState("");
-  console.log(raw);
+  const [persyaratanRaw, setPersyaratanRaw] = useState([]);
 
   const [nik, setNik] = useState("");
   const [kk, setKk] = useState("");
@@ -39,7 +36,6 @@ function Pelayanan() {
   const [kota, setKota] = useState("");
   const [tgl, setTgl] = useState("");
   const [jm, setJm] = useState("");
-  const [nikpemohon, setNikpemohon] = useState(["3505032212860004"]);
 
   const handleshowhideGender = (event) => {
     const getType = event.target.value;
@@ -66,9 +62,22 @@ function Pelayanan() {
     setStep((prevStep) => prevStep - 1);
   };
 
+  const syaratjml = dataForm.syarat_jml;
+  const tmptkn = dataForm.temp_tkn;
+  const idprodukdokumen = dataForm.id_produk_dokumen;
+  const jenislayanan = dataForm.jenis_layanan;
+  const jenispermohonan = dataForm.jenis_permohonan;
+  const permohonandokumen = dataForm.permohonan_dokumen;
+
+  const nikpmhn = localStorage.getItem("nip");
+  const stringNik = nikpmhn.replace(/"/g, "");
+  const nikpemohon = [stringNik];
+  const kkpmhn = localStorage.getItem("kk");
+  const stringKk = kkpmhn.replace(/"/g, "");
+
   const fetchData = async () => {
     await Api.get(
-      `/sipak/get-form?id_produk_dokumen=2&id_jenis_permohonan=3&nik=3505032212860004&no_kk=3572022901180003`,
+      `/sipak/get-form?id_produk_dokumen=2&id_jenis_permohonan=3&nik=${stringNik}&no_kk=${stringKk}`,
       {
         headers: {
           //header Bearer + Token
@@ -80,7 +89,8 @@ function Pelayanan() {
     )
       .then((response) => {
         setLoading(false);
-        setDataForm(response.data.data.data);
+        setDataForm(response.data.data);
+        setPersyaratanRaw(response.data.data.persyaratan_raw);
       })
       .catch((error) => {
         console.log(error);
@@ -462,16 +472,16 @@ function Pelayanan() {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData();
-    formData.append("nik", nik);
+    formData.append("nik", stringNik);
     formData.append("email", email);
     formData.append("telepon", telepon);
-    formData.append("syarat_jml", dataForm.syarat_jml);
-    formData.append("temp_tkn", dataForm.temp_tkn);
-    formData.append("id_produk_dokumen", dataForm.id_produk_dokumen);
-    formData.append("jenis_layanan", dataForm.jenis_layanan);
-    formData.append("jenis_permohonan", dataForm.jenis_permohonan);
+    formData.append("syarat_jml", syaratjml);
+    formData.append("temp_tkn", tmptkn);
+    formData.append("id_produk_dokumen", idprodukdokumen);
+    formData.append("jenis_layanan", jenislayanan);
+    formData.append("jenis_permohonan", jenispermohonan);
     formData.append("jenis_pengambilan", "SENDIRI");
-    formData.append("permohonan_dokumen", dataForm.permohonan_dokumen);
+    formData.append("permohonan_dokumen", permohonandokumen);
     formData.append("nik_pemohon_dokumen", nikpemohon);
     formData.append("nama_anak", nmanak);
     formData.append("ttl_tempat", location);
@@ -487,9 +497,9 @@ function Pelayanan() {
     formData.append("ext_fileinput_9_1", aktakawin);
     formData.append("ext_fileinput_10_1", akta3);
     formData.append("ext_fileinput_11_1", imagekitas);
-    formData.append("persyaratan_raw", raw);
+    formData.append("persyaratan_raw", persyaratanRaw);
     formData.append("pelapor_nama", nama);
-    formData.append("no_kk", kk);
+    formData.append("no_kk", stringKk);
     formData.append("saksi_nama_1", saksi);
     formData.append("saksi_nik_1", niksaksi);
     formData.append("saksi_nama_2", nmsaksi2);
@@ -502,7 +512,7 @@ function Pelayanan() {
     formData.append("anak_jk", nmanak);
     formData.append("anak_tmp_dilahirkan", location);
     formData.append("anak_kelahiran_ke", 2);
-    formData.append("anak_penolong_kelahiran", 'penolong');
+    formData.append("anak_penolong_kelahiran", "penolong");
     formData.append("anak_berat", 60);
     formData.append("anak_panjang", 60);
 
@@ -583,7 +593,7 @@ function Pelayanan() {
                       <input
                         type="text"
                         value={nama}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="nama lengkap pelapor"
                         onChange={(e) => setNama(e.target.value)}
                         required
@@ -599,11 +609,11 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="3572021011050001"
-                          onChange={(e) => setNik(e.target.value)}
-                          value={nik}
-                          required
+                          // onChange={(e) => setNik(e.target.value)}
+                          value={stringNik}
+                          disabled
                         />
                       </div>
                       <div>
@@ -615,7 +625,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="3572020607070039"
                           onChange={(e) => setKk(e.target.value)}
                           value={kk}
@@ -631,7 +641,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="inputkan nama saksi lengkap"
                           onChange={(e) => setSaksi(e.target.value)}
                           value={saksi}
@@ -647,7 +657,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="input nik saksi"
                           onChange={(e) => setNiksaksi(e.target.value)}
                           value={niksaksi}
@@ -663,7 +673,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="inputkan nama saksi lengkap 2"
                           onChange={(e) => setNmsaksi2(e.target.value)}
                           value={nmsaksi2}
@@ -679,7 +689,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="input nik saksi 2"
                           onChange={(e) => setNiksaksi2(e.target.value)}
                           value={niksaksi2}
@@ -692,7 +702,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="inputkan nama ayah lengkap 2"
                           onChange={(e) => setNmayah(e.target.value)}
                           value={nmayah}
@@ -705,7 +715,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="input nik ayah 2"
                           onChange={(e) => setNikayah(e.target.value)}
                           value={nikayah}
@@ -718,7 +728,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="inputkan nama ibu lengkap 2"
                           onChange={(e) => setNmibu(e.target.value)}
                           value={nmibu}
@@ -731,7 +741,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="input nik ibu 2"
                           onChange={(e) => setNikibu(e.target.value)}
                           value={nikibu}
@@ -752,7 +762,7 @@ function Pelayanan() {
                       </label>
                       <input
                         type="text"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="nama lengkap anak"
                         onChange={(e) => setNmanak(e.target.value)}
                         value={nmanak}
@@ -769,7 +779,7 @@ function Pelayanan() {
                         </label>
                         <select
                           value={gender}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:shadow-outline"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           onChange={(e) => handleshowhideGender(e)}
                         >
                           <option value="">-- Jenis Kelamin --</option>
@@ -786,7 +796,7 @@ function Pelayanan() {
                         </label>
                         <select
                           value={location}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:shadow-outline"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           onChange={(e) => handleshowhideLocation(e)}
                         >
                           <option value="">
@@ -805,7 +815,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="Contoh : KOTA BLITAR"
                           onChange={(e) => setKota(e.target.value)}
                           value={kota}
@@ -818,7 +828,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="date"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           onChange={(e) => setTgl(e.target.value)}
                           value={tgl}
                           required
@@ -833,7 +843,7 @@ function Pelayanan() {
                         </label>
                         <input
                           type="time"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           required
                           onChange={(e) => setJm(e.target.value)}
                           value={jm}
@@ -845,7 +855,7 @@ function Pelayanan() {
                         </label>
                         <select
                           value={jenis}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:shadow-outline"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           onChange={(e) => handleshowhideJenis(e)}
                         >
                           <option value="">-- Pilih Jenis Kelahiran --</option>
@@ -865,11 +875,11 @@ function Pelayanan() {
                 {step === 2 && (
                   <div>
                     <div
-                      class="flex p-4 mb-4 text-sm text-black-900 rounded-lg bg-blue-300 dark:bg-gray-800 dark:text-blue-400"
+                      className="flex p-4 mb-4 text-sm text-black-900 rounded-lg bg-blue-300 dark:bg-gray-800 dark:text-blue-400"
                       role="alert"
                     >
                       <svg
-                        class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                        className="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -877,9 +887,9 @@ function Pelayanan() {
                       >
                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                       </svg>
-                      <span class="sr-only">Info</span>
+                      <span className="sr-only">Info</span>
                       <div>
-                        <span class="font-medium">
+                        <span className="font-medium">
                           CATATAN : Bayi belum punya NIK / Masuk KK dan status
                           KTP Orang Tua sudah kawin, Pelapor adalah Orang Tua
                           kandung Silahkan download dan isi form dibawah dengan
@@ -909,7 +919,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -944,7 +954,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -961,7 +971,7 @@ function Pelayanan() {
                       {showrtrw && (
                         <div className="flex mb-4 space-x-2.5">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="multiple_files"
                             type="file"
                             multiple
@@ -979,7 +989,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -996,7 +1006,7 @@ function Pelayanan() {
                       {shownoakta && (
                         <div className="flex mb-4 space-x-2.5">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="multiple_files"
                             type="file"
                             multiple
@@ -1015,7 +1025,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -1051,7 +1061,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -1068,7 +1078,7 @@ function Pelayanan() {
                       {shownoaktanikah && (
                         <div className="flex mb-4 space-x-2.5">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="multiple_files"
                             type="file"
                             multiple
@@ -1086,7 +1096,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -1103,7 +1113,7 @@ function Pelayanan() {
                       {showstatuskawin && (
                         <div className="flex mb-4 space-x-2.5">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="multiple_files"
                             type="file"
                             multiple
@@ -1121,7 +1131,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -1138,7 +1148,7 @@ function Pelayanan() {
                       {showkkortu && (
                         <div className="flex mb-4 space-x-2.5">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="multiple_files"
                             type="file"
                             multiple
@@ -1157,7 +1167,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -1174,7 +1184,7 @@ function Pelayanan() {
                       {showbukunikah && (
                         <div className="flex mb-4 space-x-2.5">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="multiple_files"
                             type="file"
                             multiple
@@ -1193,7 +1203,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -1210,7 +1220,7 @@ function Pelayanan() {
                       {showaktakawin && (
                         <div className="flex mb-4 space-x-2.5">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="multiple_files"
                             type="file"
                             multiple
@@ -1229,7 +1239,7 @@ function Pelayanan() {
                       </label>
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple

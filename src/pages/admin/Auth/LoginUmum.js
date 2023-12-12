@@ -10,12 +10,13 @@ function LoginUmum() {
   document.title = "Login Pegawai";
 
   // STATE LOGIN
-  const [nik, setNik] = useState([]);
+  const [nik, setNik] = useState("");
   const [no_kk, setNokk] = useState("");
 
   useEffect(() => {
     localStorage.setItem("nip", JSON.stringify(nik));
-  }, [nik]);
+    localStorage.setItem("kk", JSON.stringify(no_kk));
+  }, [nik, no_kk]);
 
   //state loading
   const [isLoading, setLoading] = useState(false);
@@ -138,8 +139,8 @@ function LoginUmum() {
                     </div>
                   )}
                   <ReCAPTCHA
-                    // sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
-                    sitekey="6Le10GMjAAAAAAt4jp3xLa-KkS3oMnwVlwd2KDeT"
+                    sitekey="6LeVKlsjAAAAACoRKUkt3c4iHIECsphFx6kMV6qU"
+                    // sitekey="6Le10GMjAAAAAAt4jp3xLa-KkS3oMnwVlwd2KDeT"
                     onChange={onChange}
                   />
                   <div>

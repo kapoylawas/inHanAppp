@@ -16,18 +16,36 @@ function KartuKeluarga() {
   const token = Cookies.get("token");
   const [isLoading, setLoading] = useState(false);
 
-  const [dataForm, setDataForm] = useState([]);
-  console.log(dataForm);
+  const [dataForm, setDataForm] = useState("");
+  const [nikpemohondokumen, setNikpemohondokumen] = useState([]);
 
-  const options = [
-    { value: "3505032212860004", label: "3505032212860004" },
-    { value: "3505032212860005", label: "3505032212860005" },
-    { value: "3505032212860006", label: "3505032212860004" },
-  ];
+  const nikpmhn = localStorage.getItem("nip");
+  const stringNik = nikpmhn.replace(/"/g, '');
+  const kkpmhn = localStorage.getItem("kk");
+  const stringKk = kkpmhn.replace(/"/g, '');
+  const nikpemohon = nikpemohondokumen
+  // console.log(nikpemohon);
+
+  const formattedNikpmhnOptions = nikpemohon.map(item => ({
+    value: item.nik,
+    label: item.nik // Gantilah "nama" dengan properti yang sesuai dari data Anda
+  }));
+
+  const [selectedOption, setSelectedOption] = useState([null]);
+  // console.log("dipilih",selectedOption);
+
+  const handleChange = selected => {
+    setSelectedOption(selected);
+  };
+
+  const [persyaratanRaw, setPersyaratanRaw] = useState([]);
+
+
+
 
   const fetchData = async () => {
     await Api.get(
-      `/sipak/get-form?id_produk_dokumen=4&id_jenis_permohonan=13&nik=3505032212860004&no_kk=3572022901180003`,
+      `/sipak/get-form?id_produk_dokumen=4&id_jenis_permohonan=13&nik=${stringNik}&no_kk=${stringKk}`,
       {
         headers: {
           //header Bearer + Token
@@ -40,6 +58,8 @@ function KartuKeluarga() {
       .then((response) => {
         setLoading(false);
         setDataForm(response.data.data);
+        setNikpemohondokumen(response.data.data.nik_pemohon_dokumen);
+        setPersyaratanRaw(response.data.data.persyaratan_raw);
       })
       .catch((error) => {
         console.log(error);
@@ -91,6 +111,88 @@ function KartuKeluarga() {
     setShowInput(!showInput);
   };
 
+  const syaratjml = dataForm.syarat_jml
+  const tmptkn = dataForm.temp_tkn
+  const idprodukdokumen = dataForm.id_produk_dokumen
+  const jenislayanan = dataForm.jenis_layanan
+  const jenispermohonan = dataForm.jenis_permohonan
+  const permohonandokumen = dataForm.permohonan_dokumen
+
+
+  const history = useHistory();
+  const storeSipak = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("nik", stringNik);
+    formData.append("email", );
+    formData.append("telepon", );
+    formData.append("syarat_jml", syaratjml);
+    formData.append("temp_tkn", tmptkn);
+    formData.append("id_produk_dokumen", idprodukdokumen);
+    formData.append("jenis_layanan", jenislayanan);
+    formData.append("jenis_permohonan", jenispermohonan);
+    formData.append("jenis_pengambilan", "SENDIRI");
+    formData.append("permohonan_dokumen", permohonandokumen);
+    formData.append("nik_pemohon_dokumen", selectedOption);
+    formData.append("nama_anak", );
+    formData.append("ttl_tempat", );
+    formData.append("ttl_tanggal", );
+    formData.append("ext_fileinput_1_1", imagekitas);
+    formData.append("ext_fileinput_2_1", );
+    formData.append("ext_fileinput_3_1", );
+    formData.append("ext_fileinput_4_1", );
+    formData.append("ext_fileinput_5_1", );
+    formData.append("persyaratan_raw", persyaratanRaw);
+    formData.append("pelapor_nama", );
+    formData.append("no_kk", stringKk);
+    formData.append("saksi_nama_1", );
+    formData.append("saksi_nik_1", );
+    formData.append("saksi_nama_2", );
+    formData.append("saksi_nik_2", );
+
+    await Api.post("/sipak/store-permohonan", formData, {
+      headers: {
+        //header Bearer + Token
+        // Authorization: `Bearer ${token}`,
+        objects: "/sipak/store-permohonan",
+        statusUsers: status,
+      },
+    })
+      .then((response) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        //show toast
+        // const status = response.data.success
+        if (response.status) {
+          // Lakukan sesuatu dengan data yang diterima
+          toast.success("Berhasil Menyimpan Data.", {
+            duration: 9000,
+            position: "top-center",
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
+            },
+            iconTheme: {
+              primary: "#713200",
+              secondary: "#FFFAEE",
+            },
+          });
+          history.push("/web/lainya");
+        } else {
+          // Tampilkan pesan toast jika status bukan 'success'
+          toast.error("Data salah. Coba lagi.");
+        }
+      })
+      .catch((error) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        console.error("Gagal mengambil data:", error);
+        toast.error("Terjadi kesalahan. Coba lagi.");
+      });
+  };
+
   return (
     <React.Fragment>
       <LayoutWeb>
@@ -123,7 +225,7 @@ function KartuKeluarga() {
                   <input
                     type="text"
                     value={jnslayanan}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
                     onChange={(e) => setJnslayanan(e.target.value)}
                     required
@@ -139,7 +241,7 @@ function KartuKeluarga() {
                   <input
                     type="text"
                     value={jnslayanan}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
                     onChange={(e) => setJnslayanan(e.target.value)}
                     required
@@ -155,7 +257,7 @@ function KartuKeluarga() {
                   <input
                     type="text"
                     value={jnslayanan}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
                     onChange={(e) => setJnslayanan(e.target.value)}
                     required
@@ -171,7 +273,7 @@ function KartuKeluarga() {
                   <input
                     type="text"
                     value={jnslayanan}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
                     onChange={(e) => setJnslayanan(e.target.value)}
                     required
@@ -184,7 +286,7 @@ function KartuKeluarga() {
                   >
                     PEMOHON DOKUMEN
                   </label>
-                  <Select isMulti options={options} />
+                  <Select isMulti options={formattedNikpmhnOptions} onChange={handleChange} />
                 </div>
                 <div
                   class="flex p-4 mb-4 text-sm text-black-900 rounded-lg bg-blue-300 dark:bg-gray-800 dark:text-blue-400"
@@ -232,7 +334,7 @@ function KartuKeluarga() {
                     </label>
                     <div className="flex mb-4 space-x-2.5">
                       <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         id="multiple_files"
                         type="file"
                         multiple
@@ -249,7 +351,7 @@ function KartuKeluarga() {
                     {showInput && (
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -267,7 +369,7 @@ function KartuKeluarga() {
                     </label>
                     <div className="flex mb-4 space-x-2.5">
                       <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         id="multiple_files"
                         type="file"
                         multiple
@@ -284,7 +386,7 @@ function KartuKeluarga() {
                     {showInput && (
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -303,7 +405,7 @@ function KartuKeluarga() {
                     </label>
                     <div className="flex mb-4 space-x-2.5">
                       <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         id="multiple_files"
                         type="file"
                         multiple
@@ -320,7 +422,7 @@ function KartuKeluarga() {
                     {showInput && (
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -339,7 +441,7 @@ function KartuKeluarga() {
                     </label>
                     <div className="flex mb-4 space-x-2.5">
                       <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         id="multiple_files"
                         type="file"
                         multiple
@@ -356,7 +458,7 @@ function KartuKeluarga() {
                     {showInput && (
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple
@@ -375,7 +477,7 @@ function KartuKeluarga() {
                     </label>
                     <div className="flex mb-4 space-x-2.5">
                       <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         id="multiple_files"
                         type="file"
                         multiple
@@ -392,7 +494,7 @@ function KartuKeluarga() {
                     {showInput && (
                       <div className="flex mb-4 space-x-2.5">
                         <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           id="multiple_files"
                           type="file"
                           multiple

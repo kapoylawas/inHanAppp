@@ -78,7 +78,7 @@ function Lacak() {
               <div className="flex mb-4 space-x-2.5">
                 <input
                   type="text"
-                  className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                  className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   onChange={(e) => setPemohon(e.target.value)}
                   value={pemohon}
                   placeholder="Input Nomor Permohonan"
