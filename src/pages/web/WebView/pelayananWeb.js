@@ -69,11 +69,11 @@ function PelayananWeb() {
   const jenispermohonan = dataForm.jenis_permohonan;
   const permohonandokumen = dataForm.permohonan_dokumen;
 
-  const nikpmhn = localStorage.getItem("nip");
-  const stringNik = nikpmhn.replace(/"/g, "");
-  const nikpemohon = [stringNik];
-  const kkpmhn = localStorage.getItem("kk");
-  const stringKk = kkpmhn.replace(/"/g, "");
+  // const nikpmhn = localStorage.getItem("nip");
+  // const stringNik = nikpmhn.replace(/"/g, "");
+  // const nikpemohon = [stringNik];
+  // const kkpmhn = localStorage.getItem("kk");
+  // const stringKk = kkpmhn.replace(/"/g, "");
 
   const fetchData = async () => {
     await Api.get(
@@ -472,7 +472,7 @@ function PelayananWeb() {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData();
-    formData.append("nik", stringNik);
+    formData.append("nik", '3505032212860004');
     formData.append("email", email);
     formData.append("telepon", telepon);
     formData.append("syarat_jml", syaratjml);
@@ -482,7 +482,7 @@ function PelayananWeb() {
     formData.append("jenis_permohonan", jenispermohonan);
     formData.append("jenis_pengambilan", "SENDIRI");
     formData.append("permohonan_dokumen", permohonandokumen);
-    formData.append("nik_pemohon_dokumen", nikpemohon);
+    formData.append("nik_pemohon_dokumen", ['3505032212860004']);
     formData.append("nama_anak", nmanak);
     formData.append("ttl_tempat", location);
     formData.append("ttl_tanggal", tgl);
@@ -499,7 +499,7 @@ function PelayananWeb() {
     formData.append("ext_fileinput_11_1", imagekitas);
     formData.append("persyaratan_raw", persyaratanRaw);
     formData.append("pelapor_nama", nama);
-    formData.append("no_kk", stringKk);
+    formData.append("no_kk", 3572022901180003);
     formData.append("saksi_nama_1", saksi);
     formData.append("saksi_nik_1", niksaksi);
     formData.append("saksi_nama_2", nmsaksi2);
@@ -611,7 +611,7 @@ function PelayananWeb() {
                         className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="3572021011050001"
                         // onChange={(e) => setNik(e.target.value)}
-                        value={stringNik}
+                        value={3505032212860004}
                         disabled
                       />
                     </div>
@@ -627,7 +627,7 @@ function PelayananWeb() {
                         className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="3572020607070039"
                         onChange={(e) => setKk(e.target.value)}
-                        value={kk}
+                        value={3572022901180003}
                         required
                       />
                     </div>
