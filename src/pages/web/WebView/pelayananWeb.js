@@ -6,7 +6,7 @@ import Garis from "../../../components/utilities/garis";
 import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
-function Pelayanan() {
+function PelayananWeb() {
   document.title = "Sipak - Pelayanan 3 in 1";
 
   const status = localStorage.getItem("status");
@@ -550,7 +550,6 @@ function Pelayanan() {
 
   return (
     <React.Fragment>
-      <LayoutWeb>
         <div className="pt-10 pb-10">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
@@ -1273,9 +1272,8 @@ function Pelayanan() {
             </div>
           </div>
         </div>
-      </LayoutWeb>
     </React.Fragment>
   );
 }
 
-export default Pelayanan;
+export default PelayananWeb;

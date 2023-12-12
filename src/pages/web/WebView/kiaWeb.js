@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LayoutWeb from "../../../layouts/web";
 import Api from "../../../api";
 import Cookies from "js-cookie";
@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
 import Select from "react-select";
 
-function KartuKeluarga() {
+function KiaWeb() {
   document.title = "Kartu Keluarga - Perubahan Data";
 
   const [jnslayanan, setJnslayanan] = useState("");
@@ -24,28 +24,6 @@ function KartuKeluarga() {
     { value: "3505032212860005", label: "3505032212860005" },
     { value: "3505032212860006", label: "3505032212860004" },
   ];
-
-  const fetchData = async () => {
-    await Api.get(
-      `/sipak/get-form?id_produk_dokumen=4&id_jenis_permohonan=13&nik=3505032212860004&no_kk=3572022901180003`,
-      {
-        headers: {
-          //header Bearer + Token
-          // Authorization: `Bearer ${token}`,
-          objects: "/isarpras/get-kategori",
-          statusUsers: status,
-        },
-      }
-    )
-      .then((response) => {
-        setLoading(false);
-        setDataForm(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
 
   const [imagekitas, setImagekitas] = useState("");
 
@@ -79,13 +57,6 @@ function KartuKeluarga() {
     setImagekitas(imageData);
   };
 
-  useEffect(() => {
-    //call function "fetchDataPlaces"
-    fetchData();
-    setLoading(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const [showInput, setShowInput] = useState(false);
   const handlePlusClick = () => {
     setShowInput(!showInput);
@@ -93,7 +64,6 @@ function KartuKeluarga() {
 
   return (
     <React.Fragment>
-      <LayoutWeb>
         <div className="pt-10 pb-10">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
@@ -228,41 +198,6 @@ function KartuKeluarga() {
                       className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-900"
                       for="file_input"
                     >
-                      Form F-1.06 FORMAT (PNG,JPG,JPEG)
-                    </label>
-                    <div className="flex mb-4 space-x-2.5">
-                      <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        id="multiple_files"
-                        type="file"
-                        multiple
-                        onChange={handleFileChange}
-                      />
-
-                      <div
-                        className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-                        onClick={handlePlusClick}
-                      >
-                        {showInput ? "-" : "+"}
-                      </div>
-                    </div>
-                    {showInput && (
-                      <div className="flex mb-4 space-x-2.5">
-                        <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                          id="multiple_files"
-                          type="file"
-                          multiple
-                          onChange={handleFileChange}
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <div className="mb-6">
-                    <label
-                      className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-900"
-                      for="file_input"
-                    >
                       KK ASLI (PNG,JPG,JPEG)
                     </label>
                     <div className="flex mb-4 space-x-2.5">
@@ -298,8 +233,7 @@ function KartuKeluarga() {
                       className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-900"
                       for="file_input"
                     >
-                      Bukti Data yang dirubah (ijazah / akta lahir / buku nikah
-                      / SK dari instansi) (PNG,JPG,JPEG)
+                      Akta Lahir ASLI (PNG,JPG,JPEG)
                     </label>
                     <div className="flex mb-4 space-x-2.5">
                       <input
@@ -334,44 +268,8 @@ function KartuKeluarga() {
                       className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-900"
                       for="file_input"
                     >
-                      Form F-1.05 (jika tidak mempunyai akta nikah)
+                      Foto berwarna (jika anak usia di atas 5 tahun)
                       (PNG,JPG,JPEG)
-                    </label>
-                    <div className="flex mb-4 space-x-2.5">
-                      <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        id="multiple_files"
-                        type="file"
-                        multiple
-                        onChange={handleFileChange}
-                      />
-
-                      <div
-                        className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-                        onClick={handlePlusClick}
-                      >
-                        {showInput ? "-" : "+"}
-                      </div>
-                    </div>
-                    {showInput && (
-                      <div className="flex mb-4 space-x-2.5">
-                        <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                          id="multiple_files"
-                          type="file"
-                          multiple
-                          onChange={handleFileChange}
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <div className="mb-6">
-                    <label
-                      className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-900"
-                      for="file_input"
-                    >
-                      Bukti Data yang dirubah - LANJUTAN (ijazah / akta lahir /
-                      buku nikah / SK dari instansi)(PNG,JPG,JPEG)
                     </label>
                     <div className="flex mb-4 space-x-2.5">
                       <input
@@ -412,9 +310,8 @@ function KartuKeluarga() {
             </div>
           </div>
         </div>
-      </LayoutWeb>
     </React.Fragment>
   );
 }
 
-export default KartuKeluarga;
+export default KiaWeb;

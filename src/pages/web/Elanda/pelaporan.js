@@ -27,6 +27,10 @@ function Pelaporan() {
 
   const [jenisLaporan, setJenisLaporan] = useState("");
 
+  const user = localStorage.getItem("nip");
+  const stringWithoutSpaces = user.replace(/"/g, "");
+  console.log(stringWithoutSpaces);
+
   const handleJenisChange = (event) => {
     setJenisLaporan(event.target.value);
   };
@@ -47,7 +51,7 @@ function Pelaporan() {
     e.preventDefault();
     setLoading(true);
     await Api.post("/elanda/cek-nik", {
-      id: nik,
+      id: stringWithoutSpaces,
     })
       .then((response) => {
         //set state isLoading to "false"
@@ -138,7 +142,7 @@ function Pelaporan() {
     setLoading(true);
     const formData = new FormData();
     formData.append("warga", tipe);
-    formData.append("nik", nik);
+    formData.append("nik", nik || stringWithoutSpaces);
     formData.append("nama", namaData || nama);
     formData.append("nomor", noHP);
     formData.append("alamat", alamatData || alamat);
@@ -146,7 +150,7 @@ function Pelaporan() {
     formData.append("kecamatan", kecamatanData || kecamatan);
     formData.append("email", email);
     formData.append("jenis", jenisLaporan);
-    formData.append("keterangan", deskripsi); 
+    formData.append("keterangan", deskripsi);
     formData.append("file1", imagekitas);
     formData.append("file2", doc);
     await Api.post("/elanda/store-pelaporan-situasi", formData, {
@@ -215,19 +219,31 @@ function Pelaporan() {
                     <option value="Lainya">Lainya</option>
                   </select>
                   {jenisLaporan === "Politik" && (
-                    <p style={{ color: 'red' }}></p>
+                    <p style={{ color: "red" }}></p>
                   )}
                   {jenisLaporan === "Sosial" && (
-                    <p style={{ color: 'red' }}>Terkait dengan kegiatan sosial budaya, tempat hiburan/karaoke</p>
+                    <p style={{ color: "red" }}>
+                      Terkait dengan kegiatan sosial budaya, tempat
+                      hiburan/karaoke
+                    </p>
                   )}
                   {jenisLaporan === "Ekonomi" && (
-                    <p style={{ color: 'red' }}>Terkait dengan permasalahan ekonomi, perdagangan, persoalan PKL</p>
+                    <p style={{ color: "red" }}>
+                      Terkait dengan permasalahan ekonomi, perdagangan,
+                      persoalan PKL
+                    </p>
                   )}
                   {jenisLaporan === "Sara" && (
-                    <p style={{ color: 'red' }}>Terkait dengan pendirian tempat ibadah, konflik antar kelompok masyarakat, golongan, suku</p>
+                    <p style={{ color: "red" }}>
+                      Terkait dengan pendirian tempat ibadah, konflik antar
+                      kelompok masyarakat, golongan, suku
+                    </p>
                   )}
                   {jenisLaporan === "Lainya" && (
-                    <p style={{ color: 'red' }}>Terkait dengan pencurian, perampokan, pembunuhan, mabuk, dan lainnya</p>
+                    <p style={{ color: "red" }}>
+                      Terkait dengan pencurian, perampokan, pembunuhan, mabuk,
+                      dan lainnya
+                    </p>
                   )}
                 </div>
                 <div className="mb-4 ">
@@ -242,13 +258,23 @@ function Pelaporan() {
                   </select>
                 </div>
                 <div className="flex mb-4 space-x-2.5">
-                  <input
-                    type="text"
-                    className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
-                    onChange={(e) => setNik(e.target.value)}
-                    value={nik}
-                    placeholder="NIK"
-                  />
+                  {tipe === "Luar" ? (
+                    <input
+                      type="text"
+                      className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                      onChange={(e) => setNik(e.target.value)}
+                      value={nik}
+                      placeholder="NIK"
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                      value={stringWithoutSpaces}
+                      placeholder="NIK"
+                      disabled
+                    />
+                  )}
                   <button
                     onClick={handleCheckNik}
                     className={
@@ -355,13 +381,13 @@ function Pelaporan() {
                   />
                 </div>
                 <button
-                    type="submit"
-                    className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
-                    disabled={isLoading}
-                  >
-                    {" "}
-                    {isLoading ? "LOADING..." : "SUBMIT"}{" "}
-                  </button>
+                  type="submit"
+                  className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                  disabled={isLoading}
+                >
+                  {" "}
+                  {isLoading ? "LOADING..." : "SUBMIT"}{" "}
+                </button>
               </form>
             </div>
           </div>

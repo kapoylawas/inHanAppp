@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
 
-function Lacak() {
+function LacakWeb() {
   document.title = "Sipak - Lacak Permohonan";
 
   const status = localStorage.getItem("status");
@@ -70,7 +70,6 @@ function Lacak() {
 
   return (
     <React.Fragment>
-      <LayoutWeb>
         <div className="pt-20 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
@@ -219,9 +218,8 @@ function Lacak() {
             )}
           </div>
         </div>
-      </LayoutWeb>
     </React.Fragment>
   );
 }
 
-export default Lacak;
+export default LacakWeb;

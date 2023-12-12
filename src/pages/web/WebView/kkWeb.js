@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
 import Select from "react-select";
 
-function KartuKeluarga() {
+function KkWeb() {
   document.title = "Kartu Keluarga - Perubahan Data";
 
   const [jnslayanan, setJnslayanan] = useState("");
@@ -93,7 +93,6 @@ function KartuKeluarga() {
 
   return (
     <React.Fragment>
-      <LayoutWeb>
         <div className="pt-10 pb-10">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
             <div className="container p-5 mx-auto bg-gray-100 rounded-md shadow-md">
@@ -412,9 +411,8 @@ function KartuKeluarga() {
             </div>
           </div>
         </div>
-      </LayoutWeb>
     </React.Fragment>
   );
 }
 
-export default KartuKeluarga;
+export default KkWeb;

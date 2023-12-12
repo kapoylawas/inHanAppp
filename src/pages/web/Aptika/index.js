@@ -17,11 +17,23 @@ function Aptika() {
   const [isLoading, setLoading] = useState(false);
   const [imagekitas, setImagekitas] = useState("");
 
+  const status = localStorage.getItem("status");
+  const token = Cookies.get("token");
+  const user = localStorage.getItem("nip")
+  const stringWithoutSpaces = user.replace(/"/g, '');
+
   const handleCheckNik = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await Api.post("/eaptika/get-pemohon", {
-      nip: nip,
+    const formData = new FormData();
+    formData.append("nip", stringWithoutSpaces);
+    await Api.post("/eaptika/get-pemohon", formData, {
+      headers: {
+        //header Bearer + Token
+        Authorization: `Bearer ${token}`,
+        objects: "/eaptika/get-pemohon",
+        statusUsers: status,
+      },
     })
       .then((response) => {
         //set state isLoading to "false"
@@ -80,8 +92,6 @@ function Aptika() {
     setImagekitas(imageData);
   };
 
-  const status = localStorage.getItem("status");
-  const token = Cookies.get("token");
   const history = useHistory();
 
   const storePengaduan = async (e) => {
@@ -149,8 +159,9 @@ function Aptika() {
                     id="nip"
                     className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
                     onChange={(e) => setNip(e.target.value)}
-                    value={nip}
+                    value={stringWithoutSpaces}
                     placeholder="NIK (Kontak Person)"
+                    disabled
                   />
 
                   <button

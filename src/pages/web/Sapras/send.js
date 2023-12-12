@@ -22,6 +22,9 @@ function Send() {
   const history = useHistory();
   const [imagekitas, setImagekitas] = useState("");
 
+  const user = localStorage.getItem("nip")
+  const stringWithoutSpaces = user.replace(/"/g, '');
+
   const handleFileChange = (e) => {
     const imageData = e.target.files[0];
 
@@ -138,8 +141,9 @@ function Send() {
                     type="text"
                     className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
                     onChange={(e) => setNik(e.target.value)}
-                    value={nik}
+                    value={stringWithoutSpaces}
                     placeholder="NIK"
+                    disabled
                   />
                 </div>
                 <div className="flex mb-4">

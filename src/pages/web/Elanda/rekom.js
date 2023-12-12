@@ -47,11 +47,15 @@ function Rekom() {
     setJenis(getType);
   };
 
+  const user = localStorage.getItem("nip");
+  const stringWithoutSpaces = user.replace(/"/g, "");
+  console.log(stringWithoutSpaces);
+
   const handleCheckNik = async (e) => {
     e.preventDefault();
     setLoading(true);
     await Api.post("/elanda/cek-nik", {
-      id: nik,
+      id: stringWithoutSpaces,
     })
       .then((response) => {
         //set state isLoading to "false"
@@ -203,7 +207,7 @@ function Rekom() {
     formData.append("kecamatan", kecamatanData || kecamatan);
     formData.append("organisasi", organisasi);
     formData.append("prodi", progamStudi);
-    formData.append("nik", nik);
+    formData.append("nik", nik || stringWithoutSpaces);
     formData.append("nim", nim);
     formData.append("nomor", noHP);
     formData.append("jenis", jenis);
@@ -296,13 +300,24 @@ function Rekom() {
                   </select>
                 </div>
                 <div className="flex mb-4 space-x-2.5">
-                  <input
-                    type="text"
-                    className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
-                    onChange={(e) => setNik(e.target.value)}
-                    value={nik}
-                    placeholder="NIK"
-                  />
+                  {tipe === "Luar" ? (
+                    <input
+                      type="text"
+                      className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                      onChange={(e) => setNik(e.target.value)}
+                      value={nik}
+                      placeholder="NIK"
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      className="flex-1 p-2 mt-1 border border-gray-300 rounded-md"
+                      // onChange={(e) => setNik(e.target.value)}
+                      value={stringWithoutSpaces}
+                      placeholder="NIK"
+                      disabled
+                    />
+                  )}
                   <button
                     onClick={handleCheckNik}
                     className={

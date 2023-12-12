@@ -52,6 +52,12 @@ import Pelayanan from "../pages/web/Sipak/pelayanan";
 import KartuKeluarga from "../pages/web/Sipak/kartuKeluarga";
 import Kia from "../pages/web/Sipak/kia";
 import Kta from "../pages/web/Sipak/kta";
+import SipakIndex from "../pages/web/WebView/sipakIndex";
+import PelayananWeb from "../pages/web/WebView/pelayananWeb";
+import KkWeb from "../pages/web/WebView/kkWeb";
+import KiaWeb from "../pages/web/WebView/kiaWeb";
+import KtaWeb from "../pages/web/WebView/ktaWeb";
+import LacakWeb from "../pages/web/WebView/lacakWeb";
 
 function Routes() {
   return (
@@ -201,6 +207,24 @@ function Routes() {
       </Route>
       <Route exact path="/web/sipulWeb">
         <SipulWeb />
+      </Route>
+      <Route exact path="/web/sipakWeb">
+        <SipakIndex />
+      </Route>
+      <Route exact path="/web/pelayananWeb">
+        <PelayananWeb />
+      </Route>
+      <Route exact path="/web/KkWeb">
+        <KkWeb />
+      </Route>
+      <Route exact path="/web/KiaWeb">
+        <KiaWeb />
+      </Route>
+      <Route exact path="/web/KtaWeb">
+        <KtaWeb />
+      </Route>
+      <Route exact path="/web/LacakWeb">
+        <LacakWeb />
       </Route>
       <Route exact path="/web/listFormWeb">
         <ListFrormWeb />

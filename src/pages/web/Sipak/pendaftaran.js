@@ -34,7 +34,7 @@ function Pendaftaran() {
     await Api.post("/sipak/pendaftaran", formData, {
       headers: {
         //header Bearer + Token
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
         objects: "/sipak/pendaftaran",
         statusUsers: status,
       },
