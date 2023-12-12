@@ -77,7 +77,7 @@ function PelayananWeb() {
 
   const fetchData = async () => {
     await Api.get(
-      `/sipak/get-form?id_produk_dokumen=2&id_jenis_permohonan=3&nik=${stringNik}&no_kk=${stringKk}`,
+      `/sipak/get-form?id_produk_dokumen=2&id_jenis_permohonan=3&nik=${3505032212860004}&no_kk=${3572022901180003}`,
       {
         headers: {
           //header Bearer + Token
