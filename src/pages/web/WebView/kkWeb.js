@@ -17,10 +17,10 @@ function KkWeb() {
   const [dataForm, setDataForm] = useState("");
   const [nikpemohondokumen, setNikpemohondokumen] = useState([]);
 
-  const nikpmhn = localStorage.getItem("nip");
-  const stringNik = nikpmhn.replace(/"/g, "");
-  const kkpmhn = localStorage.getItem("kk");
-  const stringKk = kkpmhn.replace(/"/g, "");
+  // const nikpmhn = localStorage.getItem("nip");
+  // const stringNik = nikpmhn.replace(/"/g, "");
+  // const kkpmhn = localStorage.getItem("kk");
+  // const stringKk = kkpmhn.replace(/"/g, "");
   const nikpemohon = nikpemohondokumen;
   // console.log(nikpemohon);
 
