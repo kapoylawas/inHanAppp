@@ -58,6 +58,8 @@ import KkWeb from "../pages/web/WebView/kkWeb";
 import KiaWeb from "../pages/web/WebView/kiaWeb";
 import KtaWeb from "../pages/web/WebView/ktaWeb";
 import LacakWeb from "../pages/web/WebView/lacakWeb";
+import Simzin from "../pages/web/Simzin";
+import Ajuan from "../pages/web/Simzin/ajuan";
 
 function Routes() {
   return (
@@ -204,6 +206,12 @@ function Routes() {
       </PrivateRoute>
       <Route exact path="/web/detailBerita/:id">
         <DetailBerita />
+      </Route>
+      <Route exact path="/web/simzin">
+        <Simzin />
+      </Route>
+      <Route exact path="/web/ajuan">
+        <Ajuan />
       </Route>
       <Route exact path="/web/sipulWeb">
         <SipulWeb />

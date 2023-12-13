@@ -121,13 +121,13 @@ function Home() {
               )}
 
               {/* <div className="rounded-lg shadow-md "> */}
-                {/* <img
+              {/* <img
                   className="inline-block"
                   width="100%"
                   height="100%"
                   src={require("../../../assets/bg.png")}
                 /> */}
-                <Slider />
+              <Slider />
               {/* </div> */}
               <CategoryMenu />
               <div>
@@ -137,16 +137,15 @@ function Home() {
                       <div className="text-center underline decoration-1">
                         Instagram
                       </div>
-                      <div
-                        class="embedsocial-hashtag"
-                        data-ref="e4cf037dbf36bb6e18c632f1d29ae4add495200a"
-                      >
-                        <a
-                          class="feed-powered-by-es feed-powered-by-es-feed-new"
-                          href="https://embedsocial.com/social-media-aggregator/"
-                          target="_blank"
-                          title="Widget by EmbedSocial"
-                        ></a>
+                      <div className="mt-4 md:flex rounded-xl md:p-1">
+                        <Iframe
+                          allowfullscreen
+                          src="https://9a1b453b0851479281d0e77de3d07a44.elf.site"
+                          style="border:0;height:800px;width:100%"
+                          loading="lazy"
+                          width="100%"
+                          height="520px"
+                        />
                       </div>
                     </div>
                   </div>
@@ -162,17 +161,16 @@ function Home() {
                       <div className="mt-4 md:flex rounded-xl md:p-1">
                         <Iframe
                           allowfullscreen
-                          src="https://feed.mikle.com/widget/v2/161653/?preloader-text=Loading"
+                          src="https://6337a0cd27d648d28a607c0d55006c17.elf.site"
                           style="border:0;height:800px;width:100%"
                           loading="lazy"
                           width="100%"
-                          height="520px"
+                          height="320px"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
-                
               </div>
               <CardRadio />
             </div>

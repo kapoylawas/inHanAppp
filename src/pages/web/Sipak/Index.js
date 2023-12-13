@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React from "react";
 import LayoutWeb from "../../../layouts/web";
 import { Link } from "react-router-dom/cjs/react-router-dom";
-import Cookies from "js-cookie";
-import toast from "react-hot-toast";
-import Api from "../../../api";
-import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
+
 
 function Sipak() {
   document.title = "Sipak";

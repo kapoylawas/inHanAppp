@@ -15,7 +15,7 @@ function AllMenu() {
     <React.Fragment>
       <LayoutWeb>
         <>
-          <div className="pt-20 pb-20">
+          <div className="pt-10 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
               <div>
                 <div>
@@ -146,6 +146,18 @@ function AllMenu() {
                           />
                         </div>
                         Sipak
+                      </Link>
+                    </div>
+                    <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
+                      <Link to="/web/simzin">
+                        <div>
+                          <img
+                            src={require("../../../assets/img/call-center.png")}
+                            width="30"
+                            className="inline-block mb-2"
+                          />
+                        </div>
+                        Simzin
                       </Link>
                     </div>
                   </div>
