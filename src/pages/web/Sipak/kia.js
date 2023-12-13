@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LayoutWeb from "../../../layouts/web";
 import Api from "../../../api";
 import Cookies from "js-cookie";
@@ -10,14 +10,14 @@ import Select from "react-select";
 function Kia() {
   document.title = "Kartu Keluarga - Perubahan Data";
 
-  const [jnslayanan, setJnslayanan] = useState("");
+  // const [jnslayanan, setJnslayanan] = useState("");
 
   const status = localStorage.getItem("status");
   const token = Cookies.get("token");
   const [isLoading, setLoading] = useState(false);
 
   const [dataForm, setDataForm] = useState([]);
-  console.log(dataForm);
+  // console.log(dataForm);
 
   const options = [
     { value: "3505032212860004", label: "3505032212860004" },
@@ -57,9 +57,206 @@ function Kia() {
     setImagekitas(imageData);
   };
 
+  const [aktalahir, setAktalahir] = useState("");
+
+  const handleFileAktaLahir = (e) => {
+    const imageData = e.target.files[0];
+
+    if (imageData) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        // Lakukan sesuatu dengan base64String, misalnya simpan di state
+        setAktalahir(base64String);
+      };
+      reader.readAsDataURL(imageData);
+    }
+
+    if (!imageData.type.match("image.*")) {
+      setAktalahir("");
+
+      toast.error("Format File Tidak Cocok", {
+        duration: 4000,
+        position: "top-right",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return;
+    }
+    setAktalahir(imageData);
+  };
+
+  const [fotobewarna, setFotobewarna] = useState("");
+
+  const handleFileFotobewarna = (e) => {
+    const imageData = e.target.files[0];
+
+    if (imageData) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        // Lakukan sesuatu dengan base64String, misalnya simpan di state
+        setFotobewarna(base64String);
+      };
+      reader.readAsDataURL(imageData);
+    }
+
+    if (!imageData.type.match("image.*")) {
+      setFotobewarna("");
+
+      toast.error("Format File Tidak Cocok", {
+        duration: 4000,
+        position: "top-right",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return;
+    }
+    setFotobewarna(imageData);
+  };
+
   const [showInput, setShowInput] = useState(false);
   const handlePlusClick = () => {
     setShowInput(!showInput);
+  };
+
+  const syaratjml = dataForm.syarat_jml;
+  const tmptkn = dataForm.temp_tkn;
+  const idprodukdokumen = dataForm.id_produk_dokumen;
+  const jenislayanan = dataForm.jenis_layanan;
+  const jenispermohonan = dataForm.jenis_permohonan;
+  const permohonandokumen = dataForm.permohonan_dokumen;
+  const [nikpemohondokumen, setNikpemohondokumen] = useState([]);
+
+  const nikpmhn = localStorage.getItem("nip");
+  const stringNik = nikpmhn.replace(/"/g, "");
+  const kkpmhn = localStorage.getItem("kk");
+  const stringKk = kkpmhn.replace(/"/g, "");
+  const nikpemohon = nikpemohondokumen;
+
+  // console.log(jenislayanan);
+
+  const [tipe, setTipe] = useState("");
+
+  const handleshowhide = (event) => {
+    const getType = event.target.value;
+    setTipe(getType);
+  };
+
+  const [persyaratanRaw, setPersyaratanRaw] = useState([]);
+
+  const fetchData = async () => {
+    await Api.get(
+      `/sipak/get-form?id_produk_dokumen=6&id_jenis_permohonan=17&nik=${stringNik}&no_kk=${stringKk}`,
+      {
+        headers: {
+          //header Bearer + Token
+          // Authorization: `Bearer ${token}`,
+          objects: "/isarpras/get-kategori",
+          statusUsers: status,
+        },
+      }
+    )
+      .then((response) => {
+        setLoading(false);
+        setDataForm(response.data.data);
+        setNikpemohondokumen(response.data.data.nik_pemohon_dokumen);
+        setPersyaratanRaw(response.data.data.persyaratan_raw);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    //call function "fetchDataPlaces"
+    fetchData();
+    setLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const formattedNikpmhnOptions = nikpemohon.map((item) => ({
+    value: item.nik,
+    label: item.nik, // Gantilah "nama" dengan properti yang sesuai dari data Anda
+  }));
+
+  const [selectedOption, setSelectedOption] = useState([null]);
+
+  console.log(selectedOption);
+
+  const handleChange = (selected) => {
+    setSelectedOption(selected);
+  };
+
+  const history = useHistory();
+  const storeSipak = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("nik", stringNik);
+    formData.append("email", "testing@gmail.com");
+    formData.append("telepon", "085733517044");
+    formData.append("syarat_jml", syaratjml);
+    formData.append("temp_tkn", tmptkn);
+    formData.append("id_produk_dokumen", idprodukdokumen);
+    formData.append("jenis_layanan", jenislayanan);
+    formData.append("jenis_permohonan", jenispermohonan);
+    formData.append("jenis_pengambilan", tipe);
+    formData.append("permohonan_dokumen", permohonandokumen);
+    formData.append("nik_pemohon_dokumen", selectedOption);
+    formData.append("ext_fileinput_1_1", imagekitas);
+    formData.append("ext_fileinput_2_1", aktalahir);
+    formData.append("ext_fileinput_3_1", fotobewarna);
+    formData.append("persyaratan_raw", persyaratanRaw);
+    formData.append("no_kk", stringKk);
+
+    await Api.post("/sipak/store-permohonan", formData, {
+      headers: {
+        //header Bearer + Token
+        // Authorization: `Bearer ${token}`,
+        objects: "/sipak/store-permohonan",
+        statusUsers: status,
+      },
+    })
+      .then((response) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        //show toast
+        // const status = response.data.success
+        if (response.status) {
+          // Lakukan sesuatu dengan data yang diterima
+          toast.success("Berhasil Menyimpan Data.", {
+            duration: 9000,
+            position: "top-center",
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#713200",
+            },
+            iconTheme: {
+              primary: "#713200",
+              secondary: "#FFFAEE",
+            },
+          });
+          history.push("/web/lainya");
+        } else {
+          // Tampilkan pesan toast jika status bukan 'success'
+          toast.error("Data salah. Coba lagi.");
+        }
+      })
+      .catch((error) => {
+        //set state isLoading to "false"
+        setLoading(false);
+        console.error("Gagal mengambil data:", error);
+        toast.error("Terjadi kesalahan. Coba lagi.");
+      });
   };
 
   return (
@@ -83,79 +280,83 @@ function Kia() {
               </div>
             </div>
             <div className="container p-5 mx-auto mt-3 mb-20 bg-gray-100 rounded-md shadow-md">
-              <form>
+              <form onSubmit={storeSipak}>
                 <div className="mb-6">
                   <label
                     for="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     Jenis Layanan
                   </label>
                   <input
                     type="text"
-                    value={jnslayanan}
+                    value={jenislayanan}
                     className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
-                    onChange={(e) => setJnslayanan(e.target.value)}
                     required
+                    disabled
                   />
                 </div>
                 <div className="mb-6">
                   <label
                     for="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     JENIS PERMOHONAN
                   </label>
                   <input
                     type="text"
-                    value={jnslayanan}
+                    value={jenispermohonan}
                     className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
-                    onChange={(e) => setJnslayanan(e.target.value)}
                     required
+                    disabled
                   />
                 </div>
                 <div className="mb-6">
                   <label
                     for="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     PERMOHONAN DOKUMEN
                   </label>
                   <input
                     type="text"
-                    value={jnslayanan}
+                    value={permohonandokumen}
                     className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
-                    onChange={(e) => setJnslayanan(e.target.value)}
                     required
+                    disabled
                   />
                 </div>
                 <div className="mb-6">
                   <label
                     for="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     NOMOR KK YANG BERSANGKUTAN
                   </label>
                   <input
                     type="text"
-                    value={jnslayanan}
+                    value={stringKk}
                     className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Jenis Layanan"
-                    onChange={(e) => setJnslayanan(e.target.value)}
                     required
+                    disabled
                   />
                 </div>
                 <div className="mb-6">
                   <label
                     for="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     PEMOHON DOKUMEN
                   </label>
-                  <Select isMulti options={options} />
+                  <Select
+                    isMulti
+                    options={formattedNikpmhnOptions}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div
                   class="flex p-4 mb-4 text-sm text-black-900 rounded-lg bg-blue-300 dark:bg-gray-800 dark:text-blue-400"
@@ -242,7 +443,7 @@ function Kia() {
                         id="multiple_files"
                         type="file"
                         multiple
-                        onChange={handleFileChange}
+                        onChange={handleFileAktaLahir}
                       />
 
                       <div
@@ -259,7 +460,7 @@ function Kia() {
                           id="multiple_files"
                           type="file"
                           multiple
-                          onChange={handleFileChange}
+                          onChange={handleFileAktaLahir}
                         />
                       </div>
                     )}
@@ -278,7 +479,7 @@ function Kia() {
                         id="multiple_files"
                         type="file"
                         multiple
-                        onChange={handleFileChange}
+                        onChange={handleFileFotobewarna}
                       />
 
                       <div
@@ -295,18 +496,31 @@ function Kia() {
                           id="multiple_files"
                           type="file"
                           multiple
-                          onChange={handleFileChange}
+                          onChange={handleFileFotobewarna}
                         />
                       </div>
                     )}
                   </div>
+                  <div className="mb-5">
+                    <select
+                      value={tipe}
+                      className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
+                      onChange={(e) => handleshowhide(e)}
+                    >
+                      <option value="">-- PILIH JENIS PENGAMBILAN --</option>
+                      <option value="Cetak Mandiri">Cetak Mandiri</option>
+                      <option value="Diambil Sendiri">Diambil Sendiri</option>
+                    </select>
+                  </div>
                 </div>
                 <button
-                  type="submit"
-                  className="p-2 text-white bg-green-500 rounded"
-                >
-                  Submit
-                </button>
+                    type="submit"
+                    className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                    disabled={isLoading}
+                  >
+                    {" "}
+                    {isLoading ? "LOADING..." : "SUBMIT"}{" "}
+                  </button>
               </form>
             </div>
           </div>

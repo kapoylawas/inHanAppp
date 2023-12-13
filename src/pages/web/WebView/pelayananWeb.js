@@ -544,7 +544,7 @@ function PelayananWeb() {
               secondary: "#FFFAEE",
             },
           });
-          history.push("/web/lainya");
+          history.push("/web/sipakWeb");
         } else {
           // Tampilkan pesan toast jika status bukan 'success'
           toast.error("Data salah. Coba lagi.");
@@ -585,7 +585,7 @@ function PelayananWeb() {
                   <div className="mb-6">
                     <label
                       for="email"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-gray-900"
                     >
                       Nama
                     </label>
@@ -602,7 +602,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         NIK
                       </label>
@@ -618,7 +618,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="last_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         No KK
                       </label>
@@ -634,7 +634,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Nama Saksi
                       </label>
@@ -650,7 +650,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="last_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         NIK Saksi
                       </label>
@@ -666,7 +666,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Nama Saksi 2
                       </label>
@@ -682,7 +682,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="last_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         NIK Saksi 2
                       </label>
@@ -696,7 +696,7 @@ function PelayananWeb() {
                       />
                     </div>
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      <label className="block mb-2 text-sm font-medium text-gray-900">
                         Nama Ayah
                       </label>
                       <input
@@ -709,7 +709,7 @@ function PelayananWeb() {
                       />
                     </div>
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      <label className="block mb-2 text-sm font-medium text-gray-900">
                         NIK Ayah
                       </label>
                       <input
@@ -722,7 +722,7 @@ function PelayananWeb() {
                       />
                     </div>
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      <label className="block mb-2 text-sm font-medium text-gray-900">
                         Nama Ibu
                       </label>
                       <input
@@ -735,7 +735,7 @@ function PelayananWeb() {
                       />
                     </div>
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      <label className="block mb-2 text-sm font-medium text-gray-900">
                         NIK Ibu
                       </label>
                       <input
@@ -755,7 +755,7 @@ function PelayananWeb() {
                   <div className="mt-2 mb-2">
                     <label
                       for="email"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-gray-900"
                     >
                       Nama Anak
                     </label>
@@ -772,7 +772,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="first_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Jenis Kelamin
                       </label>
@@ -789,7 +789,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="last_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Tempat dilahirkan
                       </label>
@@ -806,7 +806,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="last_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Tempat Kelahiran
                       </label>
@@ -820,7 +820,7 @@ function PelayananWeb() {
                       />
                     </div>
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      <label className="block mb-2 text-sm font-medium text-gray-900">
                         Tanggal Lahir
                       </label>
                       <input
@@ -834,7 +834,7 @@ function PelayananWeb() {
                     <div>
                       <label
                         for="last_name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Pukul
                       </label>
@@ -847,7 +847,7 @@ function PelayananWeb() {
                       />
                     </div>
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      <label className="block mb-2 text-sm font-medium text-gray-900">
                         Jenis Kelahiran
                       </label>
                       <select
@@ -1270,9 +1270,11 @@ function PelayananWeb() {
                   </button>
                   <button
                     type="submit"
-                    className="p-2 text-white bg-green-500 rounded"
+                    className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                    disabled={isLoading}
                   >
-                    Submit
+                    {" "}
+                    {isLoading ? "LOADING..." : "SUBMIT"}{" "}
                   </button>
                 </div>
               )}

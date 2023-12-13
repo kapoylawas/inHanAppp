@@ -467,6 +467,13 @@ function Pelayanan() {
     setShowakta3(!showakta3);
   };
 
+  const [tipe, setTipe] = useState("");
+
+  const handleshowhide = (event) => {
+    const getType = event.target.value;
+    setTipe(getType);
+  };
+
   const history = useHistory();
   const storeSipak = async (e) => {
     e.preventDefault();
@@ -480,7 +487,7 @@ function Pelayanan() {
     formData.append("id_produk_dokumen", idprodukdokumen);
     formData.append("jenis_layanan", jenislayanan);
     formData.append("jenis_permohonan", jenispermohonan);
-    formData.append("jenis_pengambilan", "SENDIRI");
+    formData.append("jenis_pengambilan", tipe);
     formData.append("permohonan_dokumen", permohonandokumen);
     formData.append("nik_pemohon_dokumen", nikpemohon);
     formData.append("nama_anak", nmanak);
@@ -1265,6 +1272,17 @@ function Pelayanan() {
                         </div>
                       )}
                     </div>
+                    <div className="mb-5">
+                    <select
+                      value={tipe}
+                      className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
+                      onChange={(e) => handleshowhide(e)}
+                    >
+                      <option value="">-- PILIH JENIS PENGAMBILAN --</option>
+                      <option value="Cetak Mandiri">Cetak Mandiri</option>
+                      <option value="Diambil Sendiri">Diambil Sendiri</option>
+                    </select>
+                  </div>
                     <button
                       onClick={prevStep}
                       className="p-2 mr-2 text-white bg-gray-500 rounded"
@@ -1273,9 +1291,11 @@ function Pelayanan() {
                     </button>
                     <button
                       type="submit"
-                      className="p-2 text-white bg-green-500 rounded"
+                      className="inline-block w-full px-3 py-1 mt-2 text-xl text-white bg-gray-700 rounded-md shadow-md focus:outline-none focus:bg-gray-900"
+                      disabled={isLoading}
                     >
-                      Submit
+                      {" "}
+                      {isLoading ? "LOADING..." : "SUBMIT"}{" "}
                     </button>
                   </div>
                 )}
