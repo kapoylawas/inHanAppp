@@ -165,7 +165,7 @@ function Home() {
                           style="border:0;height:800px;width:100%"
                           loading="lazy"
                           width="100%"
-                          height="320px"
+                          height="420px"
                         />
                       </div>
                     </div>
