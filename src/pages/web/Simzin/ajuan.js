@@ -7,6 +7,7 @@ function Ajuan() {
   document.title = "Simzin";
 
   const [nopendataan, setNopendataan] = useState("");
+  const [date, setDate] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   const options = [
@@ -65,8 +66,9 @@ function Ajuan() {
                   </label>
                   <input
                     type="date"
-                    value={nopendataan}
+                    value={date}
                     className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    onChange={(e) => setDate(e.target.value)}
                     required
                   />
                 </div>
