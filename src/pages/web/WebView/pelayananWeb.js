@@ -467,6 +467,14 @@ function PelayananWeb() {
     setShowakta3(!showakta3);
   };
 
+
+  const [tipe, setTipe] = useState("");
+
+  const handleshowhide = (event) => {
+    const getType = event.target.value;
+    setTipe(getType);
+  };
+
   const history = useHistory();
   const storeSipak = async (e) => {
     e.preventDefault();
@@ -480,7 +488,7 @@ function PelayananWeb() {
     formData.append("id_produk_dokumen", idprodukdokumen);
     formData.append("jenis_layanan", jenislayanan);
     formData.append("jenis_permohonan", jenispermohonan);
-    formData.append("jenis_pengambilan", "SENDIRI");
+    formData.append("jenis_pengambilan", tipe);
     formData.append("permohonan_dokumen", permohonandokumen);
     formData.append("nik_pemohon_dokumen", ['3505032212860004']);
     formData.append("nama_anak", nmanak);
@@ -1261,6 +1269,17 @@ function PelayananWeb() {
                         />
                       </div>
                     )}
+                  </div>
+                  <div className="mb-5">
+                    <select
+                      value={tipe}
+                      className="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
+                      onChange={(e) => handleshowhide(e)}
+                    >
+                      <option value="">-- PILIH JENIS PENGAMBILAN --</option>
+                      <option value="Cetak Mandiri">Cetak Mandiri</option>
+                      <option value="Diambil Sendiri">Diambil Sendiri</option>
+                    </select>
                   </div>
                   <button
                     onClick={prevStep}
