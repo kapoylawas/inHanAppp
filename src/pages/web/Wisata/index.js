@@ -5,6 +5,8 @@ import Api from "../../../api";
 import LoadingSpinner from "../../../components/utilities/LoadingSpinner";
 import PaginationUlpimComponent from "../../../components/utilities/PaginationUlpim";
 import LayoutWeb from "../../../layouts/web";
+import { useParams } from "react-router-dom/cjs/react-router-dom";
+import Iframe from "react-iframe";
 
 function Wisata() {
   document.title = "InHandApp - Wisata";
@@ -52,80 +54,129 @@ function Wisata() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [activeTab, setActiveTab] = useState(1);
+
+  const handleTabClick = (tabNumber) => {
+    setActiveTab(tabNumber);
+  };
+
+  const { url } = useParams("https://petadigital.visitblitar.com/");
+  console.log(url);
+
   return (
     <React.Fragment>
       <LayoutWeb>
-        <div className="pt-20 pb-20">
+        <div className="pt-5 pb-20">
           <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
-            <div className="grid grid-cols-4 gap-4 mt-5">
-              <div className="col-span-4">
-                <div className="text-center underline decoration-1">Wisata</div>
-                <div className="mt-3 mb-2 border-2 border-stone-400"></div>
-                <br />
+            <ul className="hidden text-sm font-medium text-center text-gray-500 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+              <li className="w-full">
+                <div
+                  className={`cursor-pointer px-4 py-2 ${
+                    activeTab === 1
+                      ? "bg-red-500 rounded text-white"
+                      : "bg-gray-300"
+                  }`}
+                  onClick={() => handleTabClick(1)}
+                >
+                  Pariwisata
+                </div>
+              </li>
+              <li class="w-full">
+                <div
+                  className={`cursor-pointer px-4 py-2 ${
+                    activeTab === 2
+                      ? "bg-red-500 rounded text-white"
+                      : "bg-gray-300"
+                  }`}
+                  onClick={() => handleTabClick(2)}
+                >
+                  Berita Kota
+                </div>
+              </li>
+            </ul>
+            {activeTab === 1 && (
+              <div>
+                <Iframe
+                  url="https://petadigital.visitblitar.com/"
+                  width="620px"
+                  height="620px"
+                  className="mt-5"
+                  display="block"
+                  position="relative"
+                />
+              </div>
+            )}
+            {activeTab === 2 && (
+              <div className="grid grid-cols-4 gap-4 mt-5">
+                <div className="col-span-4">
+                  <div className="text-center underline decoration-1">
+                    Wisata
+                  </div>
+                  <div className="mt-3 mb-2 border-2 border-stone-400"></div>
+                  <br />
 
-                {isLoading ? (
-                  <LoadingSpinner />
-                ) : (
-                  <>
-                    {sort.map((wisata, index) => (
-                      <>
-                        <div
-                          key={index}
-                          className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-8/12"
-                        >
-                          <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                            <a href="#">
-                              <img
-                                className="rounded-t-lg"
-                                src={wisata.img}
-                                alt=""
-                              />
-                            </a>
-                            <div className="p-5">
+                  {isLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <>
+                      {sort.map((wisata, index) => (
+                        <>
+                          <div
+                            key={index}
+                            className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-8/12"
+                          >
+                            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                               <a href="#">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                  {wisata.title}
-                                </h5>
+                                <img
+                                  className="rounded-t-lg"
+                                  src={wisata.img}
+                                  alt=""
+                                />
                               </a>
-                              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                
-                              </p>
-                              <Link to={`/web/detail/${wisata.id}`}>
-                                <a className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                  Read more
-                                  <svg
-                                    aria-hidden="true"
-                                    className="w-4 h-4 ml-2 -mr-1"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      fill-rule="evenodd"
-                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"
-                                    ></path>
-                                  </svg>
+                              <div className="p-5">
+                                <a href="#">
+                                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                    {wisata.title}
+                                  </h5>
                                 </a>
-                              </Link>
+                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"></p>
+                                <Link to={`/web/detail/${wisata.id}`}>
+                                  <a className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Read more
+                                    <svg
+                                      aria-hidden="true"
+                                      className="w-4 h-4 ml-2 -mr-1"
+                                      fill="currentColor"
+                                      viewBox="0 0 20 20"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                      ></path>
+                                    </svg>
+                                  </a>
+                                </Link>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </>
-                    ))}
-                  </>
-                )}
-                <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-8/12">
-                  <PaginationUlpimComponent
-                    currentPage={currentPage}
-                    perPage={perPage}
-                    total={total}
-                    onChange={(pageNumber) => fetchData(pageNumber)}
-                    position="end"
-                  />
+                        </>
+                      ))}
+                    </>
+                  )}
+                  <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-8/12">
+                    <PaginationUlpimComponent
+                      currentPage={currentPage}
+                      perPage={perPage}
+                      total={total}
+                      onChange={(pageNumber) => fetchData(pageNumber)}
+                      position="end"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </LayoutWeb>
