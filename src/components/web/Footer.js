@@ -4,17 +4,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Ppid } from "../../assets/image/ic_ppid_by_design.svg";
 import { ReactComponent as Bliko } from "../../assets/image/ic_blikosda_by_design.svg";
-import { ReactComponent as Ulpim } from "../../assets/image/ic_ulpim_by_design.svg";
 import { ReactComponent as Home } from "../../assets/image/ic_home_by_design.svg";
 import { ReactComponent as Akun } from "../../assets/image/ic_person_by_design.svg";
 
 function WebFooter() {
-  function refreshPage() {
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 500);
-    // console.log("page to reload");
-  }
 
   return (
     <React.Fragment>
@@ -24,7 +17,6 @@ function WebFooter() {
           <div>
             <Link
               to="/"
-              onClick={refreshPage}
               className="justify-center inline-block w-full text-center focus:text-gray-500 hover:text-gray-500"
             >
               <Home width="30" className="inline-block" />

@@ -6,7 +6,7 @@ import { ReactComponent as Ppid } from "../../../assets/image/ic_ppid_by_design.
 import { ReactComponent as Bliko } from "../../../assets/image/ic_blikosda_by_design.svg";
 import { ReactComponent as Ulpim } from "../../../assets/image/ic_ulpim_by_design.svg";
 import { ReactComponent as Silpu } from "../../../assets/image/ic_silpusitron_by_design.svg";
-import { ReactComponent as Wisata } from "../../../assets/image/ic_new_wisata_by_design (1).svg";
+import { ReactComponent as Wisata } from "../../../assets/image/Ikon MBK.svg";
 import { ReactComponent as Berita } from "../../../assets/image/ic_news_by_design.svg";
 import { ReactComponent as Phone } from "../../../assets/image/phone-svgrepo-com.svg";
 
@@ -15,7 +15,7 @@ function AllMenu() {
     <React.Fragment>
       <LayoutWeb>
         <>
-          <div className="pt-10 pb-20">
+          <div className="pt-5 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
               <div>
                 <div>
@@ -75,7 +75,11 @@ function AllMenu() {
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/wisata">
                         <div>
-                          <Wisata width="30" className="inline-block mb-2" />
+                          <Wisata
+                            width="50"
+                            height="40"
+                            className="inline-block"
+                          />
                         </div>
                         Wisata
                       </Link>
@@ -92,7 +96,7 @@ function AllMenu() {
                       <Link to="/web/aptika">
                         <div>
                           <img
-                            src={require("../../../assets/img/call-center.png")}
+                            src={require("../../../assets/img/wifi.png")}
                             width="30"
                             className="inline-block mb-2"
                           />
@@ -104,7 +108,7 @@ function AllMenu() {
                       <Link to="/web/aduanWeb">
                         <div>
                           <img
-                            src={require("../../../assets/img/call-center.png")}
+                            src={require("../../../assets/img/wifi.png")}
                             width="30"
                             className="inline-block mb-2"
                           />
@@ -116,20 +120,21 @@ function AllMenu() {
                       <Link to="/web/sarpras">
                         <div>
                           <img
-                            src={require("../../../assets/img/call-center.png")}
-                            width="30"
-                            className="inline-block mb-2"
+                            src={require("../../../assets/img/iconsarpras.png")}
+                            width="50"
+                            height="20"
+                            className="inline-block"
                           />
                         </div>
-                        Aduan Sarana Prasarana
+                        Sarpras
                       </Link>
                     </div>
                     <div className="col-span-2 p-4 text-xs text-center bg-gray-100 rounded-md shadow-md md:col-span-1 lg:col-span-1">
                       <Link to="/web/elanda">
                         <div>
                           <img
-                            src={require("../../../assets/img/call-center.png")}
-                            width="30"
+                            src={require("../../../assets/img/elanda.png")}
+                            width="50"
                             className="inline-block mb-2"
                           />
                         </div>
@@ -140,7 +145,7 @@ function AllMenu() {
                       <Link to="/web/sipak">
                         <div>
                           <img
-                            src={require("../../../assets/img/call-center.png")}
+                            src={require("../../../assets/img/folder.png")}
                             width="30"
                             className="inline-block mb-2"
                           />
@@ -152,7 +157,7 @@ function AllMenu() {
                       <Link to="/web/simzin">
                         <div>
                           <img
-                            src={require("../../../assets/img/call-center.png")}
+                            src={require("../../../assets/img/Vector.png")}
                             width="30"
                             className="inline-block mb-2"
                           />

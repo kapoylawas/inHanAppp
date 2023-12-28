@@ -86,7 +86,7 @@ function Login() {
     <React.Fragment>
       <LayoutWeb>
         <>
-          <div className="pt-20 pb-20">
+          <div className="pt-10 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
               <div className="p-5 bg-gray-100 rounded-md shadow-md">
                 <div className="object-center">
