@@ -618,9 +618,8 @@ function PelayananWeb() {
                         type="text"
                         className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="3572021011050001"
-                        // onChange={(e) => setNik(e.target.value)}
-                        value={3505032212860004}
-                        disabled
+                        value={nik}
+                        onChange={(e) => setNik(e.target.value)}
                       />
                     </div>
                     <div>
@@ -635,7 +634,7 @@ function PelayananWeb() {
                         className="bg-gray-100 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="3572020607070039"
                         onChange={(e) => setKk(e.target.value)}
-                        value={3572022901180003}
+                        value={kk}
                         required
                       />
                     </div>
@@ -880,7 +879,7 @@ function PelayananWeb() {
               {step === 2 && (
                 <div>
                   <div
-                    className="flex p-4 mb-4 text-sm text-black-900 rounded-lg bg-blue-300 dark:bg-gray-800 dark:text-blue-400"
+                    className="flex p-4 mb-4 text-sm bg-blue-300 rounded-lg text-black-900 dark:bg-gray-800 dark:text-blue-400"
                     role="alert"
                   >
                     <svg
