@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Redirect, useHistory } from "react-router-dom";
 import Api from "../../../api";
-import { useTimer } from "../../../components/utilities/useTimer";
 import LayoutWeb from "../../../layouts/web";
 import OTPInput from "otp-input-react";
 
@@ -14,9 +13,24 @@ function Verifikasi() {
   const [setNip] = useState("");
   const [otp, setOtp] = useState("");
 
-  const [resendTime, setResendTime] = useTimer({
-    multiplier: 2,
-  });
+  const [isResendActive, setResendActive] = useState(false);
+  const [countdown, setCountdown] = useState(120);
+
+  useEffect(() => {
+    let timer;
+
+    if (countdown > 0) {
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else {
+      setResendActive(true);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [countdown]);
 
   const dataNip = localStorage.getItem("nip");
 
@@ -31,7 +45,8 @@ function Verifikasi() {
 
   const handleResend = async () => {
     //set state isLoading to "true"
-    setResendTime(0);
+    setResendActive(false);
+    setCountdown(120);
 
     await Api.post("/login/re-generate-otp", {
       nip: dataNip.replaceAll('"', ""),
@@ -109,7 +124,7 @@ function Verifikasi() {
     <React.Fragment>
       <LayoutWeb>
         <>
-          <div className="pt-20 pb-20">
+          <div className="pt-10 pb-20">
             <div className="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-6/12">
               <div className="p-5 bg-gray-100 rounded-md shadow-md">
                 <div className="object-center">
@@ -167,16 +182,22 @@ function Verifikasi() {
                   </div>
                 </form>
                 <hr></hr>
-                <button
-                  className="px-4 py-2 mt-3 font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
-                  disabled={resendTime !== 60}
-                  style={{ position: "relative" }}
-                  onClick={handleResend}
-                >
-                  {" "}
-                  {resendTime !== 60 && <span> {resendTime} </span>}
-                  Resend OTP
-                </button>
+                <div>
+                  {isResendActive ? (
+                    <button
+                      className="px-4 py-2 mt-3 font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
+                      style={{ position: "relative" }}
+                      onClick={handleResend}
+                    >
+                      Resend OTP
+                    </button>
+                  ) : (
+                    <p>
+                      Waktu Untuk Kirim Ulang Resend OTP{" "}
+                      {Math.floor(countdown / 60)}:{countdown % 60} minutes
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>

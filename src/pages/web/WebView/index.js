@@ -12,9 +12,6 @@ function WebVIew() {
             <div className="grid grid-cols-4 mt-5">
               <div className="col-span-4">
                 <div className="p-1 rounded-md shadow-md bg-gray-50">
-                  <div className="text-center underline decoration-1">
-                    Instagram
-                  </div>
                   <div className="mt-4 md:flex rounded-xl md:p-1">
                     <Iframe
                       allowfullscreen
@@ -32,9 +29,6 @@ function WebVIew() {
               <div className="grid grid-cols-4 gap-4 mt-5">
                 <div className="col-span-4">
                   <div className="p-2 rounded-md shadow-md bg-gray-50">
-                    <div className="text-center underline decoration-1">
-                      Youtube
-                    </div>
                     <div className="mt-4 md:flex rounded-xl md:p-1">
                       <Iframe
                         allowfullscreen
