@@ -302,7 +302,7 @@ function KkWeb() {
               secondary: "#FFFAEE",
             },
           });
-          history.push("/web/sipakWeb");
+          history.push("/web/KkWeb");
         } else {
           // Tampilkan pesan toast jika status bukan 'success'
           toast.error("Data salah. Coba lagi.");

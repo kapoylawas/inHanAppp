@@ -535,7 +535,7 @@ function KtaWeb() {
                 secondary: "#FFFAEE",
               },
             });
-            history.push("/web/lainya");
+            history.push("/web/KtaWeb");
           } else {
             // Tampilkan pesan toast jika status bukan 'success'
             toast.error("Data salah. Coba lagi.");

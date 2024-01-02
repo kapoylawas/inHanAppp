@@ -239,7 +239,7 @@ function KiaWeb() {
               secondary: "#FFFAEE",
             },
           });
-          history.push("/web/sipakWeb");
+          history.push("/web/KiaWeb");
         } else {
           // Tampilkan pesan toast jika status bukan 'success'
           toast.error("Data salah. Coba lagi.");

@@ -552,7 +552,7 @@ function PelayananWeb() {
               secondary: "#FFFAEE",
             },
           });
-          history.push("/web/sipakWeb");
+          history.push("/web/pelayananWeb");
         } else {
           // Tampilkan pesan toast jika status bukan 'success'
           toast.error("Data salah. Coba lagi.");
