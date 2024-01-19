@@ -10,6 +10,7 @@ function DetailPengaduan() {
   document.title = "UlPIM - Detail Pengaduan";
 
   const [ulpim, setUlpim] = useState([]);
+  // console.log('data', );
 
   const data = ulpim.sort();
 

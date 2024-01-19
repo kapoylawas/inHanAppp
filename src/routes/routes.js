@@ -60,6 +60,7 @@ import KtaWeb from "../pages/web/WebView/ktaWeb";
 import LacakWeb from "../pages/web/WebView/lacakWeb";
 import Simzin from "../pages/web/Simzin";
 import Ajuan from "../pages/web/Simzin/ajuan";
+import Youtube from "../pages/web/WebView/youtube";
 
 function Routes() {
   return (
@@ -98,6 +99,9 @@ function Routes() {
       </Route>
       <Route exact path="/web/webview">
         <WebVIew />
+      </Route>
+      <Route exact path="/web/youtube">
+        <Youtube />
       </Route>
       <Route exact path="/web/ulpim">
         <Ulpim />
